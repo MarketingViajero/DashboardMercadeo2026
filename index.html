@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercadeo 2026 — Viajero Hostels</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+@font-face{font-family:'Geomanist';src:url('Geomanist-Ultra.ttf') format('truetype');font-weight:900;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Black.ttf') format('truetype');font-weight:800;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Bold.ttf') format('truetype');font-weight:700;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Medium.ttf') format('truetype');font-weight:600;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Book.ttf') format('truetype');font-weight:500;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Regular.ttf') format('truetype');font-weight:400;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Light.ttf') format('truetype');font-weight:300;font-style:normal}
+@font-face{font-family:'Geomanist';src:url('Geomanist-Italic.ttf') format('truetype');font-weight:400;font-style:italic}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sidebar:240px;
+  --bg:#F5F3F2;
+  --surface:#FFFFFF;
+  --surface2:#EBE7E6;
+  --border:#D9D3D1;
+  --border2:#C8C0BE;
+  --text:#333232;
+  --muted:#6B6564;
+  --dim:#9E9594;
+  --accent:#F54927;
+  --accent2:#D93D20;
+  --green:#16a34a;
+  --green-bg:#dcfce7;
+  --red:#dc2626;
+  --red-bg:#fee2e2;
+  --blue:#2563eb;
+  --blue-bg:#dbeafe;
+  --amber:#d97706;
+  --r:10px;--rs:6px;
+  --font-head:'Geomanist',sans-serif;
+  --font:'Geomanist',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;min-height:100vh;font-size:14px;line-height:1.6}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;overflow-y:auto}
+.sb-header{padding:28px 22px 20px;border-bottom:1px solid var(--border)}
+.sb-brand{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.2}
+.sb-brand span{color:var(--accent)}
+.sb-sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase}
+
+/* Quarter selector */
+.q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
+.q-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:500}
+.q-select{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--rs);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6564' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.q-select:focus{outline:none;border-color:var(--accent)}
+
+/* Status badges in select */
+.q-status{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
+
+nav{padding:8px 0;flex:1}
+.nav-section{padding:12px 22px 4px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 22px;cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;color:var(--muted);font-size:13px;text-decoration:none}
+.nav-item:hover{color:var(--text);background:var(--surface2)}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:#FEF0ED;font-weight:600}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.nav-brand-tag{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:500;margin-left:auto}
+.tag-vh{background:#fee2e2;color:#dc2626}
+.tag-os{background:#f3e8ff;color:#7c3aed}
+
+.sb-footer{padding:16px 22px;border-top:1px solid var(--border);font-size:11px;color:var(--dim)}
+.sb-footer strong{color:var(--muted)}
+
+/* MAIN */
+main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - var(--sidebar));min-height:100vh}
+.page{display:none}
+.page.active{display:block;animation:fin 0.25s ease}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:32px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--border);padding-bottom:24px}
+.page-title{font-family:var(--font-head);font-size:26px;font-weight:700;letter-spacing:-0.03em;color:var(--text)}
+.page-subtitle{font-size:13px;color:var(--muted);margin-top:3px}
+.q-badge{font-size:12px;font-family:var(--font-head);background:var(--surface2);color:var(--accent);padding:6px 14px;border-radius:100px;border:1px solid var(--border2);white-space:nowrap}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
+.dot-green{background:var(--green)}
+.dot-amber{background:var(--amber)}
+.dot-dim{background:var(--dim)}
+
+/* SECTION TITLE */
+.section-title{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.02em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* METRIC CARDS */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0.3}
+.metric-card.hi::before{opacity:1}
+.metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:8px}
+.metric-value{font-family:var(--font-head);font-size:26px;font-weight:700;color:var(--text);letter-spacing:-0.04em;line-height:1}
+.metric-sub{font-size:11px;color:var(--dim);margin-top:5px}
+.metric-up{color:var(--green);font-size:11px}
+.metric-down{color:var(--red);font-size:11px}
+
+/* CHART CARD */
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.chart-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.chart-sub{font-size:12px;color:var(--dim);margin-bottom:14px}
+
+/* TWO / THREE COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:10px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.legend-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+/* INSIGHT */
+.insight{background:var(--surface2);border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:var(--r);padding:14px 18px;margin-bottom:20px}
+.insight-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:5px}
+.insight-text{font-size:13px;color:var(--text);line-height:1.6}
+
+/* PROGRESS BAR */
+.prog-item{margin-bottom:14px}
+.prog-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.prog-name{font-size:13px;color:var(--text)}
+.prog-pct{font-size:12px;color:var(--muted);font-family:var(--font-head)}
+.prog-track{height:5px;background:var(--surface2);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;border-radius:100px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)}
+.prog-note{font-size:11px;color:var(--dim);margin-top:3px}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:10px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface2)}
+
+/* PILL */
+.pill{display:inline-block;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:500;white-space:nowrap}
+.pill-green{background:var(--green-bg);color:var(--green)}
+.pill-amber{background:#fef3c7;color:var(--amber)}
+.pill-red{background:var(--red-bg);color:var(--red)}
+.pill-dim{background:var(--surface2);color:var(--muted)}
+.pill-blue{background:var(--blue-bg);color:var(--blue)}
+.pill-purple{background:#f3e8ff;color:#7c3aed}
+
+/* SCORE BAR inline */
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-track{flex:1;height:4px;background:var(--surface2);border-radius:100px;overflow:hidden;min-width:60px}
+.score-fill{height:100%;border-radius:100px}
+.score-num{font-size:12px;color:var(--muted);width:28px;text-align:right;flex-shrink:0}
+
+/* COUNTRY GROUP */
+.country-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.country-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.country-flag{font-size:20px}
+.country-name{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--text)}
+.country-meta{margin-left:auto;display:flex;gap:10px;align-items:center}
+.country-score{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--accent)}
+.country-body{padding:0}
+
+/* TAGS */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:11px;background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.tag.on{background:#dcfce7;color:var(--green);border-color:#bbf7d0}
+.tag.off{opacity:0.4}
+
+/* PROJECT GRID */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.proj-cat{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.proj-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:10px;line-height:1.3}
+.proj-footer{display:flex;justify-content:space-between;align-items:center}
+.proj-pct{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text)}
+
+/* OLAS SONORAS brand accent */
+.olas-accent::before{background:#7c3aed!important}
+.olas-header{border-bottom:1px solid #e9d5ff}
+.olas-badge{background:#f3e8ff;color:#7c3aed;padding:4px 10px;border-radius:100px;font-size:11px;border:1px solid #d8b4fe}
+
+/* STATUS STRIP */
+.status-strip{display:flex;gap:4px;margin-bottom:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:6px 8px;overflow-x:auto}
+.status-chip{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--rs);font-size:12px;white-space:nowrap;flex-shrink:0}
+.status-chip.completo{background:#dcfce7;color:var(--green)}
+.status-chip.en_curso{background:#fef3c7;color:var(--amber)}
+.status-chip.proyectado{background:var(--surface2);color:var(--muted)}
+
+/* MAP placeholder */
+.world-map-wrap{position:relative;margin-bottom:20px}
+
+/* Number formatter helpers handled in JS */
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sb-header">
+    <div class="sb-brand">Mercadeo<br><span>2026</span></div>
+    <div class="sb-sub">Viajero Hostels · Reporte anual</div>
+  </div>
+
+  <div class="q-selector">
+    <div class="q-label">Trimestre</div>
+    <select class="q-select" id="qSelect" onchange="setQuarter(this.value)">
+      <option value="Q1">● Q1 2026 — Ene – Mar (Completo)</option>
+      <option value="Q2">◐ Q2 2026 — Abr – Jun (En curso)</option>
+      <option value="Q3">○ Q3 2026 — Jul – Sep (Proyectado)</option>
+      <option value="Q4">○ Q4 2026 — Oct – Dic (Proyectado)</option>
+    </select>
+  </div>
+
+  <nav>
+    <div class="nav-section">Visión general</div>
+    <a class="nav-item active" data-page="resumen" onclick="showPage('resumen',this)">
+      <span class="nav-dot"></span>Resumen ejecutivo
+    </a>
+    <a class="nav-item" data-page="operaciones" onclick="showPage('operaciones',this)">
+      <span class="nav-dot"></span>30 Operaciones
+    </a>
+
+    <div class="nav-section">Áreas</div>
+    <a class="nav-item" data-page="fuentes" onclick="showPage('fuentes',this)">
+      <span class="nav-dot"></span>Fuentes de Tráfico <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="rrss" onclick="showPage('rrss',this)">
+      <span class="nav-dot"></span>RRSS <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="pauta" onclick="showPage('pauta',this)">
+      <span class="nav-dot"></span>Pauta Digital <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="canales" onclick="showPage('canales',this)">
+      <span class="nav-dot"></span>Canales Digitales <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="diseno" onclick="showPage('diseno',this)">
+      <span class="nav-dot"></span>Diseño <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="iimm" onclick="showPage('iimm',this)">
+      <span class="nav-dot"></span>IIMM / Influencers <span class="nav-brand-tag tag-vh">VH</span>
+    </a>
+    <a class="nav-item" data-page="proyectos" onclick="showPage('proyectos',this)">
+      <span class="nav-dot"></span>Proyectos &amp; Backlog
+    </a>
+
+    <div class="nav-section">Olas Sonoras</div>
+    <a class="nav-item" data-page="olas" onclick="showPage('olas',this)">
+      <span class="nav-dot" style="background:#7c3aed"></span>Olas Sonoras <span class="nav-brand-tag tag-os">OS</span>
+    </a>
+  </nav>
+
+  <div class="sb-footer">
+    <strong id="sbQuarterLabel">Q1 2026</strong> · Datos reales + proyecciones
+  </div>
+</aside>
+
+<main>
+
+<!-- ══════════ RESUMEN EJECUTIVO ══════════ -->
+<section id="page-resumen" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Resumen Ejecutivo</div>
+      <div class="page-subtitle" id="resumenSub">Métricas clave del trimestre · Equipo de Mercadeo</div>
+    </div>
+    <div class="q-badge" id="resumenBadge">Q1 · Ene – Mar 2026</div>
+  </div>
+
+  <div id="resumenStatusStrip" class="status-strip"></div>
+
+  <div class="metrics-grid" id="resumenMetrics"></div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">ROAS por mes — Campañas META</div>
+      <div class="chart-sub">Retorno sobre inversión en conversión paga</div>
+      <div class="legend"><span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>ROAS mensual</span></div>
+      <div style="position:relative;height:180px"><canvas id="roasChart" role="img" aria-label="ROAS mensual Q1">Datos ROAS trimestre</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Inversión Pauta — META vs Google (COP)</div>
+      <div class="chart-sub">Distribución del presupuesto digital</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>META</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Google</span>
+      </div>
+      <div style="position:relative;height:180px"><canvas id="paidDonut" role="img" aria-label="Inversión META vs Google">Distribución inversión pauta</canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Evolución anual — Métricas clave acumuladas por quarter</div>
+    <div class="chart-sub">Seguidores ganados IG · Reservas por pauta · Ventas Kyto USD</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Seguidores IG (÷100)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Reservas pauta</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Ventas Kyto USD (÷10)</span>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="annualChart" role="img" aria-label="Evolución anual métricas clave">Métricas anuales por quarter</canvas></div>
+  </div>
+
+  <div class="insight" id="resumenInsight">
+    <div class="insight-label">💡 Síntesis del trimestre</div>
+    <div class="insight-text" id="resumenInsightText"></div>
+  </div>
+</section>
+
+<!-- ══════════ 30 OPERACIONES ══════════ -->
+<section id="page-operaciones" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">30 Operaciones · 9 Países</div>
+      <div class="page-subtitle">Score de contribución Mercadeo por sede · Pauta · Eventos · Reservas digitales</div>
+    </div>
+    <div class="q-badge">2026 · Anual</div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card hi">
+      <div class="metric-label">Operaciones activas</div>
+      <div class="metric-value">28</div>
+      <div class="metric-sub">de 30 sedes en LATAM</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Con pauta activa</div>
+      <div class="metric-value">25</div>
+      <div class="metric-sub">META y/o Google encendidos</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Reservas via Mercadeo</div>
+      <div class="metric-value">8,440</div>
+      <div class="metric-sub">Acumuladas Q1 en todas las sedes</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Score promedio</div>
+      <div class="metric-value">74</div>
+      <div class="metric-sub">de 100 · Contribución Mercadeo</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Eventos producidos</div>
+      <div class="metric-value">62</div>
+      <div class="metric-sub">En todas las operaciones Q1</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Países cubiertos</div>
+      <div class="metric-value">9</div>
+      <div class="metric-sub">COL · PER · MEX · CRI · PAN · ARG · URY · USA · ECU</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">📊 Score de contribución Mercadeo</div>
+    <div class="insight-text">Calculado sobre 4 factores: <strong>Pauta activa (30%)</strong> + <strong>Reservas generadas por canales digitales (30%)</strong> + <strong>Eventos y experiencias producidos (25%)</strong> + <strong>Presencia en IG, Kyto y Merch (15%)</strong>. Un score de 80+ indica alta dependencia e impacto del equipo de Mercadeo en los resultados de esa operación.</div>
+  </div>
+
+  <div class="section-title">Por país</div>
+  <div id="operacionesList"></div>
+</section>
+
+<!-- ══════════ FUENTES DE TRÁFICO ══════════ -->
+<section id="page-fuentes" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Fuentes de Tráfico</div>
+      <div class="page-subtitle" id="fuentesSub">Solicitudes internas · Categorías · Backlog operativo</div>
+    </div>
+    <div class="q-badge" id="fuentesBadge"></div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card hi">
+      <div class="metric-label">Total solicitudes Q1</div>
+      <div class="metric-value">424</div>
+      <div class="metric-sub">Experiencias · A&amp;B · Ops · OTAs</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Categoría líder</div>
+      <div class="metric-value">Exp.</div>
+      <div class="metric-sub">162 solicitudes · 38%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">País con más solicitudes</div>
+      <div class="metric-value">COL</div>
+      <div class="metric-sub">213 solicitudes · 50%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Fuentes identificadas</div>
+      <div class="metric-value">61</div>
+      <div class="metric-sub">Touchpoints mapeados</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Distribución por categoría</div>
+      <div class="chart-sub">Fuentes de tráfico internas registradas</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Experiencias 38%</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>A&amp;B 25%</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Operaciones 21%</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#dc2626"></span>Plataformas 16%</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="fuentesDonut" role="img" aria-label="Fuentes por categoría">Distribución fuentes</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Solicitudes por país</div>
+      <div class="chart-sub">Volumen de requerimientos al área de Mercadeo</div>
+      <div style="position:relative;height:200px"><canvas id="fuentesPais" role="img" aria-label="Fuentes por país">Fuentes por país</canvas></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🔍 Hallazgo clave</div>
+    <div class="insight-text">Experiencias y A&amp;B concentran el 63% de las solicitudes. Colombia genera 1 de cada 2 requerimientos al equipo. El levantamiento de 61 touchpoints en el User Journey reveló oportunidades de automatización en al menos 18 puntos de contacto que actualmente son manuales.</div>
+  </div>
+</section>
+
+<!-- ══════════ RRSS ══════════ -->
+<section id="page-rrss" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">RRSS — Instagram &amp; TikTok</div>
+      <div class="page-subtitle" id="rrssSub">Desempeño orgánico · Contenido · Engagement</div>
+    </div>
+    <div class="q-badge" id="rrssBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="rrssMetrics"></div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Visualizaciones IG — Orgánico vs Pago</div>
+      <div class="chart-sub">Por mes en el trimestre seleccionado</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Orgánicas</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Pagas</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="igVizChart" role="img" aria-label="Visualizaciones IG">Visualizaciones IG trimestre</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Engagement por tipo de contenido IG</div>
+      <div class="chart-sub">Distribución de interacciones totales</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Reels</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Posts</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#5a5854"></span>Historias</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="igEngaChart" role="img" aria-label="Engagement IG por formato">Engagement IG</canvas></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">TikTok — Vistas de publicaciones</div>
+      <div class="chart-sub">Crecimiento de views por mes</div>
+      <div style="position:relative;height:180px"><canvas id="tkViewChart" role="img" aria-label="Views TikTok">TikTok views</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">TikTok — Fuentes de descubrimiento</div>
+      <div class="chart-sub">Porcentaje promedio del trimestre</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>FYP</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Perfil</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Search</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#dc2626"></span>Follow</span>
+      </div>
+      <div style="position:relative;height:180px"><canvas id="tkSrcChart" role="img" aria-label="Fuentes TikTok">Fuentes TikTok</canvas></div>
+    </div>
+  </div>
+
+  <div class="insight" id="rrssInsight">
+    <div class="insight-label">💡 Insight RRSS</div>
+    <div class="insight-text" id="rrssInsightText"></div>
+  </div>
+</section>
+
+<!-- ══════════ PAUTA ══════════ -->
+<section id="page-pauta" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Pauta Digital</div>
+      <div class="page-subtitle" id="pautaSub">META · Google · TikTok · Multi-país</div>
+    </div>
+    <div class="q-badge" id="pautaBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="pautaMetrics"></div>
+
+  <div class="chart-card">
+    <div class="chart-title">Inversión en pauta por trimestre (COP millones)</div>
+    <div class="chart-sub">Evolución anual del gasto publicitario digital</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>META</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Google</span>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="pautaAnualChart" role="img" aria-label="Inversión pauta anual">Inversión pauta por Q</canvas></div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Reservas generadas por canal</div>
+      <div class="chart-sub">Total acumulado en el trimestre</div>
+      <div style="position:relative;height:180px"><canvas id="reservasChart" role="img" aria-label="Reservas por canal">Reservas pauta</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">ROAS mensual — Crecimiento</div>
+      <div class="chart-sub">Retorno sobre inversión en campañas META conversión</div>
+      <div style="position:relative;height:180px"><canvas id="roasLineChart" role="img" aria-label="ROAS línea">ROAS línea</canvas></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">📢 Campañas destacadas</div>
+    <div class="insight-text">Always On representa ~60% del presupuesto asegurando presencia constante en los 25 destinos activos. El 40% restante se destina a campañas estacionales ligadas a eventos (Olas Sonoras, Semana Santa, Mundial) con alto ROAS puntual.</div>
+  </div>
+</section>
+
+<!-- ══════════ CANALES DIGITALES ══════════ -->
+<section id="page-canales" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Canales Digitales</div>
+      <div class="page-subtitle" id="canalesSub">Web · Kyto-Bot · Email · WhatsApp · Linktree</div>
+    </div>
+    <div class="q-badge" id="canalesBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="canalesMetrics"></div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Ventas Kyto-Bot por trimestre (USD)</div>
+      <div class="chart-sub">Canal directo de reservas via chatbot</div>
+      <div style="position:relative;height:200px"><canvas id="kytoChart" role="img" aria-label="Ventas Kyto">Ventas Kyto</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Conversaciones WhatsApp vs Email open rate</div>
+      <div class="chart-sub">Eficiencia de canales de comunicación directa</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>WhatsApp (convs ÷100)</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Email open rate %</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="canalesLineChart" role="img" aria-label="WA vs Email">WA vs Email</canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Estado de la nueva página web — Hitos del año</div>
+    <div class="chart-sub">Avance del proyecto web por trimestre</div>
+    <div id="webHitos" style="padding:8px 0"></div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">💡 Canal directo</div>
+    <div class="insight-text">La nueva web con booking engine propio elimina la dependencia de OTAs y mejora el margen por reserva directa. Kyto-Bot ha demostrado ser el canal de mayor conversión con 90/100 en satisfacción del usuario. La meta para Q4 es que el canal directo represente el 35% de todas las reservas.</div>
+  </div>
+</section>
+
+<!-- ══════════ DISEÑO ══════════ -->
+<section id="page-diseno" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Diseño</div>
+      <div class="page-subtitle" id="disenoSub">Producción visual · Campañas · Video · Marca</div>
+    </div>
+    <div class="q-badge" id="disenoBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="disenoMetrics"></div>
+
+  <div class="chart-card">
+    <div class="chart-title">Producción acumulada por trimestre</div>
+    <div class="chart-sub">Piezas gráficas · Videos · Fotografías editadas</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Piezas gráficas</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Videos</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Fotos editadas</span>
+    </div>
+    <div style="position:relative;height:220px"><canvas id="disenoChart" role="img" aria-label="Producción diseño">Producción diseño</canvas></div>
+  </div>
+
+  <div class="section-title">Entregables de marca Q1</div>
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Proyectos de marca completados</div>
+      <div class="chart-sub">Manuales · Brandbooks · Kits visuales</div>
+      <div id="marcaList" style="padding:8px 0"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Capacidad por área — Q anual</div>
+      <div class="chart-sub">% del tiempo del equipo de Diseño por área</div>
+      <div style="position:relative;height:200px"><canvas id="disenoCapChart" role="img" aria-label="Capacidad diseño">Capacidad diseño</canvas></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🎨 Producción en contexto</div>
+    <div class="insight-text">El equipo de Diseño entregó 312 piezas en Q1 cubriendo 25 operaciones activas con pauta, 2 marcas (VH + Olas), y 4 manuales de implementación. Esto equivale a ~3.5 piezas por día de trabajo, con un equipo de 3 personas.</div>
+  </div>
+</section>
+
+<!-- ══════════ IIMM ══════════ -->
+<section id="page-iimm" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">IIMM — Influencers &amp; Marca</div>
+      <div class="page-subtitle" id="iiммSub">Colaboraciones · Embajadores · Alcance · Canjes</div>
+    </div>
+    <div class="q-badge" id="iiммBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="iimmMetrics"></div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Impresiones por trimestre (millones)</div>
+      <div class="chart-sub">Alcance total de colaboraciones e influencers</div>
+      <div style="position:relative;height:200px"><canvas id="iimmImpChart" role="img" aria-label="Impresiones IIMM">Impresiones</canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Colaboraciones por tipo</div>
+      <div class="chart-sub">Distribución de acciones de IIMM en el trimestre</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Embajadores</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Canjes reactivos</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Colaboraciones pagas</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="iimmTipoChart" role="img" aria-label="Tipo colaboraciones">Tipo colaboraciones</canvas></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">⭐ Alcance orgánico amplificado</div>
+    <div class="insight-text">Las 32 colaboraciones de Q1 generaron 12M de impresiones únicas — equivalente a $24M COP en pauta pagada al CPM promedio de la marca. El programa de Embajadores (8 activos en Q1 → 18 proyectados en Q4) es el canal de mayor retorno relativo del área de IIMM.</div>
+  </div>
+</section>
+
+<!-- ══════════ PROYECTOS ══════════ -->
+<section id="page-proyectos" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Proyectos &amp; Backlog</div>
+      <div class="page-subtitle" id="proyectosSub">Estado de iniciativas estratégicas · Por área</div>
+    </div>
+    <div class="q-badge" id="proyectosBadge"></div>
+  </div>
+
+  <div class="metrics-grid" id="proyectosMetrics"></div>
+
+  <div class="section-title">Estado de proyectos</div>
+  <div id="proyectosGrid" class="proj-grid"></div>
+
+  <div class="insight">
+    <div class="insight-label">📋 Gestión del backlog</div>
+    <div class="insight-text" id="proyectosInsightText"></div>
+  </div>
+</section>
+
+<!-- ══════════ OLAS SONORAS ══════════ -->
+<section id="page-olas" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title" style="color:#7c3aed">Olas Sonoras 🌊</div>
+      <div class="page-subtitle">Festival / Eventos · Marca independiente · Resultados 2026</div>
+    </div>
+    <div class="olas-badge">Marca propia</div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card olas-accent">
+      <div class="metric-label">Ediciones Q1</div>
+      <div class="metric-value">3</div>
+      <div class="metric-sub">Tayrona · Feb · Mar · Abr</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Asistentes totales</div>
+      <div class="metric-value">4,800</div>
+      <div class="metric-sub">Promedio 1,600 por edición</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Inversión pauta Olas</div>
+      <div class="metric-value">$18.2M</div>
+      <div class="metric-sub">COP Q1 · META + TikTok</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Tickets vendidos digital</div>
+      <div class="metric-value">3,240</div>
+      <div class="metric-sub">via Joinnus / Venti / Instagram</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Seguidores @olassonoras</div>
+      <div class="metric-value">48.2K</div>
+      <div class="metric-sub">+8,400 en Q1</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Artistas convocados</div>
+      <div class="metric-value">24</div>
+      <div class="metric-sub">Nacionales e internacionales</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="chart-title">Ediciones Olas Sonoras 2026</div>
+      <div class="chart-sub">Asistentes por edición y proyección anual</div>
+      <div class="legend"><span class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Asistentes</span><span class="legend-item"><span class="legend-dot" style="background:#7c3aed44"></span>Proyectado</span></div>
+      <div style="position:relative;height:200px"><canvas id="olasAsistChart" role="img" aria-label="Asistentes Olas Sonoras">Asistentes por edición</canvas></div>
+    </div>
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="chart-title">Canales de venta de tickets</div>
+      <div class="chart-sub">Distribución de ventas por plataforma</div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Joinnus</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Venti</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>IG Direct</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Taquilla</span>
+      </div>
+      <div style="position:relative;height:200px"><canvas id="olasCanalChart" role="img" aria-label="Canales venta tickets">Canales venta</canvas></div>
+    </div>
+  </div>
+
+  <div class="section-title">Próximas ediciones 2026</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px">
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="proj-cat">Q2 · Mayo</div>
+      <div class="proj-name">Olas Sonoras — Tayrona Vol. 4</div>
+      <span class="pill pill-amber">En montaje</span>
+    </div>
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="proj-cat">Q3 · Agosto</div>
+      <div class="proj-name">Olas Sonoras — Edición Costa Rica</div>
+      <span class="pill pill-dim">Planeando</span>
+    </div>
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="proj-cat">Q3 · Septiembre</div>
+      <div class="proj-name">Olas Sonoras — Medellín</div>
+      <span class="pill pill-dim">Planeando</span>
+    </div>
+    <div class="chart-card" style="border-left:3px solid #7c3aed">
+      <div class="proj-cat">Q4 · Noviembre</div>
+      <div class="proj-name">Olas Sonoras — Gran Final 2026</div>
+      <span class="pill pill-dim">Conceptualizando</span>
+    </div>
+  </div>
+
+  <div class="insight" style="border-left-color:#7c3aed">
+    <div class="insight-label" style="color:#7c3aed">🌊 Olas en números</div>
+    <div class="insight-text">Olas Sonoras se consolida como el brazo de eventos de Viajero Hostels. Cada edición en Tayrona genera un halo de awareness que incrementa las reservas del hostel en un 40% en las 2 semanas posteriores al festival. La meta 2026 es realizar 7 ediciones y alcanzar 12,000 asistentes acumulados.</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+const DATA = {
+  quarters: {
+    Q1: {
+      label:"Q1 2026",period:"Ene – Mar 2026",status:"completo",
+      logros:{ventasKyto:29438,reservasPauta:4356,miembrosGO:3115,convWA:15000,vizOrganicasIG:9000000,colaboraciones:32,seguidoresIG:20800,avanceWeb:85,satisfaccionKyto:90,roasQ:27.9,inversionMetaCOP:33510130,inversionGoogleCOP:9953836},
+      rrss:{ig:{historias:239,posts:22,reels:33,vizTotal:7685498,vizOrg:3913368,vizPaga:3772130,alcance:1217053,interacciones:63793,likes:43842,compartidos:17224,comentarios:1935,guardados:2070,clics:17793,visitas:138373,seguidores:18120,engagement:0.0349},tk:{posts:93,seguidoresTotal:17127,seguidoresGanados:1388,profileViews:42688,postViews:471382,interacciones:17404,likes:12691,comments:378,shares:4335,engagement:0.074,fyp:0.608}},
+      pauta:{totalCOP:76614130,metaCOP:33510130,googleCOP:9953836,campañas:39,reservasMeta:1251,reservasGoogle:3105,convWA:1435,roas:[26.4,28.5,28.7]},
+      diseno:{piezas:312,campañasVisuales:18,videosProducidos:24,fotosEditadas:87,manuales:4,brandbooks:1},
+      iimm:{colaboraciones:32,impresiones:12000000,canjes:18,embajadores:8,menciones:145,alcanceTotalInflu:4800000},
+      canales:{webAvance:85,kytoVentas:29438,kytoConversaciones:27000,emailCampañas:6,emailOpenRate:0.31,linkTreeClics:8400,whatsappConvs:15000},
+      proyectos:[
+        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:85,categoria:"Fidelización"},
+        {nombre:"Nueva Página Web",estado:"en_curso",avance:85,categoria:"Digital"},
+        {nombre:"Merch x Velmost",estado:"completado",avance:100,categoria:"Marca"},
+        {nombre:"User Journey Mapping",estado:"completado",avance:100,categoria:"Estrategia"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:40,categoria:"Eventos"},
+        {nombre:"SOP Área Mercadeo",estado:"en_curso",avance:60,categoria:"Procesos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"por_iniciar",avance:10,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"por_iniciar",avance:5,categoria:"Digital"}
+      ],
+      insights:{
+        resumen:"El equipo de Mercadeo cerró Q1 con un ROAS promedio de 27.9 en META, ventas directas de $29,438 USD vía Kyto y 20,800 nuevos seguidores en Instagram. Los OKRs de Viajero GO (85%) y Web (85%) lideran el avance estratégico.",
+        rrss:"Los Reels son el motor de engagement: en marzo generaron 16,125 likes y 8,668 compartidos. En TikTok, el 61% del tráfico viene del FYP. Las vistas crecieron 3× entre enero y marzo.",
+        proyectos:"2 proyectos completados · 4 en curso · 2 por iniciar. El lanzamiento de Web y GO son las prioridades críticas para Q2."
+      }
+    },
+    Q2: {
+      label:"Q2 2026",period:"Abr – Jun 2026",status:"en_curso",
+      logros:{ventasKyto:38200,reservasPauta:5820,miembrosGO:5480,convWA:19400,vizOrganicasIG:11200000,colaboraciones:41,seguidoresIG:27300,avanceWeb:100,satisfaccionKyto:92,roasQ:31.2,inversionMetaCOP:47000000,inversionGoogleCOP:18500000},
+      rrss:{ig:{historias:278,posts:28,reels:42,vizTotal:9840000,vizOrg:5120000,vizPaga:4720000,alcance:1580000,interacciones:84200,likes:61000,compartidos:24300,comentarios:2800,guardados:3100,clics:22400,visitas:178000,seguidores:27300,engagement:0.041},tk:{posts:124,seguidoresTotal:21400,seguidoresGanados:4273,profileViews:68400,postViews:820000,interacciones:29800,likes:21400,comments:620,shares:7780,engagement:0.082,fyp:0.641}},
+      pauta:{totalCOP:114446000,metaCOP:47000000,googleCOP:18500000,campañas:41,reservasMeta:1840,reservasGoogle:3980,convWA:2100,roas:[30.1,31.4,32.1]},
+      diseno:{piezas:428,campañasVisuales:24,videosProducidos:31,fotosEditadas:112,manuales:6,brandbooks:0},
+      iimm:{colaboraciones:41,impresiones:18400000,canjes:24,embajadores:11,menciones:203,alcanceTotalInflu:7200000},
+      canales:{webAvance:100,kytoVentas:38200,kytoConversaciones:34800,emailCampañas:9,emailOpenRate:0.34,linkTreeClics:12800,whatsappConvs:19400},
+      proyectos:[
+        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:95,categoria:"Fidelización"},
+        {nombre:"Nueva Página Web",estado:"completado",avance:100,categoria:"Digital"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:75,categoria:"Eventos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"en_curso",avance:60,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"en_curso",avance:45,categoria:"Digital"},
+        {nombre:"Capacitación Comercial",estado:"en_curso",avance:55,categoria:"Procesos"},
+        {nombre:"Mapa de Touchpoints",estado:"completado",avance:100,categoria:"Estrategia"},
+        {nombre:"Email Marketing Automation",estado:"en_curso",avance:30,categoria:"Digital"}
+      ],
+      insights:{
+        resumen:"Q2 marca el lanzamiento de la nueva web y la activación del Mundial FIFA. El ROAS subió a 31.2, reflejando la maduración de las campañas. La base de Viajero GO creció 76% vs Q1.",
+        rrss:"TikTok duplicó sus vistas en Q2 (820K vs 471K en Q1). El engagement de IG sube al 4.1% con la estrategia Reels-first. Olas Sonoras amplifica el alcance orgánico en un 35%.",
+        proyectos:"3 completados · 5 en curso. El Mundial FIFA y el rebrand de Olas Sonoras son las iniciativas de mayor impacto esperado para el H2 2026."
+      }
+    },
+    Q3: {
+      label:"Q3 2026",period:"Jul – Sep 2026",status:"proyectado",
+      logros:{ventasKyto:51000,reservasPauta:7200,miembrosGO:8100,convWA:24000,vizOrganicasIG:14000000,colaboraciones:52,seguidoresIG:35000,avanceWeb:100,satisfaccionKyto:93,roasQ:33.8,inversionMetaCOP:52000000,inversionGoogleCOP:22000000},
+      rrss:{ig:{historias:310,posts:35,reels:55,vizTotal:12400000,vizOrg:6800000,vizPaga:5600000,alcance:2100000,interacciones:108000,likes:79000,compartidos:31000,comentarios:3800,guardados:4200,clics:29000,visitas:224000,seguidores:35000,engagement:0.044},tk:{posts:148,seguidoresTotal:27800,seguidoresGanados:6400,profileViews:94000,postViews:1240000,interacciones:41000,likes:29800,comments:890,shares:10310,engagement:0.088,fyp:0.658}},
+      pauta:{totalCOP:148000000,metaCOP:52000000,googleCOP:22000000,campañas:48,reservasMeta:2300,reservasGoogle:4900,convWA:2800,roas:[33.2,34.1,34.1]},
+      diseno:{piezas:540,campañasVisuales:31,videosProducidos:42,fotosEditadas:145,manuales:8,brandbooks:1},
+      iimm:{colaboraciones:52,impresiones:24000000,canjes:31,embajadores:14,menciones:278,alcanceTotalInflu:9800000},
+      canales:{webAvance:100,kytoVentas:51000,kytoConversaciones:48000,emailCampañas:13,emailOpenRate:0.36,linkTreeClics:18200,whatsappConvs:24000},
+      proyectos:[
+        {nombre:"Viajero GO — Loyalty",estado:"completado",avance:100,categoria:"Fidelización"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"completado",avance:100,categoria:"Eventos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"completado",avance:100,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"completado",avance:100,categoria:"Digital"},
+        {nombre:"Email Marketing Automation",estado:"en_curso",avance:70,categoria:"Digital"},
+        {nombre:"Programa Embajadores V2",estado:"en_curso",avance:50,categoria:"Marca"},
+        {nombre:"Revenue Canal Directo",estado:"en_curso",avance:40,categoria:"Digital"},
+        {nombre:"Capacitación Comercial V2",estado:"en_curso",avance:65,categoria:"Procesos"}
+      ],
+      insights:{
+        resumen:"Q3 proyectado consolida el crecimiento: ROAS 33.8, ventas Kyto $51K USD y 8,100 miembros en Viajero GO. El canal directo web comienza a generar revenue medible.",
+        rrss:"TikTok supera 1M de vistas mensuales. Instagram alcanza 35K nuevos seguidores en el trimestre, impulsado por contenido de Olas Sonoras y Medellín.",
+        proyectos:"4 proyectos completados en H1. El foco H2 es Email Automation, Embajadores V2 y monetización del canal directo."
+      }
+    },
+    Q4: {
+      label:"Q4 2026",period:"Oct – Dic 2026",status:"proyectado",
+      logros:{ventasKyto:68000,reservasPauta:9100,miembrosGO:12000,convWA:31000,vizOrganicasIG:18000000,colaboraciones:68,seguidoresIG:46000,avanceWeb:100,satisfaccionKyto:95,roasQ:36.5,inversionMetaCOP:62000000,inversionGoogleCOP:28000000},
+      rrss:{ig:{historias:362,posts:44,reels:68,vizTotal:16800000,vizOrg:9200000,vizPaga:7600000,alcance:2800000,interacciones:148000,likes:108000,compartidos:42000,comentarios:5200,guardados:5800,clics:38000,visitas:298000,seguidores:46000,engagement:0.048},tk:{posts:178,seguidoresTotal:36200,seguidoresGanados:8400,profileViews:128000,postViews:1780000,interacciones:58000,likes:42000,comments:1200,shares:14800,engagement:0.094,fyp:0.672}},
+      pauta:{totalCOP:198000000,metaCOP:62000000,googleCOP:28000000,campañas:56,reservasMeta:3100,reservasGoogle:6000,convWA:3800,roas:[35.8,36.5,37.2]},
+      diseno:{piezas:680,campañasVisuales:39,videosProducidos:58,fotosEditadas:188,manuales:10,brandbooks:1},
+      iimm:{colaboraciones:68,impresiones:32000000,canjes:42,embajadores:18,menciones:358,alcanceTotalInflu:13200000},
+      canales:{webAvance:100,kytoVentas:68000,kytoConversaciones:64000,emailCampañas:18,emailOpenRate:0.38,linkTreeClics:24800,whatsappConvs:31000},
+      proyectos:[
+        {nombre:"Email Marketing Automation",estado:"completado",avance:100,categoria:"Digital"},
+        {nombre:"Programa Embajadores V2",estado:"completado",avance:100,categoria:"Marca"},
+        {nombre:"Revenue Canal Directo",estado:"completado",avance:100,categoria:"Digital"},
+        {nombre:"Capacitación Comercial V2",estado:"completado",avance:100,categoria:"Procesos"},
+        {nombre:"Rebranding Viajero Hostels",estado:"en_curso",avance:70,categoria:"Marca"},
+        {nombre:"App Viajero GO V2",estado:"en_curso",avance:45,categoria:"Digital"},
+        {nombre:"Estrategia 2027",estado:"en_curso",avance:30,categoria:"Estrategia"},
+        {nombre:"Alianzas LATAM Q1-27",estado:"por_iniciar",avance:10,categoria:"Marca"}
+      ],
+      insights:{
+        resumen:"Q4 cierra el año con ROAS 36.5, el más alto del año. Viajero GO alcanza 12,000 miembros y las ventas Kyto llegan a $68K USD. El equipo de Mercadeo entrega 680 piezas en el año.",
+        rrss:"Cierre de año con 46K nuevos seguidores IG y 36K en TikTok. El engagement de IG sube a 4.8% — muy por encima del benchmark de la industria hotelera (1.8%).",
+        proyectos:"El año cierra con 14 proyectos completados. La estrategia 2027 y el rebranding de VH son los grandes proyectos que pasan al siguiente año."
+      }
+    }
+  },
+  operaciones:[
+    {pais:"Colombia",ciudad:"Guatapé",flag:"🇨🇴",pauta:true,eventos:4,reservasMkt:680,scoreContrib:94,ig:true,merch:true,kyto:true},
+    {pais:"Colombia",ciudad:"Tayrona",flag:"🇨🇴",pauta:true,eventos:5,reservasMkt:820,scoreContrib:97,ig:true,merch:false,kyto:true},
+    {pais:"Colombia",ciudad:"Medellín",flag:"🇨🇴",pauta:true,eventos:6,reservasMkt:590,scoreContrib:91,ig:true,merch:true,kyto:true},
+    {pais:"Colombia",ciudad:"Bogotá",flag:"🇨🇴",pauta:true,eventos:3,reservasMkt:410,scoreContrib:85,ig:true,merch:false,kyto:true},
+    {pais:"Colombia",ciudad:"Cartagena Centro",flag:"🇨🇴",pauta:true,eventos:3,reservasMkt:380,scoreContrib:83,ig:true,merch:false,kyto:true},
+    {pais:"Colombia",ciudad:"Getsemaní",flag:"🇨🇴",pauta:true,eventos:4,reservasMkt:340,scoreContrib:82,ig:true,merch:false,kyto:false},
+    {pais:"Colombia",ciudad:"Santa Marta",flag:"🇨🇴",pauta:true,eventos:2,reservasMkt:290,scoreContrib:78,ig:true,merch:false,kyto:true},
+    {pais:"Colombia",ciudad:"Salento",flag:"🇨🇴",pauta:true,eventos:1,reservasMkt:210,scoreContrib:71,ig:false,merch:false,kyto:true},
+    {pais:"Colombia",ciudad:"Cali",flag:"🇨🇴",pauta:true,eventos:2,reservasMkt:180,scoreContrib:69,ig:false,merch:true,kyto:false},
+    {pais:"Colombia",ciudad:"San Andrés",flag:"🇨🇴",pauta:true,eventos:0,reservasMkt:90,scoreContrib:58,ig:false,merch:false,kyto:false},
+    {pais:"Perú",ciudad:"Paracas",flag:"🇵🇪",pauta:true,eventos:3,reservasMkt:520,scoreContrib:89,ig:true,merch:false,kyto:true},
+    {pais:"Perú",ciudad:"Huacachina",flag:"🇵🇪",pauta:true,eventos:4,reservasMkt:480,scoreContrib:88,ig:true,merch:false,kyto:true},
+    {pais:"Perú",ciudad:"Lima",flag:"🇵🇪",pauta:true,eventos:2,reservasMkt:390,scoreContrib:82,ig:true,merch:false,kyto:true},
+    {pais:"Perú",ciudad:"Cusco",flag:"🇵🇪",pauta:true,eventos:2,reservasMkt:340,scoreContrib:79,ig:false,merch:false,kyto:true},
+    {pais:"Perú",ciudad:"Arequipa",flag:"🇵🇪",pauta:true,eventos:2,reservasMkt:290,scoreContrib:74,ig:false,merch:false,kyto:false},
+    {pais:"México",ciudad:"CDMX",flag:"🇲🇽",pauta:true,eventos:3,reservasMkt:480,scoreContrib:87,ig:true,merch:false,kyto:true},
+    {pais:"México",ciudad:"Bacalar",flag:"🇲🇽",pauta:true,eventos:2,reservasMkt:420,scoreContrib:85,ig:true,merch:false,kyto:true},
+    {pais:"México",ciudad:"Oaxaca",flag:"🇲🇽",pauta:true,eventos:3,reservasMkt:310,scoreContrib:80,ig:true,merch:false,kyto:false},
+    {pais:"México",ciudad:"Pto. Escondido",flag:"🇲🇽",pauta:true,eventos:1,reservasMkt:240,scoreContrib:72,ig:false,merch:false,kyto:false},
+    {pais:"Costa Rica",ciudad:"San José",flag:"🇨🇷",pauta:true,eventos:2,reservasMkt:310,scoreContrib:78,ig:false,merch:false,kyto:true},
+    {pais:"Costa Rica",ciudad:"La Fortuna",flag:"🇨🇷",pauta:true,eventos:1,reservasMkt:240,scoreContrib:73,ig:false,merch:false,kyto:false},
+    {pais:"Panamá",ciudad:"Casco Viejo",flag:"🇵🇦",pauta:true,eventos:2,reservasMkt:280,scoreContrib:76,ig:false,merch:false,kyto:true},
+    {pais:"Argentina",ciudad:"Buenos Aires",flag:"🇦🇷",pauta:true,eventos:3,reservasMkt:320,scoreContrib:80,ig:true,merch:false,kyto:true},
+    {pais:"Uruguay",ciudad:"Montevideo",flag:"🇺🇾",pauta:false,eventos:1,reservasMkt:120,scoreContrib:52,ig:false,merch:false,kyto:false},
+    {pais:"Uruguay",ciudad:"Colonia",flag:"🇺🇾",pauta:false,eventos:0,reservasMkt:80,scoreContrib:44,ig:false,merch:false,kyto:false},
+    {pais:"EE.UU",ciudad:"Miami",flag:"🇺🇸",pauta:true,eventos:1,reservasMkt:290,scoreContrib:77,ig:false,merch:false,kyto:true},
+    {pais:"Ecuador",ciudad:"Quito",flag:"🇪🇨",pauta:false,eventos:0,reservasMkt:60,scoreContrib:38,ig:false,merch:false,kyto:false},
+    {pais:"Brasil",ciudad:"São Paulo",flag:"🇧🇷",pauta:false,eventos:0,reservasMkt:0,scoreContrib:12,ig:false,merch:false,kyto:false}
+  ]
+};
+
+// ── STATE ──────────────────────────────────────────────
+let currentQ = 'Q1';
+const charts = {};
+
+function fmt(n){return n>=1000000?(n/1000000).toFixed(1)+'M':n>=1000?(n/1000).toFixed(1)+'K':n}
+function fmtM(n){return '$'+(n/1000000).toFixed(1)+'M'}
+function months(q){return{Q1:['Ene','Feb','Mar'],Q2:['Abr','May','Jun'],Q3:['Jul','Ago','Sep'],Q4:['Oct','Nov','Dic']}[q]}
+const COLORS={amber:'#d97706',green:'#16a34a',blue:'#2563eb',red:'#dc2626',purple:'#7c3aed',dim:'#9E9594',muted:'#6B6564'};
+const gridColor='rgba(0,0,0,0.06)';
+const tickColor='#9E9594';
+const tickFont={family:'Geomanist',size:11};
+
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id]}}
+function mkChart(id,cfg){destroyChart(id);charts[id]=new Chart(document.getElementById(id),cfg);return charts[id]}
+
+// ── NAVIGATION ──────────────────────────────────────────────
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  renderPage(id);
+}
+
+function setQuarter(q){
+  currentQ=q;
+  document.getElementById('sbQuarterLabel').textContent=DATA.quarters[q].label;
+  const activePage=document.querySelector('.page.active');
+  if(activePage) renderPage(activePage.id.replace('page-',''));
+}
+
+// ── RENDER DISPATCHER ──────────────────────────────────────────────
+function renderPage(id){
+  const fns={resumen:renderResumen,rrss:renderRRSS,pauta:renderPauta,canales:renderCanales,diseno:renderDiseno,iimm:renderIIMM,proyectos:renderProyectos,operaciones:renderOperaciones,fuentes:renderFuentes,olas:renderOlas};
+  if(fns[id]) fns[id]();
+}
+
+function qBadgeHTML(q){
+  const qd=DATA.quarters[q];
+  const dot=qd.status==='completo'?'dot-green':qd.status==='en_curso'?'dot-amber':'dot-dim';
+  return `<span class="status-dot ${dot}"></span>${qd.label} · ${qd.period}`;
+}
+
+// ── RESUMEN ──────────────────────────────────────────────
+function renderResumen(){
+  const qd=DATA.quarters[currentQ];
+  document.getElementById('resumenSub').textContent='Métricas clave del trimestre · Equipo de Mercadeo';
+  document.getElementById('resumenBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('resumenInsightText').textContent=qd.insights.resumen;
+
+  // Status strip
+  const strip=document.getElementById('resumenStatusStrip');
+  strip.innerHTML=Object.entries(DATA.quarters).map(([k,v])=>`<div class="status-chip ${v.status}"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>${v.label}</div>`).join('');
+
+  // Metrics
+  const l=qd.logros;
+  document.getElementById('resumenMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Ventas Kyto-Bot</div><div class="metric-value">$${fmt(l.ventasKyto)}</div><div class="metric-sub">USD · Canal directo</div></div>
+    <div class="metric-card"><div class="metric-label">Reservas por Pauta</div><div class="metric-value">${fmt(l.reservasPauta)}</div><div class="metric-sub">META + Google</div></div>
+    <div class="metric-card"><div class="metric-label">Miembros Viajero GO</div><div class="metric-value">${fmt(l.miembrosGO)}</div><div class="metric-sub">Programa de lealtad</div></div>
+    <div class="metric-card"><div class="metric-label">Seguidores IG ganados</div><div class="metric-value">${fmt(l.seguidoresIG)}</div><div class="metric-sub">Crecimiento orgánico</div></div>
+    <div class="metric-card"><div class="metric-label">ROAS promedio META</div><div class="metric-value">${l.roasQ}×</div><div class="metric-sub">Campañas de conversión</div></div>
+    <div class="metric-card"><div class="metric-label">Conversaciones WA</div><div class="metric-value">${fmt(l.convWA)}</div><div class="metric-sub">Iniciadas via Mercadeo</div></div>
+  `;
+
+  // ROAS chart
+  mkChart('roasChart',{type:'bar',data:{labels:months(currentQ),datasets:[{data:qd.pauta.roas,backgroundColor:[COLORS.amber+'88',COLORS.amber+'aa',COLORS.amber],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' ROAS: '+c.parsed.y+'×'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
+
+  // Paid donut
+  mkChart('paidDonut',{type:'doughnut',data:{labels:['META','Google'],datasets:[{data:[qd.logros.inversionMetaCOP,qd.logros.inversionGoogleCOP],backgroundColor:[COLORS.blue,COLORS.amber],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}}});
+
+  // Annual trend
+  const qs=['Q1','Q2','Q3','Q4'];
+  mkChart('annualChart',{type:'line',data:{labels:qs,datasets:[
+    {label:'Seg IG ÷100',data:qs.map(q=>Math.round(DATA.quarters[q].logros.seguidoresIG/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
+    {label:'Reservas',data:qs.map(q=>DATA.quarters[q].logros.reservasPauta),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber},
+    {label:'Kyto ÷10',data:qs.map(q=>Math.round(DATA.quarters[q].logros.ventasKyto/10)),borderColor:COLORS.blue,backgroundColor:COLORS.blue+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.blue}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+}
+
+// ── RRSS ──────────────────────────────────────────────
+function renderRRSS(){
+  const qd=DATA.quarters[currentQ];
+  const ig=qd.rrss.ig; const tk=qd.rrss.tk;
+  document.getElementById('rrssBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('rrssSub').textContent=`Desempeño orgánico Q ${currentQ} · Instagram · TikTok`;
+  document.getElementById('rrssInsightText').textContent=qd.insights.rrss;
+
+  document.getElementById('rrssMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Seguidores IG ganados</div><div class="metric-value">${fmt(ig.seguidores)}</div><div class="metric-sub">Crecimiento orgánico</div></div>
+    <div class="metric-card"><div class="metric-label">Visualizaciones IG totales</div><div class="metric-value">${fmt(ig.vizTotal)}</div><div class="metric-sub">Org: ${fmt(ig.vizOrg)} · Paga: ${fmt(ig.vizPaga)}</div></div>
+    <div class="metric-card"><div class="metric-label">Engagement IG</div><div class="metric-value">${(ig.engagement*100).toFixed(2)}%</div><div class="metric-sub">Benchmark industria: 1.8%</div></div>
+    <div class="metric-card"><div class="metric-label">Contenido IG publicado</div><div class="metric-value">${ig.historias+ig.posts+ig.reels}</div><div class="metric-sub">${ig.historias} Hist · ${ig.posts} Posts · ${ig.reels} Reels</div></div>
+    <div class="metric-card"><div class="metric-label">TikTok views</div><div class="metric-value">${fmt(tk.postViews)}</div><div class="metric-sub">${tk.posts} posts publicados</div></div>
+    <div class="metric-card"><div class="metric-label">Seg. TikTok ganados</div><div class="metric-value">${fmt(tk.seguidoresGanados)}</div><div class="metric-sub">Total: ${fmt(tk.seguidoresTotal)}</div></div>
+  `;
+
+  // IG Viz
+  mkChart('igVizChart',{type:'bar',data:{labels:months(currentQ),datasets:[
+    {label:'Orgánicas',data:[ig.vizOrg*0.42,ig.vizOrg*0.29,ig.vizOrg*0.29].map(Math.round),backgroundColor:COLORS.green,borderRadius:3,borderSkipped:false},
+    {label:'Pagas',data:[ig.vizPaga*0.34,ig.vizPaga*0.31,ig.vizPaga*0.35].map(Math.round),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+
+  // Engagement donut
+  const totalLikes=ig.likes;
+  mkChart('igEngaChart',{type:'doughnut',data:{labels:['Reels','Posts','Stories'],datasets:[{data:[Math.round(totalLikes*0.72),Math.round(totalLikes*0.2),Math.round(totalLikes*0.08)],backgroundColor:[COLORS.blue,COLORS.amber,COLORS.dim],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
+
+  // TK views
+  mkChart('tkViewChart',{type:'bar',data:{labels:months(currentQ),datasets:[{data:[Math.round(tk.postViews*0.19),Math.round(tk.postViews*0.27),Math.round(tk.postViews*0.54)],backgroundColor:[COLORS.purple+'66',COLORS.purple+'99',COLORS.purple],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+
+  // TK sources
+  const fyp=Math.round(tk.fyp*100);
+  mkChart('tkSrcChart',{type:'doughnut',data:{labels:['FYP','Perfil','Search','Follow'],datasets:[{data:[fyp,Math.round(tk.fyp*30),Math.round(tk.fyp*20),2],backgroundColor:[COLORS.blue,COLORS.green,COLORS.amber,COLORS.red],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false}}}});
+}
+
+// ── PAUTA ──────────────────────────────────────────────
+function renderPauta(){
+  const qd=DATA.quarters[currentQ]; const p=qd.pauta;
+  document.getElementById('pautaBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('pautaSub').textContent=`Inversión digital Q ${currentQ} · META · Google · TikTok`;
+
+  document.getElementById('pautaMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Inversión total</div><div class="metric-value">${fmtM(p.totalCOP)}</div><div class="metric-sub">COP · META + Google</div></div>
+    <div class="metric-card"><div class="metric-label">Campañas activas</div><div class="metric-value">${p.campañas}</div><div class="metric-sub">META + Google + TikTok</div></div>
+    <div class="metric-card"><div class="metric-label">Reservas META</div><div class="metric-value">${fmt(p.reservasMeta)}</div><div class="metric-sub">Campañas conversión</div></div>
+    <div class="metric-card"><div class="metric-label">Reservas Google</div><div class="metric-value">${fmt(p.reservasGoogle)}</div><div class="metric-sub">Search campaigns</div></div>
+    <div class="metric-card"><div class="metric-label">ROAS final</div><div class="metric-value">${p.roas[2]}×</div><div class="metric-sub">Último mes del trimestre</div></div>
+    <div class="metric-card"><div class="metric-label">Conv. WhatsApp</div><div class="metric-value">${fmt(p.convWA)}</div><div class="metric-sub">Via pauta META</div></div>
+  `;
+
+  // Annual investment
+  const qs=['Q1','Q2','Q3','Q4'];
+  mkChart('pautaAnualChart',{type:'bar',data:{labels:qs,datasets:[
+    {label:'META',data:qs.map(q=>Math.round(DATA.quarters[q].pauta.metaCOP/1000000)),backgroundColor:COLORS.blue,borderRadius:4,borderSkipped:false},
+    {label:'Google',data:qs.map(q=>Math.round(DATA.quarters[q].pauta.googleCOP/1000000)),backgroundColor:COLORS.amber,borderRadius:4,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+v+'M'}}}}});
+
+  // Reservas horizontal
+  mkChart('reservasChart',{type:'bar',data:{labels:['Google Search','META Conversión','WA (÷10)'],datasets:[{data:[p.reservasGoogle,p.reservasMeta,Math.round(p.convWA/10)],backgroundColor:[COLORS.green,COLORS.blue,COLORS.amber],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // ROAS line
+  mkChart('roasLineChart',{type:'line',data:{labels:months(currentQ),datasets:[{data:p.roas,borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:COLORS.amber,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
+}
+
+// ── CANALES ──────────────────────────────────────────────
+function renderCanales(){
+  const qd=DATA.quarters[currentQ]; const c=qd.canales;
+  document.getElementById('canalesBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('canalesSub').textContent=`Ecosistema digital Q ${currentQ}`;
+
+  document.getElementById('canalesMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Ventas Kyto-Bot</div><div class="metric-value">$${fmt(c.kytoVentas)}</div><div class="metric-sub">USD directos</div></div>
+    <div class="metric-card"><div class="metric-label">Conversaciones Kyto</div><div class="metric-value">${fmt(c.kytoConversaciones)}</div><div class="metric-sub">Total iniciadas</div></div>
+    <div class="metric-card"><div class="metric-label">Web — Avance</div><div class="metric-value">${c.webAvance}%</div><div class="metric-sub">Booking engine propio</div></div>
+    <div class="metric-card"><div class="metric-label">Email Campañas</div><div class="metric-value">${c.emailCampañas}</div><div class="metric-sub">Open rate: ${(c.emailOpenRate*100).toFixed(0)}%</div></div>
+    <div class="metric-card"><div class="metric-label">WhatsApp conversaciones</div><div class="metric-value">${fmt(c.whatsappConvs)}</div><div class="metric-sub">Canal principal atención</div></div>
+    <div class="metric-card"><div class="metric-label">Linktree clics</div><div class="metric-value">${fmt(c.linkTreeClics)}</div><div class="metric-sub">Hub digital de tráfico</div></div>
+  `;
+
+  // Kyto annual
+  const qs=['Q1','Q2','Q3','Q4'];
+  mkChart('kytoChart',{type:'bar',data:{labels:qs,datasets:[{data:qs.map(q=>DATA.quarters[q].canales.kytoVentas),backgroundColor:qs.map((q,i)=>i===(['Q1','Q2','Q3','Q4'].indexOf(currentQ))?COLORS.amber:COLORS.amber+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toLocaleString()+' USD'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+fmt(v)}}}}});
+
+  // WA vs Email
+  mkChart('canalesLineChart',{type:'line',data:{labels:qs,datasets:[
+    {label:'WA ÷100',data:qs.map(q=>Math.round(DATA.quarters[q].canales.whatsappConvs/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
+    {label:'Email OR %',data:qs.map(q=>Math.round(DATA.quarters[q].canales.emailOpenRate*100)),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Web hitos
+  const hitos=[{q:'Q1',label:'Desarrollo plataforma completa',done:true,pct:85},{q:'Q2',label:'Lanzamiento con booking engine + pagos',done:currentQ!=='Q1',pct:100},{q:'Q3',label:'Tracking conversiones + UTMs + funnel',done:currentQ==='Q3'||currentQ==='Q4',pct:100},{q:'Q4',label:'Canal directo = 35% de reservas',done:currentQ==='Q4',pct:100}];
+  document.getElementById('webHitos').innerHTML=hitos.map(h=>`<div class="prog-item"><div class="prog-header"><span class="prog-name"><span class="pill ${h.done?'pill-green':'pill-dim'}" style="margin-right:8px">${h.q}</span>${h.label}</span><span class="prog-pct">${h.done?h.pct+'%':'Pendiente'}</span></div><div class="prog-track"><div class="prog-fill" style="width:${h.done?h.pct:0}%;background:${h.done?COLORS.green:COLORS.dim}"></div></div></div>`).join('');
+}
+
+// ── DISEÑO ──────────────────────────────────────────────
+function renderDiseno(){
+  const qd=DATA.quarters[currentQ]; const d=qd.diseno;
+  document.getElementById('disenoBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('disenoSub').textContent=`Producción visual Q ${currentQ}`;
+
+  document.getElementById('disenoMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Piezas gráficas</div><div class="metric-value">${d.piezas}</div><div class="metric-sub">Campañas + RRSS + Marca</div></div>
+    <div class="metric-card"><div class="metric-label">Campañas visuales</div><div class="metric-value">${d.campañasVisuales}</div><div class="metric-sub">Con brief y piezas completas</div></div>
+    <div class="metric-card"><div class="metric-label">Videos producidos</div><div class="metric-value">${d.videosProducidos}</div><div class="metric-sub">Reels + Stories + Pauta</div></div>
+    <div class="metric-card"><div class="metric-label">Fotos editadas</div><div class="metric-value">${d.fotosEditadas}</div><div class="metric-sub">Content + Pauta + Web</div></div>
+    <div class="metric-card"><div class="metric-label">Manuales/Guías</div><div class="metric-value">${d.manuales}</div><div class="metric-sub">Acumulado en el año</div></div>
+    <div class="metric-card"><div class="metric-label">Brandbooks</div><div class="metric-value">${d.brandbooks}</div><div class="metric-sub">Actualizados/Creados</div></div>
+  `;
+
+  const qs=['Q1','Q2','Q3','Q4'];
+  mkChart('disenoChart',{type:'bar',data:{labels:qs,datasets:[
+    {label:'Piezas',data:qs.map(q=>DATA.quarters[q].diseno.piezas),backgroundColor:COLORS.blue,borderRadius:3,borderSkipped:false},
+    {label:'Videos',data:qs.map(q=>DATA.quarters[q].diseno.videosProducidos),backgroundColor:COLORS.purple,borderRadius:3,borderSkipped:false},
+    {label:'Fotos',data:qs.map(q=>DATA.quarters[q].diseno.fotosEditadas),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Marca list
+  const items=[`✓ Brandbook Viajero Hostels 2026`,`✓ Manual de comunicaciones físicas`,`✓ Manual de comunicaciones digitales`,`✓ Kit visual Olas Sonoras`,`✓ Plantillas Canva · 30 sedes`,`✓ Merch x Velmost — artes finales`];
+  document.getElementById('marcaList').innerHTML=items.map(i=>`<div style="padding:7px 0;border-bottom:1px solid #2a2924;font-size:13px;color:#8a8780">${i}</div>`).join('');
+
+  // Capacidad donut
+  mkChart('disenoCapChart',{type:'doughnut',data:{labels:['Pauta/Campañas','RRSS/Contenido','Marca','Eventos','Web/Digital'],datasets:[{data:[38,28,18,10,6],backgroundColor:[COLORS.blue,COLORS.green,COLORS.purple,COLORS.amber,COLORS.red],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
+}
+
+// ── IIMM ──────────────────────────────────────────────
+function renderIIMM(){
+  const qd=DATA.quarters[currentQ]; const m=qd.iimm;
+  document.getElementById('iiммBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('iiммSub').textContent=`Colaboraciones e influencers Q ${currentQ}`;
+
+  document.getElementById('iimmMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Colaboraciones totales</div><div class="metric-value">${m.colaboraciones}</div><div class="metric-sub">Marcas + Creadores + Canjes</div></div>
+    <div class="metric-card"><div class="metric-label">Impresiones únicas</div><div class="metric-value">${fmt(m.impresiones)}</div><div class="metric-sub">Alcance total IIMM</div></div>
+    <div class="metric-card"><div class="metric-label">Embajadores activos</div><div class="metric-value">${m.embajadores}</div><div class="metric-sub">Programa formal</div></div>
+    <div class="metric-card"><div class="metric-label">Canjes reactivos</div><div class="metric-value">${m.canjes}</div><div class="metric-sub">Hospedaje + Experiencias</div></div>
+    <div class="metric-card"><div class="metric-label">Menciones orgánicas</div><div class="metric-value">${m.menciones}</div><div class="metric-sub">Contenido no pagado</div></div>
+    <div class="metric-card"><div class="metric-label">Alcance influencers</div><div class="metric-value">${fmt(m.alcanceTotalInflu)}</div><div class="metric-sub">Audiencias combinadas</div></div>
+  `;
+
+  const qs=['Q1','Q2','Q3','Q4'];
+  mkChart('iimmImpChart',{type:'bar',data:{labels:qs,datasets:[{data:qs.map(q=>DATA.quarters[q].iimm.impresiones/1000000),backgroundColor:qs.map((q,i)=>i===qs.indexOf(currentQ)?COLORS.purple:COLORS.purple+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y.toFixed(1)+'M impresiones'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'M'}}}}});
+
+  mkChart('iimmTipoChart',{type:'doughnut',data:{labels:['Embajadores','Canjes reactivos','Colaboraciones pagas'],datasets:[{data:[Math.round(m.colaboraciones*0.25),Math.round(m.colaboraciones*0.56),Math.round(m.colaboraciones*0.19)],backgroundColor:[COLORS.purple,COLORS.blue,COLORS.amber],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
+}
+
+// ── PROYECTOS ──────────────────────────────────────────────
+function renderProyectos(){
+  const qd=DATA.quarters[currentQ];
+  document.getElementById('proyectosBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('proyectosSub').textContent=`Iniciativas estratégicas Q ${currentQ} · Mercadeo Viajero`;
+
+  const projs=qd.proyectos;
+  const completados=projs.filter(p=>p.estado==='completado').length;
+  const enCurso=projs.filter(p=>p.estado==='en_curso').length;
+  const porIniciar=projs.filter(p=>p.estado==='por_iniciar').length;
+
+  document.getElementById('proyectosMetrics').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Total proyectos</div><div class="metric-value">${projs.length}</div><div class="metric-sub">En el trimestre</div></div>
+    <div class="metric-card"><div class="metric-label">Completados</div><div class="metric-value">${completados}</div><div class="metric-sub metric-up">✓ Entregados</div></div>
+    <div class="metric-card"><div class="metric-label">En curso</div><div class="metric-value">${enCurso}</div><div class="metric-sub">Activos</div></div>
+    <div class="metric-card"><div class="metric-label">Por iniciar</div><div class="metric-value">${porIniciar}</div><div class="metric-sub">En backlog</div></div>
+  `;
+
+  const statusColor={completado:COLORS.green,en_curso:COLORS.amber,por_iniciar:COLORS.dim};
+  const statusLabel={completado:'Completado',en_curso:'En curso',por_iniciar:'Por iniciar'};
+  const statusPill={completado:'pill-green',en_curso:'pill-amber',por_iniciar:'pill-dim'};
+
+  document.getElementById('proyectosGrid').innerHTML=projs.map(p=>`
+    <div class="proj-card">
+      <div class="proj-cat">${p.categoria}</div>
+      <div class="proj-name">${p.nombre}</div>
+      <div class="prog-track" style="margin-bottom:10px"><div class="prog-fill" style="width:${p.avance}%;background:${statusColor[p.estado]}"></div></div>
+      <div class="proj-footer">
+        <span class="proj-pct" style="color:${statusColor[p.estado]}">${p.avance}%</span>
+        <span class="pill ${statusPill[p.estado]}">${statusLabel[p.estado]}</span>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('proyectosInsightText').textContent=qd.insights.proyectos;
+}
+
+// ── OPERACIONES ──────────────────────────────────────────────
+function renderOperaciones(){
+  // Group by country
+  const byCountry={};
+  DATA.operaciones.forEach(op=>{
+    if(!byCountry[op.pais]) byCountry[op.pais]={flag:op.flag,ops:[]};
+    byCountry[op.pais].ops.push(op);
+  });
+
+  const scoreColor=s=>s>=85?COLORS.green:s>=70?COLORS.amber:s>=50?COLORS.blue:COLORS.dim;
+
+  let html='';
+  Object.entries(byCountry).forEach(([pais,{flag,ops}])=>{
+    const avgScore=Math.round(ops.reduce((a,o)=>a+o.scoreContrib,0)/ops.length);
+    const totalRes=ops.reduce((a,o)=>a+o.reservasMkt,0);
+    html+=`<div class="country-group">
+      <div class="country-header">
+        <span class="country-flag">${flag}</span>
+        <span class="country-name">${pais}</span>
+        <span style="font-size:12px;color:${COLORS.muted}">${ops.length} sede${ops.length>1?'s':''} · ${totalRes.toLocaleString()} reservas</span>
+        <div class="country-meta">
+          <span style="font-size:11px;color:${COLORS.dim}">Score promedio</span>
+          <span class="country-score" style="color:${scoreColor(avgScore)}">${avgScore}</span>
+        </div>
+      </div>
+      <div class="country-body">
+        <table class="tbl">
+          <thead><tr>
+            <th>Ciudad / Sede</th>
+            <th>Score Mkt</th>
+            <th>Reservas dig.</th>
+            <th>Eventos</th>
+            <th>Pauta</th>
+            <th>IG</th>
+            <th>Kyto</th>
+            <th>Merch</th>
+          </tr></thead>
+          <tbody>
+            ${ops.sort((a,b)=>b.scoreContrib-a.scoreContrib).map(op=>`
+            <tr>
+              <td style="font-weight:500">${op.ciudad}</td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-track"><div class="score-fill" style="width:${op.scoreContrib}%;background:${scoreColor(op.scoreContrib)}"></div></div>
+                  <span class="score-num" style="color:${scoreColor(op.scoreContrib)}">${op.scoreContrib}</span>
+                </div>
+              </td>
+              <td>${op.reservasMkt.toLocaleString()}</td>
+              <td>${op.eventos}</td>
+              <td><span class="tag ${op.pauta?'on':'off'}">${op.pauta?'✓ Activa':'—'}</span></td>
+              <td><span class="tag ${op.ig?'on':'off'}">${op.ig?'✓':'—'}</span></td>
+              <td><span class="tag ${op.kyto?'on':'off'}">${op.kyto?'✓':'—'}</span></td>
+              <td><span class="tag ${op.merch?'on':'off'}">${op.merch?'✓':'—'}</span></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('operacionesList').innerHTML=html;
+}
+
+// ── FUENTES ──────────────────────────────────────────────
+function renderFuentes(){
+  document.getElementById('fuentesBadge').innerHTML=qBadgeHTML(currentQ);
+
+  mkChart('fuentesDonut',{type:'doughnut',data:{labels:['Experiencias','A&B','Operaciones','Plataformas y OTAs'],datasets:[{data:[162,104,91,67],backgroundColor:[COLORS.blue,COLORS.green,COLORS.amber,COLORS.red],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
+
+  mkChart('fuentesPais',{type:'bar',data:{labels:['Colombia','Perú','México','Argentina','C. Rica','Uruguay','Ecuador','Panamá'],datasets:[{data:[213,101,52,22,14,11,6,4],backgroundColor:COLORS.blue,borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+}
+
+// ── OLAS SONORAS ──────────────────────────────────────────────
+function renderOlas(){
+  mkChart('olasAsistChart',{type:'bar',data:{labels:['Feb','Mar','Abr (Olas 3)','May (proy)','Ago (proy)','Sep (proy)','Nov (proy)'],datasets:[{label:'Asistentes',data:[1400,1700,1700,2000,2200,2400,2800],backgroundColor:[COLORS.purple,COLORS.purple,COLORS.purple,COLORS.purple+'55',COLORS.purple+'55',COLORS.purple+'55',COLORS.purple+'55'],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+
+  mkChart('olasCanalChart',{type:'doughnut',data:{labels:['Joinnus','Venti','IG Direct','Taquilla'],datasets:[{data:[42,28,18,12],backgroundColor:[COLORS.purple,COLORS.blue,COLORS.amber,COLORS.green],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:false}}}});
+}
+
+// ── INIT ──────────────────────────────────────────────
+renderResumen();
+</script>
+</body>
+</html>
