@@ -1271,6 +1271,14 @@ function showPage(id, el){
   document.getElementById('page-'+id).classList.add('active');
   if(el) el.classList.add('active');
   renderPage(id);
+  // Auto-sync Sheet when opening OKR page for the first time
+  if (id === 'okrs') {
+    const app = document.getElementById('okr-app');
+    if (app && !app.dataset.synced) {
+      app.dataset.synced = '1';
+      okrLoadFromSheet();
+    }
+  }
 }
 
 function onQCheck(){
@@ -2161,11 +2169,12 @@ function okrToast(msg, type='ok') {
     document.body.appendChild(t);
   }
   t.textContent = msg;
-  t.style.background = type==='ok' ? '#16a34a' : type==='err' ? '#dc2626' : '#d97706';
+  t.style.background = type==='ok' ? '#16a34a' : type==='err' ? '#dc2626' : '#2563eb';
+  const hideDelay = type==='info' ? 8000 : 2500;
   t.style.color = '#fff';
   t.style.opacity = '1';
   clearTimeout(t._hide);
-  t._hide = setTimeout(() => t.style.opacity = '0', 2500);
+  t._hide = setTimeout(() => t.style.opacity = '0', type==='info' ? 8000 : 2500);
 }
 
 async function okrLoadFromSheet() {
@@ -2192,9 +2201,15 @@ async function okrLoadFromSheet() {
       });
     });
     okrToast('✓ Datos cargados', 'ok');
-    // Re-render
+    // Re-render only if OKR page is visible
     const app = document.getElementById('okr-app');
-    if (app) { app.dataset.rendered = ''; app.innerHTML = ''; renderOKRs(); }
+    if (app) { 
+      app.dataset.rendered = '';
+      app.innerHTML = '';
+      if (document.getElementById('page-okrs').classList.contains('active')) {
+        renderOKRs();
+      }
+    }
   } catch(err) {
     okrToast('⚠ Sin conexión al Sheet', 'err');
     console.warn('OKR Sheet error:', err);
@@ -2299,11 +2314,7 @@ function okrForceSync(){
   const btn = document.getElementById('okrSyncBtn');
   btn.textContent = '↻ Cargando...';
   btn.disabled = true;
-  const app = document.getElementById('okr-app');
-  app.dataset.rendered = '';
-  app.innerHTML = '';
-  okrLoadFromSheet().then(()=>{
-    renderOKRs();
+  okrLoadFromSheet().finally(()=>{
     btn.textContent = '↻ Sincronizar';
     btn.disabled = false;
   });
@@ -2311,8 +2322,6 @@ function okrForceSync(){
 function renderOKRs(){
   const app = document.getElementById('okr-app');
   if(app.dataset.rendered) { updateOKRGlobal(); return; }
-  // Load latest data from Google Sheet on first open
-  okrLoadFromSheet();
   app.dataset.rendered = '1';
   app.innerHTML = '';
 
