@@ -42,12 +42,80 @@ html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;min-height:100vh;font-size:14px;line-height:1.6}
 
 /* SIDEBAR */
-.sidebar{width:var(--sidebar);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;overflow-y:auto}
+.sidebar{width:var(--sidebar);height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;overflow:hidden}
 .sb-header{padding:28px 22px 20px;border-bottom:1px solid var(--border)}
 .sb-brand{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.2}
 .sb-brand span{color:var(--accent)}
 .sb-sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase}
 
+
+/* ── OKR TRACKER ── */
+.okr-global-card{background:var(--text);color:#fff;border-radius:var(--r);padding:22px;margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.okr-ring-wrap{position:relative;width:86px;height:86px;flex-shrink:0}
+.okr-ring-wrap svg{width:86px;height:86px;transform:rotate(-90deg)}
+.okr-ring-bg{fill:none;stroke:#444;stroke-width:8}
+.okr-ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 0.5s ease}
+.okr-ring-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:19px;font-weight:900;color:#fff}
+.okr-global-info{flex:1;min-width:180px}
+.okr-global-title{font-size:10px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.okr-global-name{font-size:15px;font-weight:800;margin-bottom:10px;color:#fff}
+.okr-gbar-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.okr-gbar-label{font-size:11px;color:#aaa;min-width:52px}
+.okr-gbar-bg{flex:1;height:5px;background:#444;border-radius:99px;overflow:hidden}
+.okr-gbar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
+.okr-gbar-pct{font-size:11px;color:#fff;font-weight:600;min-width:28px;text-align:right}
+.okr-filter-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:18px}
+.okr-filter-btn{font-size:11px;font-weight:600;padding:5px 12px;border-radius:99px;border:1.5px solid var(--border2);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:var(--font)}
+.okr-filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.okr-filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.obj-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.obj-block.hidden{display:none}
+.obj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;cursor:pointer;user-select:none}
+.obj-label-tag{font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;display:flex;align-items:center;gap:4px}
+.obj-name{font-size:13px;font-weight:700;color:var(--text);max-width:360px;line-height:1.4}
+.obj-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.obj-pct-big{font-size:26px;font-weight:900;line-height:1}
+.obj-bar-track{height:5px;background:var(--surface2);border-radius:99px;margin-bottom:14px;overflow:hidden}
+.obj-bar-fill{height:100%;border-radius:99px;transition:width 0.3s ease}
+.kr-block{margin-bottom:14px;padding-left:14px;border-left:3px solid var(--border)}
+.kr-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px}
+.kr-title{font-size:12px;font-weight:700;color:var(--text);flex:1;line-height:1.4}
+.kr-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.kr-pct-lbl{font-size:12px;font-weight:600;color:var(--muted)}
+.resp-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px}
+.entregable{margin-bottom:12px}
+.ent-header{display:flex;justify-content:space-between;margin-bottom:4px}
+.ent-name{font-size:12px;color:var(--muted);flex:1;padding-right:8px;line-height:1.4}
+.ent-pct-lbl{font-size:12px;font-weight:700;min-width:32px;text-align:right}
+.okr-slider-wrap{position:relative;height:18px;display:flex;align-items:center;margin-bottom:5px}
+.okr-bar-bg{position:absolute;width:100%;height:5px;background:var(--surface2);border-radius:99px}
+.okr-bar-fill{height:100%;border-radius:99px;transition:width 0.08s}
+input.okr-range{position:absolute;width:100%;opacity:0;cursor:pointer;height:18px;margin:0;z-index:2}
+.okr-thumb{position:absolute;width:13px;height:13px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,0.2);pointer-events:none;transform:translateX(-50%);transition:left 0.08s;z-index:1}
+.obs-toggle-btn{font-size:11px;color:var(--dim);cursor:pointer;background:none;border:none;padding:0;display:inline-flex;align-items:center;gap:3px;font-family:var(--font)}
+.obs-toggle-btn:hover{color:var(--accent)}
+.obs-box{overflow:hidden;max-height:0;transition:max-height 0.25s ease}
+.obs-box.open{max-height:160px}
+.obs-textarea{width:100%;font-size:11px;font-family:var(--font);color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:7px 9px;resize:vertical;min-height:50px;outline:none;margin-top:5px}
+.obs-textarea:focus{border-color:var(--accent)}
+.okr-kr-content{overflow:hidden;transition:max-height 0.3s ease}
+.okr-toggle-arrow{font-size:12px;color:var(--dim);margin-left:4px;display:inline-block;transition:transform 0.2s}
+.okr-no-results{text-align:center;color:var(--dim);font-size:13px;padding:32px 0;display:none}
+
+/* Quarter selector */
+.q-all-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:7px 12px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:8px;letter-spacing:0.03em;transition:background 0.15s}
+.q-all-btn:hover{background:var(--accent2)}
+.q-all-btn.partial{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}
+.q-checks{display:flex;flex-direction:column;gap:3px}
+.q-check{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:var(--rs);cursor:pointer;font-size:13px;color:var(--muted);user-select:none;transition:all 0.12s;border:1px solid transparent}
+.q-check input{display:none}
+.q-check.active{background:#FEF0ED;color:var(--accent);border-color:#fcd5cb;font-weight:600}
+.q-check-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.q-check-dot.completo{background:var(--green)}
+.q-check-dot.en_curso{background:var(--amber)}
+.q-check-dot.proyectado{background:var(--dim)}
+.q-check-sub{font-size:10px;color:var(--dim);margin-left:auto}
+.q-check.active .q-check-sub{color:var(--accent2)}
 /* Quarter selector */
 .q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
 .q-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:500}
@@ -57,15 +125,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
 /* Status badges in select */
 .q-status{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
 
-nav{padding:8px 0;flex:1}
+nav{padding:8px 0;flex:1;overflow-y:auto;overflow-x:hidden}
 .nav-section{padding:12px 22px 4px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:500}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 22px;cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;color:var(--muted);font-size:13px;text-decoration:none}
+.nav-sub{padding-left:32px!important;font-size:12px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:7px 22px;cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;color:var(--muted);font-size:13px;text-decoration:none}
 .nav-item:hover{color:var(--text);background:var(--surface2)}
 .nav-item.active{color:var(--accent);border-left-color:var(--accent);background:#FEF0ED;font-weight:600}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
 .nav-brand-tag{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:500;margin-left:auto}
 .tag-vh{background:#fee2e2;color:#dc2626}
 .tag-os{background:#f3e8ff;color:#7c3aed}
+.tag-pm{background:#e0f2fe;color:#0369a1}
 
 .sb-footer{padding:16px 22px;border-top:1px solid var(--border);font-size:11px;color:var(--dim)}
 .sb-footer strong{color:var(--muted)}
@@ -200,13 +270,14 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   </div>
 
   <div class="q-selector">
-    <div class="q-label">Trimestre</div>
-    <select class="q-select" id="qSelect" onchange="setQuarter(this.value)">
-      <option value="Q1">● Q1 2026 — Ene – Mar (Completo)</option>
-      <option value="Q2">◐ Q2 2026 — Abr – Jun (En curso)</option>
-      <option value="Q3">○ Q3 2026 — Jul – Sep (Proyectado)</option>
-      <option value="Q4">○ Q4 2026 — Oct – Dic (Proyectado)</option>
-    </select>
+    <div class="q-label" style="margin-bottom:10px">Trimestre</div>
+    <button class="q-all-btn" id="qAllBtn" onclick="toggleAllQ()">Año completo</button>
+    <div class="q-checks">
+      <label class="q-check active" id="qCheck-Q1"><input type="checkbox" value="Q1" checked onchange="onQCheck()"><span class="q-check-dot completo"></span>Q1 <span class="q-check-sub">Ene–Mar</span></label>
+      <label class="q-check" id="qCheck-Q2"><input type="checkbox" value="Q2" onchange="onQCheck()"><span class="q-check-dot en_curso"></span>Q2 <span class="q-check-sub">Abr–Jun</span></label>
+      <label class="q-check" id="qCheck-Q3"><input type="checkbox" value="Q3" onchange="onQCheck()"><span class="q-check-dot proyectado"></span>Q3 <span class="q-check-sub">Jul–Sep</span></label>
+      <label class="q-check" id="qCheck-Q4"><input type="checkbox" value="Q4" onchange="onQCheck()"><span class="q-check-dot proyectado"></span>Q4 <span class="q-check-sub">Oct–Dic</span></label>
+    </div>
   </div>
 
   <nav>
@@ -218,32 +289,42 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
       <span class="nav-dot"></span>30 Operaciones
     </a>
 
-    <div class="nav-section">Áreas</div>
-    <a class="nav-item" data-page="fuentes" onclick="showPage('fuentes',this)">
-      <span class="nav-dot"></span>Fuentes de Tráfico <span class="nav-brand-tag tag-vh">VH</span>
+    <div class="nav-section">Project Management</div>
+    <a class="nav-item nav-sub" data-page="fuentes" onclick="showPage('fuentes',this)">
+      <span class="nav-dot"></span>Fuentes de Tráfico
     </a>
-    <a class="nav-item" data-page="rrss" onclick="showPage('rrss',this)">
-      <span class="nav-dot"></span>RRSS <span class="nav-brand-tag tag-vh">VH</span>
+    <a class="nav-item nav-sub" data-page="proyectos" onclick="showPage('proyectos',this)">
+      <span class="nav-dot"></span>Backlog
     </a>
-    <a class="nav-item" data-page="pauta" onclick="showPage('pauta',this)">
-      <span class="nav-dot"></span>Pauta Digital <span class="nav-brand-tag tag-vh">VH</span>
+    <a class="nav-item nav-sub" data-page="okrs" onclick="showPage('okrs',this)">
+      <span class="nav-dot"></span>OKR Tracker
     </a>
-    <a class="nav-item" data-page="canales" onclick="showPage('canales',this)">
-      <span class="nav-dot"></span>Canales Digitales <span class="nav-brand-tag tag-vh">VH</span>
+
+    <div class="nav-section">Subáreas de Marketing</div>
+    <a class="nav-item nav-sub" data-page="rrss" onclick="showPage('rrss',this)">
+      <span class="nav-dot"></span>RRSS
     </a>
-    <a class="nav-item" data-page="diseno" onclick="showPage('diseno',this)">
-      <span class="nav-dot"></span>Diseño <span class="nav-brand-tag tag-vh">VH</span>
+    <a class="nav-item nav-sub" data-page="pauta" onclick="showPage('pauta',this)">
+      <span class="nav-dot"></span>Pauta Digital
     </a>
-    <a class="nav-item" data-page="iimm" onclick="showPage('iimm',this)">
-      <span class="nav-dot"></span>IIMM / Influencers <span class="nav-brand-tag tag-vh">VH</span>
+    <a class="nav-item nav-sub" data-page="canales" onclick="showPage('canales',this)">
+      <span class="nav-dot"></span>Canales Digitales
     </a>
-    <a class="nav-item" data-page="proyectos" onclick="showPage('proyectos',this)">
-      <span class="nav-dot"></span>Proyectos &amp; Backlog
+    <a class="nav-item nav-sub" data-page="diseno" onclick="showPage('diseno',this)">
+      <span class="nav-dot"></span>Diseño
+    </a>
+    <a class="nav-item nav-sub" data-page="iimm" onclick="showPage('iimm',this)">
+      <span class="nav-dot"></span>IIMM / Influencers
+    </a>
+
+    <div class="nav-section">Brand Equity</div>
+    <a class="nav-item nav-sub" data-page="sentiment" onclick="showPage('sentiment',this)">
+      <span class="nav-dot"></span>Sentiment &amp; Reputación
     </a>
 
     <div class="nav-section">Olas Sonoras</div>
-    <a class="nav-item" data-page="olas" onclick="showPage('olas',this)">
-      <span class="nav-dot" style="background:#7c3aed"></span>Olas Sonoras <span class="nav-brand-tag tag-os">OS</span>
+    <a class="nav-item nav-sub" data-page="olas" onclick="showPage('olas',this)">
+      <span class="nav-dot" style="background:#7c3aed"></span>Olas Sonoras
     </a>
   </nav>
 
@@ -518,7 +599,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   <div class="page-header">
     <div>
       <div class="page-title">Canales Digitales</div>
-      <div class="page-subtitle" id="canalesSub">Web · Kyto-Bot · Email · WhatsApp · Linktree</div>
+      <div class="page-subtitle" id="canalesSub">Web · Kyto-Bot · Email · WhatsApp · Linktree · Hub de Envíos</div>
     </div>
     <div class="q-badge" id="canalesBadge"></div>
   </div>
@@ -548,6 +629,47 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
     <div id="webHitos" style="padding:8px 0"></div>
   </div>
 
+
+  <!-- ── EMAIL HUB ─────────────────────────────── -->
+  <div class="section-title">Hub de Envíos — Email Marketing</div>
+
+  <div class="metrics-grid" id="emailKPIs"></div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">OR promedio por campaña</div>
+      <div class="chart-sub">Open rate · % sobre destinatarios</div>
+      <div style="position:relative;height:220px"><canvas id="emailCampañaChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Destinatarios por destino</div>
+      <div class="chart-sub">Volumen de contactos alcanzados</div>
+      <div style="position:relative;height:220px"><canvas id="emailDestinoChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section-title">Detalle de envíos</div>
+
+  <!-- Filtros -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center">
+    <span style="font-size:12px;color:var(--muted);font-weight:600">Filtrar:</span>
+    <select id="emailFiltCamp" class="q-select" style="width:auto;min-width:160px;font-size:12px" onchange="renderEmailTable()">
+      <option value="">Todas las campañas</option>
+    </select>
+    <select id="emailFiltDest" class="q-select" style="width:auto;min-width:140px;font-size:12px" onchange="renderEmailTable()">
+      <option value="">Todos los destinos</option>
+    </select>
+    <select id="emailFiltIdioma" class="q-select" style="width:auto;min-width:110px;font-size:12px" onchange="renderEmailTable()">
+      <option value="">ESP + ING</option>
+      <option value="ESP">Solo ESP</option>
+      <option value="ING">Solo ING</option>
+    </select>
+    <span id="emailCount" style="font-size:11px;color:var(--dim);margin-left:4px"></span>
+  </div>
+
+  <div class="chart-card" style="padding:0;overflow:hidden">
+    <div id="emailTableWrap" style="overflow-x:auto;max-height:480px;overflow-y:auto"></div>
+  </div>
   <div class="insight">
     <div class="insight-label">💡 Canal directo</div>
     <div class="insight-text">La nueva web con booking engine propio elimina la dependencia de OTAs y mejora el margen por reserva directa. Kyto-Bot ha demostrado ser el canal de mayor conversión con 90/100 en satisfacción del usuario. La meta para Q4 es que el canal directo represente el 35% de todas las reservas.</div>
@@ -747,6 +869,140 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   </div>
 </section>
 
+
+<!-- ══════════ SENTIMENT & REPUTACIÓN ══════════ -->
+<section id="page-sentiment" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Sentiment &amp; Reputación</div>
+      <div class="page-subtitle">Análisis de 39,740 reviews con texto · 27 operaciones · Todas las plataformas</div>
+    </div>
+    <div class="q-badge">⭐ Datos 2025–2026</div>
+  </div>
+
+  <!-- KPIs Globales -->
+  <div class="metrics-grid" id="sentimentKPIs"></div>
+
+  <!-- Brand Association Top 5 -->
+  <div class="section-title">Asociación de marca — Global</div>
+  <div class="two-col" style="margin-bottom:18px">
+    <div class="chart-card" style="border-top:3px solid var(--green)">
+      <div class="chart-title" style="color:var(--green)">🟢 Top 5 positivo — Lo que más define a Viajero</div>
+      <div class="chart-sub">Palabras/temas acumulados en las 27 sedes · reviews positivas</div>
+      <div id="brandPosWords" style="margin-top:14px"></div>
+    </div>
+    <div class="chart-card" style="border-top:3px solid var(--red)">
+      <div class="chart-title" style="color:var(--red)">🔴 Top 5 negativo — Principales focos de mejora</div>
+      <div class="chart-sub">Palabras/temas acumulados en las 27 sedes · reviews negativas</div>
+      <div id="brandNegWords" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <!-- Ranking por locación -->
+  <div class="section-title">Ranking por locación</div>
+  <div class="chart-card" style="padding:0;overflow:hidden">
+    <div id="sentimentRankingTable" style="overflow-x:auto"></div>
+  </div>
+
+  <div class="two-col" style="margin-top:18px">
+    <!-- Rating promedio -->
+    <div class="chart-card">
+      <div class="chart-title">Rating promedio por locación</div>
+      <div class="chart-sub">Todas las plataformas combinadas</div>
+      <div style="position:relative;height:320px"><canvas id="sentimentRatingChart"></canvas></div>
+    </div>
+    <!-- % positivo vs negativo -->
+    <div class="chart-card">
+      <div class="chart-title">% Positivo vs % Negativo</div>
+      <div class="chart-sub">Top 10 locaciones por volumen</div>
+      <div style="position:relative;height:320px"><canvas id="sentimentPosNegChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Detalle por locación -->
+  <div class="section-title">Análisis por locación</div>
+  <div style="margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:13px;color:var(--muted)">Seleccionar sede:</span>
+    <select id="sentimentLocSelect" class="q-select" style="width:auto;min-width:220px" onchange="renderSentimentDetail()"></select>
+  </div>
+
+  <div class="three-col">
+    <div class="chart-card" id="sentimentDetailKPIs" style="display:flex;flex-direction:column;gap:12px"></div>
+    <div class="chart-card">
+      <div class="chart-title">Temas positivos más mencionados</div>
+      <div class="chart-sub">Top 10 en reviews positivas</div>
+      <div style="position:relative;height:240px"><canvas id="sentimentPosWords"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Temas negativos más mencionados</div>
+      <div class="chart-sub">Top 10 en reviews negativas</div>
+      <div style="position:relative;height:240px"><canvas id="sentimentNegWords"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Fuentes por locación -->
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Distribución de fuentes</div>
+      <div class="chart-sub">Plataformas de origen de reviews</div>
+      <div style="position:relative;height:220px"><canvas id="sentimentFuentesChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Distribución de sentiment</div>
+      <div class="chart-sub">Positivo · Neutral · Negativo</div>
+      <div style="position:relative;height:220px"><canvas id="sentimentDonutChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">💬 Metodología</div>
+    <div class="insight-text">Sentiment calculado por rating: Positivo ≥ 4.0 · Neutral 3.0–3.9 · Negativo &lt; 3.0. Los temas negativos son palabras que aparecen dentro de reseñas negativas, no necesariamente adjetivos negativos puros. Base: 39,740 reviews con texto de Booking.com, HostelWorld, Google y otras plataformas (2025–2026).</div>
+  </div>
+</section>
+
+
+<!-- ══════════ OKR TRACKER ══════════ -->
+<section id="page-okrs" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">OKR Tracker</div>
+      <div class="page-subtitle">Cumplimiento de objetivos Q2 · Equipo de Mercadeo · Viajero Hostels</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="q-badge"><span class="status-dot dot-amber"></span>Q2 2026 — En curso</div>
+      <button onclick="okrForceSync()" style="font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:5px 10px;cursor:pointer;font-family:var(--font);color:var(--muted)" id="okrSyncBtn">↻ Sincronizar</button>
+    </div>
+  </div>
+
+  <div class="okr-global-card">
+    <div class="okr-ring-wrap">
+      <svg viewBox="0 0 86 86">
+        <circle class="okr-ring-bg" cx="43" cy="43" r="35"/>
+        <circle class="okr-ring-fill" id="okr-global-ring" cx="43" cy="43" r="35" stroke="#F54927" stroke-dasharray="219.9" stroke-dashoffset="219.9"/>
+      </svg>
+      <div class="okr-ring-label" id="okr-global-pct">0%</div>
+    </div>
+    <div class="okr-global-info">
+      <div class="okr-global-title">Cumplimiento Global Q2</div>
+      <div class="okr-global-name">OKRs Equipo Mercadeo — Viajero Hostels</div>
+      <div id="okr-global-bars"></div>
+    </div>
+  </div>
+
+  <div class="okr-filter-wrap">
+    <span style="font-size:11px;font-weight:600;color:var(--muted)">Filtrar por:</span>
+    <button class="okr-filter-btn active" data-okrfilter="all">Todos</button>
+    <button class="okr-filter-btn" data-okrfilter="PM">PM</button>
+    <button class="okr-filter-btn" data-okrfilter="DM">DM</button>
+    <button class="okr-filter-btn" data-okrfilter="Pauta">Pauta</button>
+    <button class="okr-filter-btn" data-okrfilter="Plataformas">Plataformas</button>
+    <button class="okr-filter-btn" data-okrfilter="PR">PR</button>
+  </div>
+
+  <div id="okr-app"></div>
+  <div class="okr-no-results" id="okr-no-results">No hay KRs para este responsable en este objetivo.</div>
+</section>
+
 </main>
 
 <script>
@@ -883,7 +1139,7 @@ const DATA = {
 };
 
 // ── STATE ──────────────────────────────────────────────
-let currentQ = 'Q1';
+let selectedQs = ['Q1'];
 const charts = {};
 
 function fmt(n){return n>=1000000?(n/1000000).toFixed(1)+'M':n>=1000?(n/1000).toFixed(1)+'K':n}
@@ -893,6 +1149,117 @@ const COLORS={amber:'#d97706',green:'#16a34a',blue:'#2563eb',red:'#dc2626',purpl
 const gridColor='rgba(0,0,0,0.06)';
 const tickColor='#9E9594';
 const tickFont={family:'Geomanist',size:11};
+
+// Helper: get current active Qs (always at least 1)
+function getActiveQs(){ return selectedQs.length?selectedQs:['Q1']; }
+
+// Helper: single Q mode (for backwards compat — uses first selected Q)
+function currentQ(){ return getActiveQs()[0]; }
+
+// Helper: merge multiple quarters data with sum/avg depending on field type
+function mergeQs(qs){
+  const n=qs.length;
+  const qdata=qs.map(q=>DATA.quarters[q]);
+  // logros: sums for accumulables, weighted avg for rates
+  const totalReservas=qdata.reduce((a,d)=>a+d.logros.reservasPauta,0);
+  const merged={
+    label: n===1?qdata[0].label: n===4?'Año 2026 completo':`${qs[0]}–${qs[n-1]} 2026`,
+    period: n===1?qdata[0].period:`${qdata[0].period.split(' ')[0]} – ${qdata[n-1].period.split(' – ')[1]||qdata[n-1].period}`,
+    status: qdata.some(d=>d.status==='en_curso')?'en_curso':qdata.every(d=>d.status==='completo')?'completo':'proyectado',
+    logros:{
+      ventasKyto: qdata.reduce((a,d)=>a+d.logros.ventasKyto,0),
+      reservasPauta: qdata.reduce((a,d)=>a+d.logros.reservasPauta,0),
+      miembrosGO: qdata[n-1].logros.miembrosGO, // last Q (cumulative)
+      convWA: qdata.reduce((a,d)=>a+d.logros.convWA,0),
+      vizOrganicasIG: qdata.reduce((a,d)=>a+d.logros.vizOrganicasIG,0),
+      colaboraciones: qdata.reduce((a,d)=>a+d.logros.colaboraciones,0),
+      seguidoresIG: qdata.reduce((a,d)=>a+d.logros.seguidoresIG,0),
+      avanceWeb: qdata[n-1].logros.avanceWeb,
+      satisfaccionKyto: Math.round(qdata.reduce((a,d)=>a+d.logros.satisfaccionKyto,0)/n),
+      roasQ: +(qdata.reduce((a,d)=>a+d.logros.roasQ,0)/n).toFixed(1),
+      inversionMetaCOP: qdata.reduce((a,d)=>a+d.logros.inversionMetaCOP,0),
+      inversionGoogleCOP: qdata.reduce((a,d)=>a+d.logros.inversionGoogleCOP,0)
+    },
+    rrss:{
+      ig:{
+        historias: qdata.reduce((a,d)=>a+d.rrss.ig.historias,0),
+        posts: qdata.reduce((a,d)=>a+d.rrss.ig.posts,0),
+        reels: qdata.reduce((a,d)=>a+d.rrss.ig.reels,0),
+        vizTotal: qdata.reduce((a,d)=>a+d.rrss.ig.vizTotal,0),
+        vizOrg: qdata.reduce((a,d)=>a+d.rrss.ig.vizOrg,0),
+        vizPaga: qdata.reduce((a,d)=>a+d.rrss.ig.vizPaga,0),
+        alcance: qdata.reduce((a,d)=>a+d.rrss.ig.alcance,0),
+        interacciones: qdata.reduce((a,d)=>a+d.rrss.ig.interacciones,0),
+        likes: qdata.reduce((a,d)=>a+d.rrss.ig.likes,0),
+        compartidos: qdata.reduce((a,d)=>a+d.rrss.ig.compartidos,0),
+        comentarios: qdata.reduce((a,d)=>a+d.rrss.ig.comentarios,0),
+        guardados: qdata.reduce((a,d)=>a+d.rrss.ig.guardados,0),
+        clics: qdata.reduce((a,d)=>a+d.rrss.ig.clics,0),
+        visitas: qdata.reduce((a,d)=>a+d.rrss.ig.visitas,0),
+        seguidores: qdata.reduce((a,d)=>a+d.rrss.ig.seguidores,0),
+        engagement: +(qdata.reduce((a,d)=>a+d.rrss.ig.engagement,0)/n).toFixed(4)
+      },
+      tk:{
+        posts: qdata.reduce((a,d)=>a+d.rrss.tk.posts,0),
+        seguidoresTotal: qdata[n-1].rrss.tk.seguidoresTotal,
+        seguidoresGanados: qdata.reduce((a,d)=>a+d.rrss.tk.seguidoresGanados,0),
+        profileViews: qdata.reduce((a,d)=>a+d.rrss.tk.profileViews,0),
+        postViews: qdata.reduce((a,d)=>a+d.rrss.tk.postViews,0),
+        interacciones: qdata.reduce((a,d)=>a+d.rrss.tk.interacciones,0),
+        likes: qdata.reduce((a,d)=>a+d.rrss.tk.likes,0),
+        comments: qdata.reduce((a,d)=>a+d.rrss.tk.comments,0),
+        shares: qdata.reduce((a,d)=>a+d.rrss.tk.shares,0),
+        engagement: +(qdata.reduce((a,d)=>a+d.rrss.tk.engagement,0)/n).toFixed(4),
+        fyp: +(qdata.reduce((a,d)=>a+d.rrss.tk.fyp,0)/n).toFixed(3)
+      }
+    },
+    pauta:{
+      totalCOP: qdata.reduce((a,d)=>a+d.pauta.totalCOP,0),
+      metaCOP: qdata.reduce((a,d)=>a+d.pauta.metaCOP,0),
+      googleCOP: qdata.reduce((a,d)=>a+d.pauta.googleCOP,0),
+      campañas: Math.max(...qdata.map(d=>d.pauta.campañas)),
+      reservasMeta: qdata.reduce((a,d)=>a+d.pauta.reservasMeta,0),
+      reservasGoogle: qdata.reduce((a,d)=>a+d.pauta.reservasGoogle,0),
+      convWA: qdata.reduce((a,d)=>a+d.pauta.convWA,0),
+      roas: n===1?qdata[0].pauta.roas:qs.map(q=>DATA.quarters[q].pauta.roas[2])
+    },
+    diseno:{
+      piezas: qdata.reduce((a,d)=>a+d.diseno.piezas,0),
+      campañasVisuales: qdata.reduce((a,d)=>a+d.diseno.campañasVisuales,0),
+      videosProducidos: qdata.reduce((a,d)=>a+d.diseno.videosProducidos,0),
+      fotosEditadas: qdata.reduce((a,d)=>a+d.diseno.fotosEditadas,0),
+      manuales: qdata[n-1].diseno.manuales,
+      brandbooks: qdata.reduce((a,d)=>a+d.diseno.brandbooks,0)
+    },
+    iimm:{
+      colaboraciones: qdata.reduce((a,d)=>a+d.iimm.colaboraciones,0),
+      impresiones: qdata.reduce((a,d)=>a+d.iimm.impresiones,0),
+      canjes: qdata.reduce((a,d)=>a+d.iimm.canjes,0),
+      embajadores: qdata[n-1].iimm.embajadores,
+      menciones: qdata.reduce((a,d)=>a+d.iimm.menciones,0),
+      alcanceTotalInflu: qdata.reduce((a,d)=>a+d.iimm.alcanceTotalInflu,0)
+    },
+    canales:{
+      webAvance: qdata[n-1].canales.webAvance,
+      kytoVentas: qdata.reduce((a,d)=>a+d.canales.kytoVentas,0),
+      kytoConversaciones: qdata.reduce((a,d)=>a+d.canales.kytoConversaciones,0),
+      emailCampañas: qdata.reduce((a,d)=>a+d.canales.emailCampañas,0),
+      emailOpenRate: +(qdata.reduce((a,d)=>a+d.canales.emailOpenRate,0)/n).toFixed(3),
+      linkTreeClics: qdata.reduce((a,d)=>a+d.canales.linkTreeClics,0),
+      whatsappConvs: qdata.reduce((a,d)=>a+d.canales.whatsappConvs,0)
+    },
+    proyectos: qdata[n-1].proyectos,
+    insights:{
+      resumen: n===1?qdata[0].insights.resumen:`Vista combinada ${qs.join('+')} — Datos acumulados / promediados según métrica.`,
+      rrss: n===1?qdata[0].insights.rrss:`Vista combinada ${qs.join('+')} — Acumulado de contenido y audiencias.`,
+      proyectos: n===1?qdata[0].insights.proyectos:`Proyectos del periodo ${qs[0]}–${qs[n-1]} — mostrando estado al cierre de ${qs[n-1]}.`
+    }
+  };
+  return merged;
+}
+
+// Helper to get merged data for current selection
+function getMerged(){ return mergeQs(getActiveQs()); }
 
 function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id]}}
 function mkChart(id,cfg){destroyChart(id);charts[id]=new Chart(document.getElementById(id),cfg);return charts[id]}
@@ -906,30 +1273,72 @@ function showPage(id, el){
   renderPage(id);
 }
 
-function setQuarter(q){
-  currentQ=q;
-  document.getElementById('sbQuarterLabel').textContent=DATA.quarters[q].label;
+function onQCheck(){
+  const checked=[...document.querySelectorAll('.q-checks input:checked')].map(i=>i.value);
+  if(!checked.length){ // prevent unchecking all — recheck the one that was just unchecked
+    document.querySelectorAll('.q-checks input').forEach(i=>{ if(!checked.includes(i.value)) i.checked=true; });
+    return;
+  }
+  selectedQs = ['Q1','Q2','Q3','Q4'].filter(q=>checked.includes(q));
+  // Update label active states
+  ['Q1','Q2','Q3','Q4'].forEach(q=>{
+    document.getElementById('qCheck-'+q).classList.toggle('active', selectedQs.includes(q));
+  });
+  updateAllBtn();
+  updateFooterLabel();
   const activePage=document.querySelector('.page.active');
   if(activePage) renderPage(activePage.id.replace('page-',''));
 }
 
+function toggleAllQ(){
+  const allSelected = selectedQs.length===4;
+  if(allSelected){
+    // Deselect all except Q1
+    selectedQs=['Q1'];
+    document.querySelectorAll('.q-checks input').forEach(i=>{ i.checked = i.value==='Q1'; });
+    ['Q1','Q2','Q3','Q4'].forEach(q=>document.getElementById('qCheck-'+q).classList.toggle('active',q==='Q1'));
+  } else {
+    selectedQs=['Q1','Q2','Q3','Q4'];
+    document.querySelectorAll('.q-checks input').forEach(i=>{ i.checked=true; });
+    ['Q1','Q2','Q3','Q4'].forEach(q=>document.getElementById('qCheck-'+q).classList.add('active'));
+  }
+  updateAllBtn();
+  updateFooterLabel();
+  const activePage=document.querySelector('.page.active');
+  if(activePage) renderPage(activePage.id.replace('page-',''));
+}
+
+function updateAllBtn(){
+  const btn=document.getElementById('qAllBtn');
+  const n=selectedQs.length;
+  if(n===4){btn.textContent='Año completo ✓';btn.classList.remove('partial');}
+  else if(n===1){btn.textContent='Año completo';btn.classList.add('partial');}
+  else{btn.textContent=`Año completo (${n}/4)`;btn.classList.add('partial');}
+}
+
+function updateFooterLabel(){
+  const qs=getActiveQs();
+  const n=qs.length;
+  document.getElementById('sbQuarterLabel').textContent=n===4?'2026 completo':n===1?DATA.quarters[qs[0]].label:`${qs[0]}–${qs[n-1]} 2026`;
+}
+
 // ── RENDER DISPATCHER ──────────────────────────────────────────────
 function renderPage(id){
-  const fns={resumen:renderResumen,rrss:renderRRSS,pauta:renderPauta,canales:renderCanales,diseno:renderDiseno,iimm:renderIIMM,proyectos:renderProyectos,operaciones:renderOperaciones,fuentes:renderFuentes,olas:renderOlas};
+  const fns={resumen:renderResumen,rrss:renderRRSS,pauta:renderPauta,canales:renderCanales,diseno:renderDiseno,iimm:renderIIMM,proyectos:renderProyectos,operaciones:renderOperaciones,fuentes:renderFuentes,olas:renderOlas,sentiment:renderSentiment,okrs:renderOKRs};
   if(fns[id]) fns[id]();
 }
 
-function qBadgeHTML(q){
-  const qd=DATA.quarters[q];
-  const dot=qd.status==='completo'?'dot-green':qd.status==='en_curso'?'dot-amber':'dot-dim';
-  return `<span class="status-dot ${dot}"></span>${qd.label} · ${qd.period}`;
+function qBadgeHTML(){
+  const m=getMerged();
+  const dot=m.status==='completo'?'dot-green':m.status==='en_curso'?'dot-amber':'dot-dim';
+  return `<span class="status-dot ${dot}"></span>${m.label} · ${m.period}`;
 }
 
 // ── RESUMEN ──────────────────────────────────────────────
 function renderResumen(){
-  const qd=DATA.quarters[currentQ];
-  document.getElementById('resumenSub').textContent='Métricas clave del trimestre · Equipo de Mercadeo';
-  document.getElementById('resumenBadge').innerHTML=qBadgeHTML(currentQ);
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length;
+  document.getElementById('resumenSub').textContent=n===1?'Métricas clave del trimestre · Equipo de Mercadeo':`Vista ${n===4?'anual':n+' trimestres'} acumulada · Equipo de Mercadeo`;
+  document.getElementById('resumenBadge').innerHTML=qBadgeHTML();
   document.getElementById('resumenInsightText').textContent=qd.insights.resumen;
 
   // Status strip
@@ -948,26 +1357,29 @@ function renderResumen(){
   `;
 
   // ROAS chart
-  mkChart('roasChart',{type:'bar',data:{labels:months(currentQ),datasets:[{data:qd.pauta.roas,backgroundColor:[COLORS.amber+'88',COLORS.amber+'aa',COLORS.amber],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' ROAS: '+c.parsed.y+'×'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
+  const roasLabels=qs.length===1?months(qs[0]):qs;
+  const roasData=qs.length===1?qd.pauta.roas:qs.map(q=>DATA.quarters[q].pauta.roas[2]);
+  const roasBg=roasData.map((_,i)=>i===roasData.length-1?COLORS.amber:COLORS.amber+'88');
+  mkChart('roasChart',{type:'bar',data:{labels:roasLabels,datasets:[{data:roasData,backgroundColor:roasBg,borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' ROAS: '+c.parsed.y+'×'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
 
   // Paid donut
   mkChart('paidDonut',{type:'doughnut',data:{labels:['META','Google'],datasets:[{data:[qd.logros.inversionMetaCOP,qd.logros.inversionGoogleCOP],backgroundColor:[COLORS.blue,COLORS.amber],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}}});
 
   // Annual trend
-  const qs=['Q1','Q2','Q3','Q4'];
-  mkChart('annualChart',{type:'line',data:{labels:qs,datasets:[
-    {label:'Seg IG ÷100',data:qs.map(q=>Math.round(DATA.quarters[q].logros.seguidoresIG/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
-    {label:'Reservas',data:qs.map(q=>DATA.quarters[q].logros.reservasPauta),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber},
-    {label:'Kyto ÷10',data:qs.map(q=>Math.round(DATA.quarters[q].logros.ventasKyto/10)),borderColor:COLORS.blue,backgroundColor:COLORS.blue+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.blue}
+  const allQs=['Q1','Q2','Q3','Q4'];
+  mkChart('annualChart',{type:'line',data:{labels:allQs,datasets:[
+    {label:'Seg IG ÷100',data:allQs.map(q=>Math.round(DATA.quarters[q].logros.seguidoresIG/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
+    {label:'Reservas',data:allQs.map(q=>DATA.quarters[q].logros.reservasPauta),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber},
+    {label:'Kyto ÷10',data:allQs.map(q=>Math.round(DATA.quarters[q].logros.ventasKyto/10)),borderColor:COLORS.blue,backgroundColor:COLORS.blue+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.blue}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
 }
 
 // ── RRSS ──────────────────────────────────────────────
 function renderRRSS(){
-  const qd=DATA.quarters[currentQ];
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length;
   const ig=qd.rrss.ig; const tk=qd.rrss.tk;
-  document.getElementById('rrssBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('rrssSub').textContent=`Desempeño orgánico Q ${currentQ} · Instagram · TikTok`;
+  document.getElementById('rrssBadge').innerHTML=qBadgeHTML();
+  document.getElementById('rrssSub').textContent=`Desempeño ${n===1?'Q '+qs[0]:n===4?'anual':qs.join('+')} · Instagram · TikTok`;
   document.getElementById('rrssInsightText').textContent=qd.insights.rrss;
 
   document.getElementById('rrssMetrics').innerHTML=`
@@ -980,7 +1392,8 @@ function renderRRSS(){
   `;
 
   // IG Viz
-  mkChart('igVizChart',{type:'bar',data:{labels:months(currentQ),datasets:[
+  const igLabels=qs.length===1?months(qs[0]):qs;
+  mkChart('igVizChart',{type:'bar',data:{labels:igLabels,datasets:[
     {label:'Orgánicas',data:[ig.vizOrg*0.42,ig.vizOrg*0.29,ig.vizOrg*0.29].map(Math.round),backgroundColor:COLORS.green,borderRadius:3,borderSkipped:false},
     {label:'Pagas',data:[ig.vizPaga*0.34,ig.vizPaga*0.31,ig.vizPaga*0.35].map(Math.round),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
@@ -990,7 +1403,7 @@ function renderRRSS(){
   mkChart('igEngaChart',{type:'doughnut',data:{labels:['Reels','Posts','Stories'],datasets:[{data:[Math.round(totalLikes*0.72),Math.round(totalLikes*0.2),Math.round(totalLikes*0.08)],backgroundColor:[COLORS.blue,COLORS.amber,COLORS.dim],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
 
   // TK views
-  mkChart('tkViewChart',{type:'bar',data:{labels:months(currentQ),datasets:[{data:[Math.round(tk.postViews*0.19),Math.round(tk.postViews*0.27),Math.round(tk.postViews*0.54)],backgroundColor:[COLORS.purple+'66',COLORS.purple+'99',COLORS.purple],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+  mkChart('tkViewChart',{type:'bar',data:{labels:igLabels,datasets:[{data:[Math.round(tk.postViews*0.19),Math.round(tk.postViews*0.27),Math.round(tk.postViews*0.54)],backgroundColor:[COLORS.purple+'66',COLORS.purple+'99',COLORS.purple],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
 
   // TK sources
   const fyp=Math.round(tk.fyp*100);
@@ -999,9 +1412,9 @@ function renderRRSS(){
 
 // ── PAUTA ──────────────────────────────────────────────
 function renderPauta(){
-  const qd=DATA.quarters[currentQ]; const p=qd.pauta;
-  document.getElementById('pautaBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('pautaSub').textContent=`Inversión digital Q ${currentQ} · META · Google · TikTok`;
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length; const p=qd.pauta;
+  document.getElementById('pautaBadge').innerHTML=qBadgeHTML();
+  document.getElementById('pautaSub').textContent=`Inversión digital ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')} · META · Google · TikTok`;
 
   document.getElementById('pautaMetrics').innerHTML=`
     <div class="metric-card hi"><div class="metric-label">Inversión total</div><div class="metric-value">${fmtM(p.totalCOP)}</div><div class="metric-sub">COP · META + Google</div></div>
@@ -1013,24 +1426,112 @@ function renderPauta(){
   `;
 
   // Annual investment
-  const qs=['Q1','Q2','Q3','Q4'];
-  mkChart('pautaAnualChart',{type:'bar',data:{labels:qs,datasets:[
-    {label:'META',data:qs.map(q=>Math.round(DATA.quarters[q].pauta.metaCOP/1000000)),backgroundColor:COLORS.blue,borderRadius:4,borderSkipped:false},
-    {label:'Google',data:qs.map(q=>Math.round(DATA.quarters[q].pauta.googleCOP/1000000)),backgroundColor:COLORS.amber,borderRadius:4,borderSkipped:false}
+  const allQs=['Q1','Q2','Q3','Q4'];
+  mkChart('pautaAnualChart',{type:'bar',data:{labels:allQs,datasets:[
+    {label:'META',data:allQs.map(q=>Math.round(DATA.quarters[q].pauta.metaCOP/1000000)),backgroundColor:COLORS.blue,borderRadius:4,borderSkipped:false},
+    {label:'Google',data:allQs.map(q=>Math.round(DATA.quarters[q].pauta.googleCOP/1000000)),backgroundColor:COLORS.amber,borderRadius:4,borderSkipped:false}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+v+'M'}}}}});
 
   // Reservas horizontal
   mkChart('reservasChart',{type:'bar',data:{labels:['Google Search','META Conversión','WA (÷10)'],datasets:[{data:[p.reservasGoogle,p.reservasMeta,Math.round(p.convWA/10)],backgroundColor:[COLORS.green,COLORS.blue,COLORS.amber],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
 
   // ROAS line
-  mkChart('roasLineChart',{type:'line',data:{labels:months(currentQ),datasets:[{data:p.roas,borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:COLORS.amber,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
+  const pautaRoasLabels=qs.length===1?months(qs[0]):qs;
+  mkChart('roasLineChart',{type:'line',data:{labels:pautaRoasLabels,datasets:[{data:p.roas,borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:COLORS.amber,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:24}}}});
+}
+
+
+// ── EMAIL HUB DATA ──────────────────────────────────────────────
+const EMAIL_DATA = [{"nombre": "50OFF Guatapé | ESP", "fecha": "30 de abril de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 14, "or": 28.6, "ctr": 7.1, "performance": "⚠️ Regular", "idioma": "ESP", "tipo": "Nuevo", "insight": "Open rate y CTR en promedio, pero sin conversión."}, {"nombre": "50OFF Guatapé | ESP", "fecha": "6 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 19, "or": 31.6, "ctr": 10.5, "performance": "⚠️ Regular", "idioma": "ESP", "tipo": "Nuevo", "insight": "Open rate y CTR en promedio, pero sin conversión."}, {"nombre": "H2H | Medellín - Guatapé | ING", "fecha": "7 de mayo de 2026", "destino": "Guatapé", "campaña": "H2H", "dest": 3235, "or": 6.3, "ctr": 0.63, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "H2H | Medellín - Guatapé | ESP", "fecha": "7 de mayo de 2026", "destino": "Guatapé", "campaña": "H2H", "dest": 86, "or": 4.7, "ctr": 1.2, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": "Correo con baja tasa de apertura y sin clics"}, {"nombre": "H2H | Paracas - Huacachina | ING", "fecha": "7 de mayo de 2026", "destino": "Huacachina", "campaña": "H2H", "dest": 379, "or": 8.73, "ctr": 3.7, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "H2H | Paracas - Huacachina | ESP", "fecha": "7 de mayo de 2026", "destino": "Huacachina", "campaña": "H2H", "dest": 49, "or": 6.25, "ctr": 4.17, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Focus Group | ING", "fecha": "8 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 10, "or": 40.0, "ctr": 20.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Focus Group | ESP", "fecha": "8 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 11, "or": 18.2, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | Resend | ESP", "fecha": "8 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 8, "or": 0.0, "ctr": 0.0, "performance": "❌ Baja", "idioma": "ESP", "tipo": "Reenvío", "insight": "Reenvío no logró aperturas"}, {"nombre": "40% | Viajeros Frecuentes Tayrona | ING", "fecha": "9 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 322, "or": 3.4, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "40% | Viajeros Frecuentes Tayrona | ESP", "fecha": "9 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 330, "or": 0, "ctr": 0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "25% | Viajeros Frecuentes Tayrona | ING", "fecha": "9 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 327, "or": 5.8, "ctr": 0.7, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "25% | Viajeros Frecuentes Tayrona | ESP", "fecha": "9 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 332, "or": 7.2, "ctr": 0.7, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Focus Group| ESP", "fecha": "11 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 4, "or": 50.0, "ctr": 25.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | ESP", "fecha": "11 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 23, "or": 21.7, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Encuesta | ING", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 10, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Encuesta | ESP", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 13, "or": 15.4, "ctr": 7.7, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Encuesta | ING", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 14, "or": 21.4, "ctr": 7.1, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Encuesta | ESP", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 24, "or": 4.2, "ctr": 4.2, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Encuesta | ING", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 95, "or": 14.7, "ctr": 4.2, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Encuesta | ESP", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 100, "or": 22.0, "ctr": 2.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Encuesta | ING", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 507, "or": 10.8, "ctr": 3.2, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Encuesta | ESP", "fecha": "12 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 932, "or": 12.0, "ctr": 3.2, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Bienvenida | ING", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 25, "or": 20.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Bienvenida | ESP", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 9, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Bienvenida | ING", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 29, "or": 6.9, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Bienvenida | ESP", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 7, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Bienvenida | ING", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 46, "or": 10.9, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Bienvenida | ESP", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 12, "or": 33.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Bienvenida | ING", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 305, "or": 7.2, "ctr": 0.33, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Bienvenida | ESP", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 80, "or": 5.0, "ctr": 1.3, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Bienvenida | ING", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 1787, "or": 6.5, "ctr": 0.17, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Bienvenida | ESP", "fecha": "13 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 583, "or": 10.3, "ctr": 0.7, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Olas Sonoras | Promoción 5X4| ESP", "fecha": "14 de mayo de 2026", "destino": "General", "campaña": "Olas Sonoras", "dest": 11444, "or": 4.8, "ctr": 5.3, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | Resend | ESP ", "fecha": "15 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 10, "or": 40.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Reenvío", "insight": ""}, {"nombre": "Mundial | Reservas | ING", "fecha": "16 de mayo de 2026", "destino": "CDMX, Miami", "campaña": "Mundial", "dest": 0, "or": 0, "ctr": 0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Mundial | Reservas | ESP", "fecha": "16 de mayo de 2026", "destino": "CDMX, Miami", "campaña": "Mundial", "dest": 6186, "or": 20.0, "ctr": 0.4, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | ESP", "fecha": "18 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 18, "or": 38.9, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Aviso Huachina | ING", "fecha": "19 de mayo de 2026", "destino": "Huacachina", "campaña": "Prevención phishing", "dest": 592, "or": 18.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Aviso Huachina | ESP", "fecha": "19 de mayo de 2026", "destino": "Huacachina", "campaña": "Prevención phishing", "dest": 126, "or": 20.3, "ctr": 0.81, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Aniversario Bogota | ESP", "fecha": "20 de mayo de 2026", "destino": "Bogotá", "campaña": "Events & Listings", "dest": 253, "or": 14.0, "ctr": 2.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "2_Olas Sonoras | Promoción 5X4| ESP", "fecha": "20 de mayo de 2026", "destino": "Tayrona", "campaña": "Olas Sonoras", "dest": 4816, "or": 11.5, "ctr": 6.1, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | Resend | ESP ", "fecha": "21 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 13, "or": 23.0, "ctr": 15.0, "performance": "✅", "idioma": "ESP", "tipo": "Reenvio", "insight": ""}, {"nombre": "Mundial | Reservas | ING", "fecha": "21 de mayo de 2026", "destino": "CDMX, Miami", "campaña": "Mundial", "dest": 7532, "or": 4.9, "ctr": 0.25, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Mundial | Reservas | ESP", "fecha": "21 de mayo de 2026", "destino": "CDMX, Miami", "campaña": "Mundial", "dest": 1993, "or": 5.5, "ctr": 0.57, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "40% | Viajeros Frecuentes Tayrona | ING", "fecha": "23 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 293, "or": 4.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Reenvio", "insight": ""}, {"nombre": "40% | Viajeros Frecuentes Tayrona | ESP", "fecha": "23 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 290, "or": 6.0, "ctr": 3.0, "performance": "✅", "idioma": "ESP", "tipo": "Reenvio", "insight": ""}, {"nombre": "25% | Viajeros Frecuentes Tayrona | ING", "fecha": "23 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 1, "or": 100.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Reenvio", "insight": ""}, {"nombre": "25% | Viajeros Frecuentes Tayrona | ESP", "fecha": "23 de mayo de 2026", "destino": "Tayrona", "campaña": "Viajeros Frecuentes", "dest": 6, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Reenvio", "insight": ""}, {"nombre": "H2H | Medellín - Guatapé | ING", "fecha": "23 de mayo de 2026", "destino": "Guatapé", "campaña": "H2H", "dest": 308, "or": 6.0, "ctr": 1.2, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "H2H | Medellín - Guatapé | ESP", "fecha": "23 de mayo de 2026", "destino": "Guatapé", "campaña": "H2H", "dest": 97, "or": 6.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "H2H | Paracas - Huacachina | ING", "fecha": "23 de mayo de 2026", "destino": "Huacachina", "campaña": "H2H", "dest": 264, "or": 4.5, "ctr": 0.76, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "H2H | Paracas - Huacachina | ESP", "fecha": "23 de mayo de 2026", "destino": "Huacachina", "campaña": "H2H", "dest": 37, "or": 2.7, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Olas Sonoras | Compradores | ESP", "fecha": "23 de mayo de 2026", "destino": "Tayrona", "campaña": "Olas Sonoras", "dest": 418, "or": 11.0, "ctr": 0.24, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | ESP", "fecha": "25 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 12, "or": 33.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Tinder Party | Getsemaní | ESP", "fecha": "26 de mayo de 2026", "destino": "Getsemaní", "campaña": "Events & Listings", "dest": 809, "or": 7.3, "ctr": 0.6, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Bienvenida | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 1, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Bienvenida | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 1, "or": 100.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Viajero Encuesta | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 3, "or": 66.0, "ctr": 33.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Nomad Bienvenida | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 4, "or": 25.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Bienvenida | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 5, "or": 0.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Bienvenida | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 48, "or": 10.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Bienvenida | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 7, "or": 14.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Bienvenida | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 332, "or": 11.4, "ctr": 0.62, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Bienvenida | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 86, "or": 14.1, "ctr": 3.5, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Explorer Encuesta | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 3, "or": 33.0, "ctr": 33.0, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Encuesta | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 123, "or": 19.0, "ctr": 3.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Encuesta | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 15, "or": 6.7, "ctr": 6.7, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Backpacker Encuesta | ESP | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 10, "or": 30.0, "ctr": 10.0, "performance": "✅", "idioma": "ESP", "tipo": "Nuevo", "insight": ""}, {"nombre": "Loyalty | Tourist Encuesta | ING | 2 ", "fecha": "27 de mayo de 2026", "destino": "General", "campaña": "Loyalty", "dest": 91, "or": 14.6, "ctr": 2.2, "performance": "✅", "idioma": "ING", "tipo": "Nuevo", "insight": ""}, {"nombre": "50OFF Guatapé | Resend | ESP", "fecha": "28 de mayo de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 13, "or": 38.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Reenvío", "insight": ""}, {"nombre": "50OFF Guatapé | ESP", "fecha": "1 de junio de 2026", "destino": "Guatapé", "campaña": "Guatapé Friday 50OF", "dest": 17, "or": 53.0, "ctr": 12.0, "performance": "✅", "idioma": "ESP", "tipo": "Envío", "insight": ""}, {"nombre": "Buenos Aires | Corte de agua | ING", "fecha": "2 de junio de 2026", "destino": "Buenos Aires", "campaña": "Informativo", "dest": 34, "or": 39.0, "ctr": 3.0, "performance": "✅", "idioma": "ING", "tipo": "Envío", "insight": ""}, {"nombre": "Buenos Aires | Corte de agua | ESP", "fecha": "2 de junio de 2026", "destino": "Buenos Aires", "campaña": "Informativo", "dest": 13, "or": 58.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Envío", "insight": ""}, {"nombre": "Olas Sonoras | Boletas por día | ESP", "fecha": "2 de junio de 2026", "destino": "Tayrona", "campaña": "Olas Sonoras", "dest": 0, "or": 0, "ctr": 0, "performance": "✅", "idioma": "ESP", "tipo": "Envío", "insight": ""}, {"nombre": "Aviso Paracas | ING", "fecha": "3 de junio de 2026", "destino": "Paracas", "campaña": "Prevención phishing", "dest": 92, "or": 24.0, "ctr": 0.0, "performance": "✅", "idioma": "ING", "tipo": "Envío", "insight": ""}, {"nombre": "Aviso Paracas | ESP", "fecha": "3 de junio de 2026", "destino": "Paracas", "campaña": "Prevención phishing", "dest": 92, "or": 24.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Envío", "insight": ""}, {"nombre": "Olas Sonoras | venta dorm cancelado en Tayrona | ESP", "fecha": "4 de junio de 2026", "destino": "Tayrona", "campaña": "Olas Sonoras", "dest": 31, "or": 16.0, "ctr": 0.0, "performance": "✅", "idioma": "ESP", "tipo": "Envío", "insight": ""}];
+const EMAIL_CAMPANAS = [{"nombre": "Olas Sonoras", "envios": 5, "dest": 16709, "avg_or": 10.8, "avg_ctr": 3.9}, {"nombre": "Mundial", "envios": 4, "dest": 15711, "avg_or": 10.1, "avg_ctr": 0.4}, {"nombre": "Loyalty", "envios": 35, "dest": 5332, "avg_or": 21.7, "avg_ctr": 8.1}, {"nombre": "H2H", "envios": 8, "dest": 4455, "avg_or": 5.6, "avg_ctr": 1.9}, {"nombre": "Viajeros Frecuentes", "envios": 8, "dest": 1901, "avg_or": 21.1, "avg_ctr": 1.5}, {"nombre": "Events & Listings", "envios": 2, "dest": 1062, "avg_or": 10.7, "avg_ctr": 1.3}, {"nombre": "Prevención phishing", "envios": 4, "dest": 902, "avg_or": 21.6, "avg_ctr": 0.8}, {"nombre": "Guatapé Friday 50OF", "envios": 10, "dest": 147, "avg_or": 34.2, "avg_ctr": 11.2}, {"nombre": "Informativo", "envios": 2, "dest": 47, "avg_or": 48.5, "avg_ctr": 3.0}];
+const EMAIL_DESTINOS = [{"destino": "General", "envios": 36, "dest": 16776, "avg_or": 21.2}, {"destino": "CDMX, Miami", "envios": 4, "dest": 15711, "avg_or": 10.1}, {"destino": "Tayrona", "envios": 12, "dest": 7166, "avg_or": 18.3}, {"destino": "Guatapé", "envios": 14, "dest": 3873, "avg_or": 25.4}, {"destino": "Huacachina", "envios": 6, "dest": 1447, "avg_or": 10.1}, {"destino": "Getsemaní", "envios": 1, "dest": 809, "avg_or": 7.3}, {"destino": "Bogotá", "envios": 1, "dest": 253, "avg_or": 14.0}, {"destino": "Paracas", "envios": 2, "dest": 184, "avg_or": 24.0}];
+
+function renderEmailHub(){
+  const total = EMAIL_DATA.length;
+  const totalDest = EMAIL_DATA.reduce((a,e)=>a+e.dest,0);
+  const ors = EMAIL_DATA.filter(e=>e.or>0).map(e=>e.or);
+  const ctrs = EMAIL_DATA.filter(e=>e.ctr>0).map(e=>e.ctr);
+  const avgOR = (ors.reduce((a,v)=>a+v,0)/ors.length).toFixed(1);
+  const avgCTR = (ctrs.reduce((a,v)=>a+v,0)/ctrs.length).toFixed(1);
+  const bestCamp = [...EMAIL_CAMPANAS].sort((a,b)=>b.avg_or-a.avg_or)[0];
+
+  document.getElementById('emailKPIs').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Total envíos</div><div class="metric-value">${total}</div><div class="metric-sub">Mailchimp · 2026</div></div>
+    <div class="metric-card"><div class="metric-label">Destinatarios alcanzados</div><div class="metric-value">${fmt(totalDest)}</div><div class="metric-sub">Contactos únicos (suma)</div></div>
+    <div class="metric-card"><div class="metric-label">Open Rate promedio</div><div class="metric-value" style="color:var(--green)">${avgOR}%</div><div class="metric-sub">Benchmark email: ~21%</div></div>
+    <div class="metric-card"><div class="metric-label">CTR promedio</div><div class="metric-value">${avgCTR}%</div><div class="metric-sub">Ratio clics/aperturas</div></div>
+    <div class="metric-card"><div class="metric-label">Mejor campaña OR</div><div class="metric-value">${bestCamp.avg_or}%</div><div class="metric-sub">${bestCamp.nombre}</div></div>
+    <div class="metric-card"><div class="metric-label">Campañas distintas</div><div class="metric-value">${EMAIL_CAMPANAS.length}</div><div class="metric-sub">Tipos de comunicación</div></div>
+  `;
+
+  // OR por campaña
+  mkChart('emailCampañaChart',{type:'bar',data:{
+    labels:EMAIL_CAMPANAS.map(c=>c.nombre),
+    datasets:[{data:EMAIL_CAMPANAS.map(c=>c.avg_or),backgroundColor:EMAIL_CAMPANAS.map(c=>c.avg_or>=21?COLORS.green:c.avg_or>=10?COLORS.amber:COLORS.red),borderRadius:4,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' OR: '+c.parsed.x+'%'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Destinatarios por destino
+  mkChart('emailDestinoChart',{type:'bar',data:{
+    labels:EMAIL_DESTINOS.map(d=>d.destino),
+    datasets:[{data:EMAIL_DESTINOS.map(d=>d.dest),backgroundColor:COLORS.blue,borderRadius:4,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.x.toLocaleString()+' destinatarios'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}},y:{grid:{display:false},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Populate filters
+  const campSel = document.getElementById('emailFiltCamp');
+  const destSel = document.getElementById('emailFiltDest');
+  if(campSel.options.length===1){
+    EMAIL_CAMPANAS.forEach(c=>{ const o=document.createElement('option'); o.value=c.nombre; o.textContent=c.nombre+' ('+c.envios+')'; campSel.appendChild(o); });
+  }
+  if(destSel.options.length===1){
+    const dests=[...new Set(EMAIL_DATA.map(e=>e.destino))].sort();
+    dests.forEach(d=>{ const o=document.createElement('option'); o.value=d; o.textContent=d; destSel.appendChild(o); });
+  }
+  renderEmailTable();
+}
+
+function renderEmailTable(){
+  const filtCamp = document.getElementById('emailFiltCamp').value;
+  const filtDest = document.getElementById('emailFiltDest').value;
+  const filtIdioma = document.getElementById('emailFiltIdioma').value;
+
+  let data = EMAIL_DATA;
+  if(filtCamp) data = data.filter(e=>e.campaña===filtCamp);
+  if(filtDest) data = data.filter(e=>e.destino===filtDest);
+  if(filtIdioma) data = data.filter(e=>e.idioma===filtIdioma);
+
+  document.getElementById('emailCount').textContent = data.length+' envíos';
+
+  const perfColor = p => p==='✅'||p===''?'var(--green)': p.includes('Regular')?'var(--amber)':'var(--red)';
+
+  document.getElementById('emailTableWrap').innerHTML=`
+    <table class="tbl" style="font-size:12px">
+      <thead style="position:sticky;top:0;background:var(--surface2);z-index:1">
+        <tr>
+          <th>Envío</th><th>Fecha</th><th>Campaña</th><th>Destino</th>
+          <th>Idioma</th><th>Dest.</th><th>OR %</th><th>CTR %</th><th>Perf.</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${data.map(e=>`<tr>
+          <td style="max-width:200px;white-space:normal;line-height:1.3">${e.nombre}</td>
+          <td style="white-space:nowrap;color:var(--muted)">${e.fecha.replace(' de ',' ').replace(/^(\d+) (\w+) (\d+)$/, '$1 $2')}</td>
+          <td><span class="pill pill-blue" style="font-size:10px">${e.campaña}</span></td>
+          <td style="white-space:nowrap">${e.destino}</td>
+          <td style="text-align:center"><span class="pill ${e.idioma==='ING'?'pill-purple':'pill-dim'}" style="font-size:10px">${e.idioma}</span></td>
+          <td style="text-align:center;font-weight:600">${e.dest.toLocaleString()}</td>
+          <td style="text-align:center;color:${e.or>=21?'var(--green)':e.or>=10?'var(--amber)':'var(--red)'};font-weight:600">${e.or>0?e.or+'%':'—'}</td>
+          <td style="text-align:center;color:${e.ctr>=5?'var(--green)':e.ctr>=2?'var(--amber)':'var(--red)'};font-weight:600">${e.ctr>0?e.ctr+'%':'—'}</td>
+          <td style="text-align:center;font-size:15px;color:${perfColor(e.performance)}">${e.performance||'✅'}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
 }
 
 // ── CANALES ──────────────────────────────────────────────
 function renderCanales(){
-  const qd=DATA.quarters[currentQ]; const c=qd.canales;
-  document.getElementById('canalesBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('canalesSub').textContent=`Ecosistema digital Q ${currentQ}`;
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length; const c=qd.canales;
+  document.getElementById('canalesBadge').innerHTML=qBadgeHTML();
+  document.getElementById('canalesSub').textContent=`Ecosistema digital ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')}`;
 
   document.getElementById('canalesMetrics').innerHTML=`
     <div class="metric-card hi"><div class="metric-label">Ventas Kyto-Bot</div><div class="metric-value">$${fmt(c.kytoVentas)}</div><div class="metric-sub">USD directos</div></div>
@@ -1042,25 +1543,27 @@ function renderCanales(){
   `;
 
   // Kyto annual
-  const qs=['Q1','Q2','Q3','Q4'];
-  mkChart('kytoChart',{type:'bar',data:{labels:qs,datasets:[{data:qs.map(q=>DATA.quarters[q].canales.kytoVentas),backgroundColor:qs.map((q,i)=>i===(['Q1','Q2','Q3','Q4'].indexOf(currentQ))?COLORS.amber:COLORS.amber+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toLocaleString()+' USD'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+fmt(v)}}}}});
+  const allQs=['Q1','Q2','Q3','Q4'];
+  mkChart('kytoChart',{type:'bar',data:{labels:allQs,datasets:[{data:allQs.map(q=>DATA.quarters[q].canales.kytoVentas),backgroundColor:qs.map((q)=>getActiveQs().includes(q)?COLORS.amber:COLORS.amber+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toLocaleString()+' USD'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+fmt(v)}}}}});
 
   // WA vs Email
-  mkChart('canalesLineChart',{type:'line',data:{labels:qs,datasets:[
-    {label:'WA ÷100',data:qs.map(q=>Math.round(DATA.quarters[q].canales.whatsappConvs/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
-    {label:'Email OR %',data:qs.map(q=>Math.round(DATA.quarters[q].canales.emailOpenRate*100)),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber}
+  mkChart('canalesLineChart',{type:'line',data:{labels:allQs,datasets:[
+    {label:'WA ÷100',data:allQs.map(q=>Math.round(DATA.quarters[q].canales.whatsappConvs/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
+    {label:'Email OR %',data:allQs.map(q=>Math.round(DATA.quarters[q].canales.emailOpenRate*100)),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
 
   // Web hitos
-  const hitos=[{q:'Q1',label:'Desarrollo plataforma completa',done:true,pct:85},{q:'Q2',label:'Lanzamiento con booking engine + pagos',done:currentQ!=='Q1',pct:100},{q:'Q3',label:'Tracking conversiones + UTMs + funnel',done:currentQ==='Q3'||currentQ==='Q4',pct:100},{q:'Q4',label:'Canal directo = 35% de reservas',done:currentQ==='Q4',pct:100}];
+  const lastQ=qs[qs.length-1];
+  const hitos=[{q:'Q1',label:'Desarrollo plataforma completa',done:true,pct:85},{q:'Q2',label:'Lanzamiento con booking engine + pagos',done:lastQ!=='Q1',pct:100},{q:'Q3',label:'Tracking conversiones + UTMs + funnel',done:lastQ==='Q3'||lastQ==='Q4',pct:100},{q:'Q4',label:'Canal directo = 35% de reservas',done:lastQ==='Q4',pct:100}];
+  renderEmailHub();
   document.getElementById('webHitos').innerHTML=hitos.map(h=>`<div class="prog-item"><div class="prog-header"><span class="prog-name"><span class="pill ${h.done?'pill-green':'pill-dim'}" style="margin-right:8px">${h.q}</span>${h.label}</span><span class="prog-pct">${h.done?h.pct+'%':'Pendiente'}</span></div><div class="prog-track"><div class="prog-fill" style="width:${h.done?h.pct:0}%;background:${h.done?COLORS.green:COLORS.dim}"></div></div></div>`).join('');
 }
 
 // ── DISEÑO ──────────────────────────────────────────────
 function renderDiseno(){
-  const qd=DATA.quarters[currentQ]; const d=qd.diseno;
-  document.getElementById('disenoBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('disenoSub').textContent=`Producción visual Q ${currentQ}`;
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length; const d=qd.diseno;
+  document.getElementById('disenoBadge').innerHTML=qBadgeHTML();
+  document.getElementById('disenoSub').textContent=`Producción visual ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')}`;
 
   document.getElementById('disenoMetrics').innerHTML=`
     <div class="metric-card hi"><div class="metric-label">Piezas gráficas</div><div class="metric-value">${d.piezas}</div><div class="metric-sub">Campañas + RRSS + Marca</div></div>
@@ -1071,16 +1574,16 @@ function renderDiseno(){
     <div class="metric-card"><div class="metric-label">Brandbooks</div><div class="metric-value">${d.brandbooks}</div><div class="metric-sub">Actualizados/Creados</div></div>
   `;
 
-  const qs=['Q1','Q2','Q3','Q4'];
-  mkChart('disenoChart',{type:'bar',data:{labels:qs,datasets:[
-    {label:'Piezas',data:qs.map(q=>DATA.quarters[q].diseno.piezas),backgroundColor:COLORS.blue,borderRadius:3,borderSkipped:false},
-    {label:'Videos',data:qs.map(q=>DATA.quarters[q].diseno.videosProducidos),backgroundColor:COLORS.purple,borderRadius:3,borderSkipped:false},
-    {label:'Fotos',data:qs.map(q=>DATA.quarters[q].diseno.fotosEditadas),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
+  const allQs=['Q1','Q2','Q3','Q4'];
+  mkChart('disenoChart',{type:'bar',data:{labels:allQs,datasets:[
+    {label:'Piezas',data:allQs.map(q=>DATA.quarters[q].diseno.piezas),backgroundColor:COLORS.blue,borderRadius:3,borderSkipped:false},
+    {label:'Videos',data:allQs.map(q=>DATA.quarters[q].diseno.videosProducidos),backgroundColor:COLORS.purple,borderRadius:3,borderSkipped:false},
+    {label:'Fotos',data:allQs.map(q=>DATA.quarters[q].diseno.fotosEditadas),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
 
   // Marca list
   const items=[`✓ Brandbook Viajero Hostels 2026`,`✓ Manual de comunicaciones físicas`,`✓ Manual de comunicaciones digitales`,`✓ Kit visual Olas Sonoras`,`✓ Plantillas Canva · 30 sedes`,`✓ Merch x Velmost — artes finales`];
-  document.getElementById('marcaList').innerHTML=items.map(i=>`<div style="padding:7px 0;border-bottom:1px solid #2a2924;font-size:13px;color:#8a8780">${i}</div>`).join('');
+  document.getElementById('marcaList').innerHTML=items.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--muted)">${i}</div>`).join('');
 
   // Capacidad donut
   mkChart('disenoCapChart',{type:'doughnut',data:{labels:['Pauta/Campañas','RRSS/Contenido','Marca','Eventos','Web/Digital'],datasets:[{data:[38,28,18,10,6],backgroundColor:[COLORS.blue,COLORS.green,COLORS.purple,COLORS.amber,COLORS.red],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
@@ -1088,9 +1591,9 @@ function renderDiseno(){
 
 // ── IIMM ──────────────────────────────────────────────
 function renderIIMM(){
-  const qd=DATA.quarters[currentQ]; const m=qd.iimm;
-  document.getElementById('iiммBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('iiммSub').textContent=`Colaboraciones e influencers Q ${currentQ}`;
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length; const m=qd.iimm;
+  document.getElementById('iiммBadge').innerHTML=qBadgeHTML();
+  document.getElementById('iiммSub').textContent=`Colaboraciones e influencers ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')}`;
 
   document.getElementById('iimmMetrics').innerHTML=`
     <div class="metric-card hi"><div class="metric-label">Colaboraciones totales</div><div class="metric-value">${m.colaboraciones}</div><div class="metric-sub">Marcas + Creadores + Canjes</div></div>
@@ -1101,17 +1604,18 @@ function renderIIMM(){
     <div class="metric-card"><div class="metric-label">Alcance influencers</div><div class="metric-value">${fmt(m.alcanceTotalInflu)}</div><div class="metric-sub">Audiencias combinadas</div></div>
   `;
 
-  const qs=['Q1','Q2','Q3','Q4'];
-  mkChart('iimmImpChart',{type:'bar',data:{labels:qs,datasets:[{data:qs.map(q=>DATA.quarters[q].iimm.impresiones/1000000),backgroundColor:qs.map((q,i)=>i===qs.indexOf(currentQ)?COLORS.purple:COLORS.purple+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y.toFixed(1)+'M impresiones'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'M'}}}}});
+  const allQs=['Q1','Q2','Q3','Q4'];
+  mkChart('iimmImpChart',{type:'bar',data:{labels:allQs,datasets:[{data:allQs.map(q=>DATA.quarters[q].iimm.impresiones/1000000),backgroundColor:qs.map((q)=>getActiveQs().includes(q)?COLORS.purple:COLORS.purple+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y.toFixed(1)+'M impresiones'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'M'}}}}});
 
   mkChart('iimmTipoChart',{type:'doughnut',data:{labels:['Embajadores','Canjes reactivos','Colaboraciones pagas'],datasets:[{data:[Math.round(m.colaboraciones*0.25),Math.round(m.colaboraciones*0.56),Math.round(m.colaboraciones*0.19)],backgroundColor:[COLORS.purple,COLORS.blue,COLORS.amber],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
 }
 
 // ── PROYECTOS ──────────────────────────────────────────────
 function renderProyectos(){
-  const qd=DATA.quarters[currentQ];
-  document.getElementById('proyectosBadge').innerHTML=qBadgeHTML(currentQ);
-  document.getElementById('proyectosSub').textContent=`Iniciativas estratégicas Q ${currentQ} · Mercadeo Viajero`;
+  const qd=getMerged(); const qs=getActiveQs(); const n=qs.length;
+  document.getElementById('proyectosBadge').innerHTML=qBadgeHTML();
+  const qs_label=n===1?'Q '+qs[0]:n===4?'Año 2026':qs.join('+');
+  document.getElementById('proyectosSub').textContent=`Iniciativas estratégicas ${qs_label} · Mercadeo Viajero`;
 
   const projs=qd.proyectos;
   const completados=projs.filter(p=>p.estado==='completado').length;
@@ -1209,7 +1713,7 @@ function renderOperaciones(){
 
 // ── FUENTES ──────────────────────────────────────────────
 function renderFuentes(){
-  document.getElementById('fuentesBadge').innerHTML=qBadgeHTML(currentQ);
+  document.getElementById('fuentesBadge').innerHTML=qBadgeHTML();
 
   mkChart('fuentesDonut',{type:'doughnut',data:{labels:['Experiencias','A&B','Operaciones','Plataformas y OTAs'],datasets:[{data:[162,104,91,67],backgroundColor:[COLORS.blue,COLORS.green,COLORS.amber,COLORS.red],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
 
@@ -1223,7 +1727,729 @@ function renderOlas(){
   mkChart('olasCanalChart',{type:'doughnut',data:{labels:['Joinnus','Venti','IG Direct','Taquilla'],datasets:[{data:[42,28,18,12],backgroundColor:[COLORS.purple,COLORS.blue,COLORS.amber,COLORS.green],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:false}}}});
 }
 
+
+// ── SENTIMENT DATA ──────────────────────────────────────────────
+const SENTIMENT_DATA = [
+  {loc:"Viajero Salento",reviews:2590,rating:4.74,pos:2456,pctPos:0.9483,neu:99,pctNeu:0.0382,neg:35,pctNeg:0.0135,fuentes:"Booking.com: 1075, HostelWorld: 1031, Google: 298",topPos:["staff (1200)","amabilidad (815)","vista (655)","increible / amazing (596)","ambiente / vibe (476)","bonito / beautiful (431)","actividades (417)","ubicacion (408)","recomendado (262)","comida (242)"],topNeg:["malo / bad (22)","servicio (16)","habitacion (11)","noche / descanso (10)","precio (9)","reserva (8)","comida (7)","ruido (6)","cama (5)","limpieza (5)"]},
+  {loc:"Viajero Kokopelli Cusco",reviews:2573,rating:4.82,pos:2474,pctPos:0.9615,neu:69,pctNeu:0.0268,neg:30,pctNeg:0.0117,fuentes:"HostelWorld: 832, Google: 763, Booking.com: 691",topPos:["amabilidad (964)","staff (776)","increible / amazing (513)","ubicacion (511)","actividades (446)","ambiente / vibe (438)","limpieza (437)","recomendado (378)","servicio (322)","excelente (316)"],topNeg:["malo / bad (18)","servicio (14)","habitacion (11)","precio (10)","noche / descanso (10)","reserva (9)","ruido (6)","comida (6)","agua (4)","cama (3)"]},
+  {loc:"Viajero Cartagena Centro",reviews:2522,rating:4.52,pos:2150,pctPos:0.8525,neu:198,pctNeu:0.0785,neg:174,pctNeg:0.069,fuentes:"HostelWorld: 1175, Booking.com: 796, Google: 380",topPos:["amabilidad (670)","staff (668)","ambiente / vibe (501)","ubicacion (474)","increible / amazing (344)","actividades (326)","excelente (269)","servicio (252)","recomendado (247)","limpieza (200)"],topNeg:["malo / bad (109)","habitacion (102)","servicio (66)","ubicacion (55)","precio (41)","bano (37)","reserva (35)","agua (35)","suciedad (34)","noche / descanso (32)"]},
+  {loc:"Viajero Kokopelli Barranco",reviews:2406,rating:4.75,pos:2270,pctPos:0.9435,neu:91,pctNeu:0.0378,neg:45,pctNeg:0.0187,fuentes:"Google: 966, Booking.com: 579, HostelWorld: 572",topPos:["staff (590)","amabilidad (583)","actividades (520)","increible / amazing (493)","bonito / beautiful (398)","ubicacion (372)","recomendado (293)","bar (272)","ambiente / vibe (271)","comida (266)"],topNeg:["malo / bad (32)","noche / descanso (21)","habitacion (16)","servicio (14)","ruido (12)","comida (11)","cama (9)","ubicacion (9)","precio (7)","suciedad (5)"]},
+  {loc:"Viajero Miami",reviews:2365,rating:4.32,pos:1907,pctPos:0.8063,neu:223,pctNeu:0.0943,neg:235,pctNeg:0.0994,fuentes:"Booking.com: 1102, Google: 774, HostelWorld: 219",topPos:["ubicacion (672)","staff (519)","amabilidad (430)","increible / amazing (319)","excelente (317)","limpieza (316)","actividades (277)","ambiente / vibe (264)","habitacion (256)","servicio (242)"],topNeg:["malo / bad (144)","habitacion (105)","servicio (89)","ubicacion (62)","cama (51)","noche / descanso (43)","suciedad (37)","bano (33)","reserva (31)","precio (28)"]},
+  {loc:"Viajero Medellín",reviews:2210,rating:4.63,pos:2011,pctPos:0.91,neu:108,pctNeu:0.0489,neg:91,pctNeg:0.0412,fuentes:"Booking.com: 1019, HostelWorld: 958, Google: 209",topPos:["staff (609)","ubicacion (465)","amabilidad (452)","ambiente / vibe (410)","actividades (386)","bar (378)","limpieza (310)","increible / amazing (310)","excelente (240)","recomendado (208)"],topNeg:["malo / bad (59)","habitacion (39)","servicio (37)","noche / descanso (22)","cama (20)","reserva (18)","ubicacion (18)","ruido (18)","precio (14)","comida (10)"]},
+  {loc:"Viajero Kokopelli Huacachina",reviews:2131,rating:4.70,pos:1970,pctPos:0.9244,neu:90,pctNeu:0.0422,neg:71,pctNeg:0.0333,fuentes:"Google: 1205, Booking.com: 519, HostelWorld: 261",topPos:["staff (423)","amabilidad (404)","increible / amazing (398)","ambiente / vibe (386)","actividades (354)","comida (306)","servicio (290)","excelente (261)","piscina (251)","recomendado (247)"],topNeg:["malo / bad (33)","habitacion (26)","ruido (25)","servicio (22)","noche / descanso (22)","reserva (16)","precio (12)","agua (8)","comida (7)","bano (7)"]},
+  {loc:"Viajero Cartagena Getsemaní",reviews:2105,rating:4.50,pos:1818,pctPos:0.8637,neu:155,pctNeu:0.0736,neg:132,pctNeg:0.0627,fuentes:"Booking.com: 1006, Google: 827, HostelWorld: 189",topPos:["staff (552)","ubicacion (498)","servicio (436)","excelente (432)","amabilidad (385)","bar (368)","increible / amazing (266)","ambiente / vibe (250)","actividades (201)","bonito / beautiful (195)"],topNeg:["malo / bad (97)","habitacion (62)","servicio (47)","ubicacion (35)","suciedad (29)","bano (24)","noche / descanso (22)","cama (20)","precio (19)","agua (19)"]},
+  {loc:"Viajero Ciudad de México Centro",reviews:1966,rating:4.44,pos:1644,pctPos:0.8362,neu:186,pctNeu:0.0946,neg:136,pctNeg:0.0692,fuentes:"HostelWorld: 984, Booking.com: 665, Google: 270",topPos:["staff (641)","ambiente / vibe (482)","ubicacion (464)","amabilidad (450)","actividades (449)","limpieza (260)","increible / amazing (237)","recomendado (202)","comida (183)","excelente (169)"],topNeg:["malo / bad (78)","servicio (73)","habitacion (59)","noche / descanso (49)","ubicacion (38)","ruido (38)","cama (31)","suciedad (24)","precio (24)","bano (23)"]},
+  {loc:"Viajero Bogotá",reviews:1745,rating:4.45,pos:1476,pctPos:0.8458,neu:139,pctNeu:0.0797,neg:130,pctNeg:0.0745,fuentes:"Booking.com: 781, HostelWorld: 425, Google: 372",topPos:["staff (518)","amabilidad (442)","ubicacion (304)","increible / amazing (304)","actividades (288)","ambiente / vibe (252)","excelente (216)","limpieza (190)","recomendado (188)","habitacion (188)"],topNeg:["malo / bad (94)","servicio (68)","habitacion (66)","ubicacion (33)","noche / descanso (29)","reserva (27)","bano (25)","suciedad (21)","ruido (19)","precio (19)"]},
+  {loc:"Viajero Buenos Aires",reviews:1708,rating:4.65,pos:1552,pctPos:0.9087,neu:93,pctNeu:0.0544,neg:63,pctNeg:0.0369,fuentes:"Google: 802, Booking.com: 495, HostelWorld: 325",topPos:["staff (474)","amabilidad (402)","ambiente / vibe (383)","actividades (380)","increible / amazing (309)","ubicacion (245)","excelente (225)","recomendado (203)","servicio (166)","bar (162)"],topNeg:["malo / bad (39)","habitacion (24)","servicio (18)","bano (13)","ubicacion (11)","calor / aire (10)","cama (10)","comida (10)","mantenimiento (9)","precio (9)"]},
+  {loc:"Viajero Arequipa",reviews:1539,rating:4.83,pos:1497,pctPos:0.9727,neu:24,pctNeu:0.0156,neg:18,pctNeg:0.0117,fuentes:"Google: 982, Booking.com: 284, HostelWorld: 238",topPos:["staff (353)","amabilidad (318)","bar (307)","increible / amazing (270)","servicio (232)","limpieza (223)","actividades (213)","ambiente / vibe (207)","excelente (201)","recomendado (176)"],topNeg:["servicio (8)","reserva (8)","malo / bad (6)","habitacion (6)","cama (5)","noche / descanso (4)","comida (3)","tamano (1)","ubicacion (1)","precio (1)"]},
+  {loc:"Viajero Tayrona",reviews:1521,rating:4.50,pos:1308,pctPos:0.86,neu:110,pctNeu:0.0723,neg:103,pctNeg:0.0677,fuentes:"Google: 652, Booking.com: 541, HostelWorld: 234",topPos:["comida (370)","increible / amazing (352)","servicio (334)","staff (331)","amabilidad (244)","excelente (239)","actividades (237)","ambiente / vibe (224)","bonito / beautiful (174)","piscina (159)"],topNeg:["malo / bad (59)","servicio (52)","habitacion (39)","comida (36)","noche / descanso (31)","precio (24)","ubicacion (21)","ruido (19)","wifi (19)","bano (17)"]},
+  {loc:"Viajero Santa Marta",reviews:1394,rating:4.62,pos:1256,pctPos:0.901,neu:84,pctNeu:0.0603,neg:54,pctNeg:0.0387,fuentes:"Booking.com: 577, Google: 386, HostelWorld: 379",topPos:["staff (329)","amabilidad (318)","bar (260)","servicio (242)","comida (238)","increible / amazing (201)","excelente (198)","piscina (174)","limpieza (153)","actividades (153)"],topNeg:["malo / bad (29)","servicio (21)","habitacion (18)","noche / descanso (12)","agua (11)","comida (10)","reserva (7)","ubicacion (7)","cama (7)","bano (6)"]},
+  {loc:"Viajero Kokopelli Paracas",reviews:1239,rating:4.65,pos:1131,pctPos:0.9128,neu:71,pctNeu:0.0573,neg:36,pctNeg:0.0291,fuentes:"HostelWorld: 427, Google: 416, Booking.com: 356",topPos:["staff (280)","amabilidad (253)","actividades (239)","ambiente / vibe (207)","limpieza (201)","ubicacion (174)","increible / amazing (153)","comida (142)","recomendado (138)","bar (138)"],topNeg:["malo / bad (24)","ruido (14)","habitacion (11)","servicio (11)","noche / descanso (10)","ubicacion (8)","precio (6)","cama (6)","bano (6)","agua (4)"]},
+  {loc:"Viajero Guatapé",reviews:1179,rating:4.54,pos:1035,pctPos:0.8779,neu:63,pctNeu:0.0534,neg:81,pctNeg:0.0687,fuentes:"Google: 620, Booking.com: 430, HostelWorld: 112",topPos:["increible / amazing (288)","staff (274)","servicio (268)","vista (259)","comida (238)","excelente (228)","bonito / beautiful (219)","amabilidad (197)","actividades (184)","recomendado (164)"],topNeg:["malo / bad (48)","servicio (46)","comida (35)","habitacion (35)","ubicacion (20)","precio (18)","wifi (17)","noche / descanso (15)","ruido (12)","reserva (8)"]},
+  {loc:"Viajero Casco Viejo Panamá",reviews:1143,rating:4.13,pos:843,pctPos:0.7375,neu:148,pctNeu:0.1295,neg:152,pctNeg:0.133,fuentes:"Booking.com: 520, Google: 340, HostelWorld: 259",topPos:["staff (281)","bar (241)","ubicacion (219)","actividades (218)","increible / amazing (183)","amabilidad (175)","excelente (129)","habitacion (123)","limpieza (118)","recomendado (107)"],topNeg:["malo / bad (103)","habitacion (74)","noche / descanso (66)","servicio (63)","ruido (59)","ubicacion (31)","suciedad (24)","reserva (22)","bano (22)","precio (21)"]},
+  {loc:"Viajero San Andrés",reviews:1074,rating:4.19,pos:806,pctPos:0.7505,neu:155,pctNeu:0.1443,neg:113,pctNeg:0.1052,fuentes:"Booking.com: 705, Google: 235, HostelWorld: 67",topPos:["staff (255)","ubicacion (202)","actividades (134)","excelente (128)","ambiente / vibe (121)","amabilidad (111)","servicio (99)","limpieza (82)","bar (77)","increible / amazing (77)"],topNeg:["malo / bad (93)","habitacion (40)","servicio (35)","bano (33)","agua (28)","precio (22)","ubicacion (22)","comida (18)","noche / descanso (18)","suciedad (18)"]},
+  {loc:"Viajero Montevideo",reviews:1052,rating:4.24,pos:840,pctPos:0.7985,neu:104,pctNeu:0.0989,neg:108,pctNeg:0.1027,fuentes:"Booking.com: 838, Google: 186, Hotels.com: 9",topPos:["ubicacion (312)","staff (225)","excelente (151)","bonito / beautiful (134)","ambiente / vibe (123)","amabilidad (119)","habitacion (116)","limpieza (99)","increible / amazing (86)","instalaciones (84)"],topNeg:["malo / bad (86)","servicio (44)","habitacion (42)","cama (27)","suciedad (27)","noche / descanso (26)","ubicacion (26)","bano (23)","reserva (23)","limpieza (16)"]},
+  {loc:"Viajero Puerto Escondido",reviews:948,rating:4.66,pos:878,pctPos:0.9262,neu:42,pctNeu:0.0443,neg:28,pctNeg:0.0295,fuentes:"HostelWorld: 480, Booking.com: 309, Google: 135",topPos:["staff (370)","ambiente / vibe (290)","amabilidad (249)","ubicacion (218)","actividades (214)","piscina (183)","increible / amazing (177)","limpieza (162)","recomendado (153)","excelente (118)"],topNeg:["malo / bad (17)","habitacion (16)","servicio (12)","calor / aire (8)","suciedad (7)","agua (5)","noche / descanso (5)","ruido (5)","comida (5)","ubicacion (5)"]},
+  {loc:"Viajero Cali",reviews:938,rating:4.54,pos:830,pctPos:0.8849,neu:53,pctNeu:0.0565,neg:55,pctNeg:0.0586,fuentes:"HostelWorld: 410, Booking.com: 281, Google: 167",topPos:["actividades (305)","staff (292)","amabilidad (232)","increible / amazing (220)","ambiente / vibe (191)","ubicacion (143)","recomendado (135)","comida (121)","piscina (98)","excelente (96)"],topNeg:["malo / bad (35)","habitacion (26)","servicio (25)","noche / descanso (16)","bano (14)","ubicacion (14)","precio (12)","cama (11)","reserva (10)","suciedad (9)"]},
+  {loc:"Viajero Colonia",reviews:890,rating:4.31,pos:735,pctPos:0.8258,neu:106,pctNeu:0.1191,neg:49,pctNeg:0.0551,fuentes:"Booking.com: 766, Google: 119, Agoda: 4",topPos:["ubicacion (373)","staff (168)","excelente (164)","instalaciones (126)","bonito / beautiful (112)","habitacion (104)","comida (97)","amabilidad (95)","servicio (79)","limpieza (71)"],topNeg:["malo / bad (34)","habitacion (18)","ubicacion (15)","suciedad (13)","servicio (12)","cama (10)","comida (9)","bano (8)","desayuno (7)","noche / descanso (7)"]},
+  {loc:"Viajero Oaxaca",reviews:843,rating:4.38,pos:698,pctPos:0.828,neu:101,pctNeu:0.1198,neg:44,pctNeg:0.0522,fuentes:"Booking.com: 415, HostelWorld: 219, Google: 167",topPos:["staff (248)","bar (216)","ubicacion (178)","amabilidad (169)","actividades (159)","limpieza (153)","habitacion (132)","ambiente / vibe (124)","bonito / beautiful (121)","increible / amazing (118)"],topNeg:["malo / bad (29)","servicio (22)","habitacion (15)","wifi (8)","ruido (8)","cama (7)","noche / descanso (7)","reserva (6)","precio (5)","calor / aire (4)"]},
+  {loc:"Viajero Sayulita",reviews:531,rating:4.61,pos:481,pctPos:0.9058,neu:27,pctNeu:0.0508,neg:23,pctNeg:0.0433,fuentes:"HostelWorld: 172, Booking.com: 153, Google: 113",topPos:["staff (225)","actividades (150)","increible / amazing (144)","amabilidad (136)","ambiente / vibe (119)","limpieza (105)","bar (102)","piscina (91)","comida (78)","recomendado (74)"],topNeg:["malo / bad (14)","servicio (10)","habitacion (8)","bano (6)","noche / descanso (6)","ruido (5)","comida (4)","limpieza (4)","cama (3)","calor / aire (3)"]},
+  {loc:"Viajero San José",reviews:502,rating:4.64,pos:461,pctPos:0.9183,neu:28,pctNeu:0.0558,neg:13,pctNeg:0.0259,fuentes:"Booking.com: 253, HostelWorld: 151, Google: 79",topPos:["staff (181)","limpieza (148)","amabilidad (146)","ubicacion (98)","comida (85)","actividades (78)","habitacion (74)","ambiente / vibe (69)","recomendado (67)","comodidad (63)"],topNeg:["malo / bad (9)","habitacion (5)","ubicacion (5)","servicio (4)","noche / descanso (3)","calor / aire (3)","comida (3)","wifi (2)","precio (2)","bano (2)"]},
+  {loc:"Viajero La Fortuna",reviews:326,rating:4.54,pos:291,pctPos:0.8926,neu:23,pctNeu:0.0706,neg:12,pctNeg:0.0368,fuentes:"Booking.com: 191, HostelWorld: 75, Google: 57",topPos:["staff (136)","amabilidad (83)","comida (70)","ambiente / vibe (69)","actividades (68)","ubicacion (62)","limpieza (54)","instalaciones (45)","increible / amazing (43)","piscina (42)"],topNeg:["malo / bad (8)","servicio (7)","habitacion (6)","cama (5)","ruido (3)","noche / descanso (3)","reserva (2)","limpieza (2)","ubicacion (2)","precio (2)"]},
+  {loc:"Viajero Bacalar",reviews:300,rating:4.73,pos:284,pctPos:0.9467,neu:15,pctNeu:0.05,neg:1,pctNeg:0.0033,fuentes:"Booking.com: 125, Google: 93, HostelWorld: 75",topPos:["staff (120)","amabilidad (78)","ubicacion (65)","ambiente / vibe (65)","limpieza (64)","piscina (58)","actividades (58)","habitacion (56)","bar (50)","increible / amazing (48)"],topNeg:["malo / bad (1)","habitacion (1)","ubicacion (1)","noche / descanso (1)","bano (1)","ruido (1)"]}
+];
+
+// ── SENTIMENT RENDER ──────────────────────────────────────────────
+function renderSentiment(){
+  const totalReviews = SENTIMENT_DATA.reduce((a,d)=>a+d.reviews,0);
+  const avgRating = (SENTIMENT_DATA.reduce((a,d)=>a+d.rating*d.reviews,0)/totalReviews).toFixed(2);
+  const totalPos = SENTIMENT_DATA.reduce((a,d)=>a+d.pos,0);
+  const totalNeg = SENTIMENT_DATA.reduce((a,d)=>a+d.neg,0);
+  const pctPos = (totalPos/totalReviews*100).toFixed(1);
+  const pctNeg = (totalNeg/totalReviews*100).toFixed(1);
+  const bestLoc = SENTIMENT_DATA.reduce((a,d)=>d.rating>a.rating?d:a);
+  const mostReviewed = SENTIMENT_DATA.reduce((a,d)=>d.reviews>a.reviews?d:a);
+
+  document.getElementById('sentimentKPIs').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Reviews analizadas</div><div class="metric-value">${fmt(totalReviews)}</div><div class="metric-sub">Total con texto · todas las sedes</div></div>
+    <div class="metric-card"><div class="metric-label">Rating promedio</div><div class="metric-value">⭐ ${avgRating}</div><div class="metric-sub">Ponderado por volumen</div></div>
+    <div class="metric-card"><div class="metric-label">% Positivo global</div><div class="metric-value" style="color:var(--green)">${pctPos}%</div><div class="metric-sub">${fmt(totalPos)} reviews positivas</div></div>
+    <div class="metric-card"><div class="metric-label">% Negativo global</div><div class="metric-value" style="color:var(--red)">${pctNeg}%</div><div class="metric-sub">${fmt(totalNeg)} reviews negativas</div></div>
+    <div class="metric-card"><div class="metric-label">Mejor rating</div><div class="metric-value">${bestLoc.rating}</div><div class="metric-sub">${bestLoc.loc.replace('Viajero ','')}</div></div>
+    <div class="metric-card"><div class="metric-label">+ Reseñas</div><div class="metric-value">${fmt(mostReviewed.reviews)}</div><div class="metric-sub">${mostReviewed.loc.replace('Viajero ','')}</div></div>
+  `;
+
+
+  // Brand association top 5 global
+  const brandPos = [
+    {word:'staff',count:11038},
+    {word:'amabilidad',count:8920},
+    {word:'ubicación',count:6457},
+    {word:'actividades',count:6454},
+    {word:'increíble / amazing',count:6449}
+  ];
+  const brandNeg = [
+    {word:'malo / bad',count:1320},
+    {word:'habitación',count:881},
+    {word:'servicio',count:836},
+    {word:'noche / descanso',count:490},
+    {word:'ubicación',count:439}
+  ];
+  const maxPos = brandPos[0].count;
+  const maxNeg = brandNeg[0].count;
+
+  document.getElementById('brandPosWords').innerHTML = brandPos.map((w,i)=>{
+    const pct = Math.round(w.count/maxPos*100);
+    const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+    return `<div class="prog-item">
+      <div class="prog-header">
+        <span class="prog-name">${medals[i]} <strong>${w.word}</strong></span>
+        <span class="prog-pct" style="color:var(--green)">${w.count.toLocaleString()} menciones</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%;background:var(--green)"></div></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('brandNegWords').innerHTML = brandNeg.map((w,i)=>{
+    const pct = Math.round(w.count/maxNeg*100);
+    const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+    return `<div class="prog-item">
+      <div class="prog-header">
+        <span class="prog-name">${medals[i]} <strong>${w.word}</strong></span>
+        <span class="prog-pct" style="color:var(--red)">${w.count.toLocaleString()} menciones</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%;background:var(--red)"></div></div>
+    </div>`;
+  }).join('');
+
+
+  // Ranking table
+  const sorted=[...SENTIMENT_DATA].sort((a,b)=>b.rating-a.rating);
+  const ratingColor=r=>r>=4.7?'var(--green)':r>=4.4?'var(--amber)':'var(--red)';
+  const negColor=p=>p<=0.03?'var(--green)':p<=0.07?'var(--amber)':'var(--red)';
+  document.getElementById('sentimentRankingTable').innerHTML=`
+    <table class="tbl">
+      <thead><tr>
+        <th>#</th><th>Locación</th><th>Reviews</th><th>Rating</th>
+        <th>% Positivo</th><th>% Neutral</th><th>% Negativo</th><th>Top positivo</th><th>Top negativo</th>
+      </tr></thead>
+      <tbody>
+        ${sorted.map((d,i)=>`<tr>
+          <td style="color:var(--dim);font-size:12px">${i+1}</td>
+          <td style="font-weight:600">${d.loc.replace('Viajero ','')}</td>
+          <td>${d.reviews.toLocaleString()}</td>
+          <td><span style="font-weight:700;color:${ratingColor(d.rating)}">${d.rating}</span></td>
+          <td><span style="color:var(--green);font-weight:600">${(d.pctPos*100).toFixed(1)}%</span></td>
+          <td style="color:var(--muted)">${(d.pctNeu*100).toFixed(1)}%</td>
+          <td><span style="color:${negColor(d.pctNeg)};font-weight:600">${(d.pctNeg*100).toFixed(1)}%</span></td>
+          <td style="font-size:11px;color:var(--muted);max-width:180px">${d.topPos.slice(0,3).map(t=>t.split(' (')[0]).join(', ')}</td>
+          <td style="font-size:11px;color:var(--muted);max-width:180px">${d.topNeg.slice(0,3).map(t=>t.split(' (')[0]).join(', ')}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+
+  // Rating bar chart — top 10 by volume
+  const top10=[...SENTIMENT_DATA].sort((a,b)=>b.reviews-a.reviews).slice(0,10);
+  const ratingBg=top10.map(d=>d.rating>=4.7?COLORS.green:d.rating>=4.4?COLORS.amber:COLORS.red);
+  mkChart('sentimentRatingChart',{type:'bar',data:{
+    labels:top10.map(d=>d.loc.replace('Viajero ','')),
+    datasets:[{data:top10.map(d=>d.rating),backgroundColor:ratingBg,borderRadius:4,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' ⭐ '+c.parsed.x}}},scales:{
+    x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},min:3.8,max:5},
+    y:{grid:{display:false},ticks:{color:tickColor,font:tickFont}}
+  }}});
+
+  // Pos vs Neg stacked
+  mkChart('sentimentPosNegChart',{type:'bar',data:{
+    labels:top10.map(d=>d.loc.replace('Viajero ','')),
+    datasets:[
+      {label:'% Positivo',data:top10.map(d=>+(d.pctPos*100).toFixed(1)),backgroundColor:COLORS.green,borderRadius:4,borderSkipped:false},
+      {label:'% Negativo',data:top10.map(d=>+(d.pctNeg*100).toFixed(1)),backgroundColor:COLORS.red,borderRadius:4,borderSkipped:false}
+    ]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+    x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'%'},stacked:false},
+    y:{grid:{display:false},ticks:{color:tickColor,font:tickFont}}
+  }}});
+
+  // Populate location selector
+  const sel=document.getElementById('sentimentLocSelect');
+  if(sel.options.length===0){
+    SENTIMENT_DATA.forEach((d,i)=>{
+      const opt=document.createElement('option');
+      opt.value=i;
+      opt.textContent=d.loc;
+      sel.appendChild(opt);
+    });
+  }
+  renderSentimentDetail();
+}
+
+function renderSentimentDetail(){
+  const idx=parseInt(document.getElementById('sentimentLocSelect').value)||0;
+  const d=SENTIMENT_DATA[idx];
+
+  // KPIs card
+  const negColor=p=>p<=0.03?'var(--green)':p<=0.07?'var(--amber)':'var(--red)';
+  document.getElementById('sentimentDetailKPIs').innerHTML=`
+    <div>
+      <div class="metric-label">Reviews totales</div>
+      <div class="metric-value" style="font-size:32px">${d.reviews.toLocaleString()}</div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:12px">
+      <div class="metric-label">Rating promedio</div>
+      <div class="metric-value" style="font-size:28px;color:var(--accent)">⭐ ${d.rating}</div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div><div class="metric-label" style="font-size:9px">POSITIVO</div><div style="font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--green)">${(d.pctPos*100).toFixed(1)}%</div></div>
+      <div><div class="metric-label" style="font-size:9px">NEUTRAL</div><div style="font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--amber)">${(d.pctNeu*100).toFixed(1)}%</div></div>
+      <div><div class="metric-label" style="font-size:9px">NEGATIVO</div><div style="font-family:var(--font-head);font-size:20px;font-weight:700;color:${negColor(d.pctNeg)}">${(d.pctNeg*100).toFixed(1)}%</div></div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:12px">
+      <div class="metric-label">Fuentes</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8">${d.fuentes.split(', ').join('<br>')}</div>
+    </div>
+  `;
+
+  // Positive words bar
+  const posLabels=d.topPos.map(t=>t.split(' (')[0]);
+  const posVals=d.topPos.map(t=>parseInt(t.match(/\((\d+)\)/)[1]));
+  mkChart('sentimentPosWords',{type:'bar',data:{
+    labels:posLabels,datasets:[{data:posVals,backgroundColor:COLORS.green+'cc',borderRadius:3,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+    x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},
+    y:{grid:{display:false},ticks:{color:tickColor,font:{family:'Geomanist',size:10}}}
+  }}});
+
+  // Negative words bar
+  const negLabels=d.topNeg.map(t=>t.split(' (')[0]);
+  const negVals=d.topNeg.map(t=>parseInt(t.match(/\((\d+)\)/)[1]));
+  mkChart('sentimentNegWords',{type:'bar',data:{
+    labels:negLabels,datasets:[{data:negVals,backgroundColor:COLORS.red+'cc',borderRadius:3,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+    x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},
+    y:{grid:{display:false},ticks:{color:tickColor,font:{family:'Geomanist',size:10}}}
+  }}});
+
+  // Fuentes pie
+  const fuenteParts=d.fuentes.split(', ').map(f=>{const p=f.split(': ');return{name:p[0],val:parseInt(p[1])}});
+  const fuenteColors=[COLORS.blue,COLORS.amber,COLORS.green,COLORS.purple,'#6b7280'];
+  mkChart('sentimentFuentesChart',{type:'doughnut',data:{
+    labels:fuenteParts.map(f=>f.name),
+    datasets:[{data:fuenteParts.map(f=>f.val),backgroundColor:fuenteColors,borderWidth:0,hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{color:tickColor,font:{family:'Geomanist',size:11},boxWidth:10}}}}});
+
+  // Sentiment donut
+  mkChart('sentimentDonutChart',{type:'doughnut',data:{
+    labels:['Positivo','Neutral','Negativo'],
+    datasets:[{data:[d.pos,d.neu,d.neg],backgroundColor:[COLORS.green,COLORS.amber,COLORS.red],borderWidth:0,hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:true,position:'right',labels:{color:tickColor,font:{family:'Geomanist',size:11},boxWidth:10}}}}});
+}
+
+
+// ── OKR TRACKER ─────────────────────────────────────────────────
+const OKR_CIRC = 2 * Math.PI * 35;
+
+const OKR_RESP_COLORS = {
+  'PM':          { bg: '#EDE9FE', color: '#5B21B6' },
+  'DM':          { bg: '#DBEAFE', color: '#1D4ED8' },
+  'PM+DM':       { bg: '#E0E7FF', color: '#3730A3' },
+  'Pauta':       { bg: '#FEF3C7', color: '#92400E' },
+  'Plataformas': { bg: '#D1FAE5', color: '#065F46' },
+  'PR':          { bg: '#FCE7F3', color: '#9D174D' },
+};
+
+const OKR_OBJ_COLORS = ['#F54927','#d97706','#16a34a','#2563eb','#7c3aed','#0891b2','#db2777'];
+
+const OKR_DATA = [
+  {
+    label:'OBJ 1', name:'Implementar e integrar una nueva página web alineada con la identidad de la marca',
+    krs:[
+      { title:'KR1 — Web operativa en 100% de la cadena', resp:['Plataformas'], entregables:[
+        {name:'Integraciones web, booking engine y pagos finalizadas',pct:0,obs:''},
+        {name:'Pruebas de reserva end-to-end validadas',pct:0,obs:''},
+        {name:'Tracking GA4 + GTM configurado',pct:0,obs:''},
+        {name:'Activación progresiva por destinos',pct:0,obs:''},
+      ]},
+      { title:'KR2 — +4pp share del canal web (Pauta)', resp:['Pauta'], entregables:[
+        {name:'Campañas PMAX por país en Youtube / Display encendidas',pct:0,obs:''},
+        {name:'Pauta Google full conversión por operaciones',pct:0,obs:''},
+        {name:'Reporte de campañas PMAX',pct:0,obs:''},
+      ]},
+      { title:'KR2 — +4pp share del canal web (Plataformas)', resp:['Plataformas'], entregables:[
+        {name:'Nueva web y booking engine optimizado lanzado',pct:0,obs:''},
+        {name:'UTMs y medición de conversiones implementados',pct:0,obs:''},
+        {name:'Landings comerciales y campañas prioritarias creadas',pct:0,obs:''},
+        {name:'Share web monitoreado semanalmente con Revenue',pct:0,obs:''},
+      ]},
+      { title:'KR2 — +4pp share del canal web (PR)', resp:['PR'], entregables:[
+        {name:'UTMs y Dashboard de seguimiento de tráfico',pct:0,obs:''},
+        {name:'Brief de colaboración con influenciadores',pct:0,obs:''},
+        {name:'Reporte de campaña influenciadores con UTMs',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 2', name:'Estandarizar los procesos internos del área de Mercadeo y la colaboración con otras áreas',
+    krs:[
+      { title:'KR1 — Brandbook y Toolkit al 60%', resp:['PM','DM'], entregables:[
+        {name:'Brandbook final',pct:0,obs:''},
+        {name:'Toolkit en Notion',pct:0,obs:''},
+        {name:'Plantillas editables',pct:0,obs:''},
+        {name:'Presentación de capacitación',pct:0,obs:''},
+      ]},
+      { title:'KR2 — Sistema de priorización y gestión de solicitudes', resp:['PM'], entregables:[
+        {name:'Formulario único de solicitudes',pct:0,obs:''},
+        {name:'Backlog maestro en Notion',pct:0,obs:''},
+        {name:'Matriz de priorización',pct:0,obs:''},
+        {name:'Flujos interáreas y RACI',pct:0,obs:''},
+      ]},
+      { title:'KR3 — Backlog visible y priorizado', resp:['PM'], entregables:[
+        {name:'Proyectos activos levantados y categorizados',pct:0,obs:''},
+        {name:'Estado, responsable y prioridad de cada proyecto',pct:0,obs:''},
+        {name:'Revisión semanal activa',pct:0,obs:''},
+      ]},
+      { title:'KR4 — Modelo de trabajo interáreas documentado', resp:['PM'], entregables:[
+        {name:'Blueprint general de trabajo interárea',pct:0,obs:''},
+        {name:'Talleres con Operaciones, Revenue, Experiences y Proyectos',pct:0,obs:''},
+        {name:'Manual de trabajo + flujos visuales + RACI',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 3', name:'Implementar un plan comercial integral para la cadena',
+    krs:[
+      { title:'KR1 — User Journey en 100% de operaciones', resp:['PM'], entregables:[
+        {name:'Mapa de User Journey',pct:100,obs:'Completado en semana 3 del Q.'},
+        {name:'Playbook (página web)',pct:60,obs:'En desarrollo. Pendiente sección de protocolos.'},
+        {name:'Kit de piezas por etapa',pct:30,obs:'Solo están listas las piezas de bienvenida y check-in.'},
+        {name:'Capacitación con Operaciones',pct:0,obs:''},
+      ]},
+      { title:'KR2 — Plan comercial Merch y A&B', resp:['PR'], entregables:[
+        {name:'Capacitación integral 101 comercial',pct:0,obs:''},
+        {name:'Sistema de inventarios merch estandarizado',pct:0,obs:''},
+        {name:'Dashboard de seguimiento merch',pct:0,obs:''},
+        {name:'Manual operativo Velmost',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 4', name:'Consolidar un rebranding y equity coherente en todos los canales de la cadena',
+    krs:[
+      { title:'KR1 — Manual de marca 360°', resp:['PM','DM'], entregables:[
+        {name:'Manual de aplicaciones 360°',pct:0,obs:''},
+        {name:'Portafolio de piezas base',pct:0,obs:''},
+        {name:'Plantillas editables por canal',pct:0,obs:''},
+        {name:'Guía de tono de voz',pct:0,obs:''},
+      ]},
+      { title:'KR2 — Unificación A&B a nivel cadena', resp:['PM','DM'], entregables:[
+        {name:'Mini brandbook A&B',pct:0,obs:''},
+        {name:'Kit editable de menús, promos y señalética',pct:0,obs:''},
+        {name:'Checklist de implementación',pct:0,obs:''},
+      ]},
+      { title:'KR3 — Sistema de reporting del área', resp:['PM'], entregables:[
+        {name:'Framework de KPIs por subárea',pct:0,obs:''},
+        {name:'Dashboard consolidado',pct:0,obs:''},
+        {name:'Plantilla reporte mensual y Q',pct:0,obs:''},
+        {name:'Análisis de carga operativa',pct:0,obs:''},
+      ]},
+      { title:'KR4 — SOP de implementación de Merch', resp:['PR'], entregables:[
+        {name:'SOP de implementación merch',pct:0,obs:''},
+        {name:'Medición de adopción del SOP',pct:0,obs:''},
+      ]},
+      { title:'KR5 — Análisis de equity de marca', resp:['PR'], entregables:[
+        {name:'Criterios de equity definidos',pct:0,obs:''},
+        {name:'Matriz de evaluación de marcas',pct:0,obs:''},
+        {name:'Seguimiento periódico en Notion',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 5', name:'Desarrollar un sistema de datos que soporte decisiones de negocio',
+    krs:[
+      { title:'KR1 — Reportes de pauta en tiempo real (MasterMetrics)', resp:['Pauta'], entregables:[
+        {name:'Suscripción MasterMetrics activa',pct:0,obs:''},
+        {name:'KPIs de pauta definidos',pct:0,obs:''},
+        {name:'Dashboard mensual en tiempo real',pct:0,obs:''},
+        {name:'Reporte ejecutivo Q2',pct:0,obs:''},
+      ]},
+      { title:'KR2 — Reporting de fuentes de tráfico de solicitudes', resp:['PM'], entregables:[
+        {name:'Definición y clasificación de fuentes de solicitudes',pct:0,obs:''},
+        {name:'Dashboard mensual de fuentes de tráfico',pct:0,obs:''},
+        {name:'Reporte ejecutivo Q2',pct:0,obs:''},
+      ]},
+      { title:'KR3 — Monitoreo de activos digitales', resp:['Plataformas'], entregables:[
+        {name:'KPIs y tracking de activos digitales validados',pct:0,obs:''},
+        {name:'Dashboard de monitoreo activo',pct:0,obs:''},
+        {name:'Reporte mensual de insights',pct:0,obs:''},
+      ]},
+      { title:'KR4 — Integración de datos entre áreas', resp:['Plataformas'], entregables:[
+        {name:'Fuentes de información consolidadas por área',pct:0,obs:''},
+        {name:'Dashboard consolidado transversal',pct:0,obs:''},
+        {name:'Reportes ejecutivos para toma de decisiones',pct:0,obs:''},
+      ]},
+      { title:'KR5 — Reporte Olas Sonoras vs año anterior', resp:['PR'], entregables:[
+        {name:'Data levantada y matriz comparativa 2025 vs 2026',pct:0,obs:''},
+        {name:'Reporte integral de desempeño Olas Sonoras',pct:0,obs:''},
+      ]},
+      { title:'KR6 — Reporte de impacto y ROI de alianzas', resp:['PR'], entregables:[
+        {name:'Alianzas activas levantadas y clasificadas',pct:0,obs:''},
+        {name:'KPIs por categoría de alianza definidos',pct:0,obs:''},
+        {name:'Matriz de ROI de alianzas',pct:0,obs:''},
+      ]},
+      { title:'KR7 — ROAS promedio ≥ 13–15', resp:['Pauta'], entregables:[
+        {name:'Pauta META por país con objetivo conversión activa',pct:0,obs:''},
+        {name:'Pauta Google full conversión por operaciones',pct:0,obs:''},
+        {name:'Seguimiento semanal de ROAS y optimización',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 6', name:'Crear sistemas y procesos para alineación efectiva con Brand Performance',
+    krs:[
+      { title:'KR1 — Metodología de seguimiento en 10 procesos clave', resp:['PR'], entregables:[
+        {name:'Metodología de Notion convertida en estándar operativo',pct:0,obs:''},
+        {name:'Ruta de socialización con áreas clave',pct:0,obs:''},
+        {name:'Medición de adopción por proyecto',pct:0,obs:''},
+      ]},
+      { title:'KR3 — Estandarización y capacitación de Viajero Market', resp:['PR'], entregables:[
+        {name:'Módulos y presentaciones de Viajero Market',pct:0,obs:''},
+        {name:'Capacitación equipos ejecutada',pct:0,obs:''},
+        {name:'Toolkit comercial estandarizado',pct:0,obs:''},
+      ]},
+    ]
+  },
+  {
+    label:'OBJ 7', name:'Continuar y validar el programa de lealtad Viajero GO',
+    krs:[
+      { title:'KR1 — +7.000 miembros registrados al cierre de junio', resp:['Plataformas'], entregables:[
+        {name:'Flujo de enrolamiento optimizado',pct:0,obs:''},
+        {name:'Visibilidad del programa en web, CRM y recepción',pct:0,obs:''},
+        {name:'Materiales de apoyo para operación implementados',pct:0,obs:''},
+        {name:'Sistema de seguimiento de registros por canal',pct:0,obs:''},
+      ]},
+      { title:'KR2 — 100% operaciones aplicando beneficios correctamente', resp:['Plataformas'], entregables:[
+        {name:'Lineamientos de beneficios y redenciones estandarizados',pct:0,obs:''},
+        {name:'Equipos capacitados en el programa',pct:0,obs:''},
+        {name:'Seguimiento de incidencias activo',pct:0,obs:''},
+      ]},
+      { title:'KR3 — Sistema de medición de impacto comercial de Viajero GO', resp:['Plataformas'], entregables:[
+        {name:'KPIs estratégicos del programa definidos',pct:0,obs:''},
+        {name:'Dashboard estratégico de impacto',pct:0,obs:''},
+        {name:'Análisis comparativo miembros vs no miembros',pct:0,obs:''},
+      ]},
+      { title:'KR4 — Lanzamiento global Viajero GO con AKIN', resp:['Plataformas'], entregables:[
+        {name:'Cronograma de lanzamiento coordinado con AKIN',pct:0,obs:''},
+        {name:'Materiales y activos del programa implementados',pct:0,obs:''},
+        {name:'Equipos capacitados y destinos activados',pct:0,obs:''},
+        {name:'Monitoreo de incidencias y rollout activo',pct:0,obs:''},
+      ]},
+    ]
+  },
+];
+
+let okrActiveFilter = 'all';
+
+// ── Google Sheets sync ──────────────────────────────────────────
+// Reemplaza esta URL con la URL de tu implementación de Apps Script
+const OKR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwE2wvo2ynB6IejZ2kxtyDge9knxeYfCKmszqFLGRYlJSYCCeA4ZIt7-LoUZRoB4lLw/exec';
+
+async function okrLoadFromSheet() {
+  if (OKR_SHEET_URL === 'https://script.google.com/macros/s/AKfycbwE2wvo2ynB6IejZ2kxtyDge9knxeYfCKmszqFLGRYlJSYCCeA4ZIt7-LoUZRoB4lLw/exec') return; // no configurado aún
+  try {
+    const res  = await fetch(OKR_SHEET_URL);
+    const json = await res.json();
+    if (!json.ok) return;
+    // Sobrescribir pct y obs en OKR_DATA usando el campo ID
+    json.data.forEach(row => {
+      const id = row['ID']; // ej: "OBJ1-KR1-E1"
+      if (!id) return;
+      // Buscar en OKR_DATA por id
+      const [objPart, krPart, ePart] = id.split('-');
+      const oi = parseInt(objPart.replace('OBJ','')) - 1;
+      if (!OKR_DATA[oi]) return;
+      // encontrar el KR y entregable correctos por nombre (más robusto que índice)
+      const entName = row['Entregable'];
+      const krName  = row['Key Result'];
+      OKR_DATA[oi].krs.forEach(kr => {
+        if (kr.title === krName) {
+          kr.entregables.forEach(ent => {
+            if (ent.name === entName) {
+              ent.pct = Number(row['% Avance']) || 0;
+              ent.obs = row['Observación'] || '';
+            }
+          });
+        }
+      });
+    });
+    // Re-render si la página OKR ya está activa
+    const app = document.getElementById('okr-app');
+    if (app && document.getElementById('page-okrs').classList.contains('active')) {
+      app.dataset.rendered = '';
+      app.innerHTML = '';
+      renderOKRs();
+    }
+  } catch(err) {
+    console.warn('OKR Sheet no disponible:', err);
+  }
+}
+
+async function okrSaveToSheet(id, pct, obs) {
+  if (OKR_SHEET_URL === 'https://script.google.com/macros/s/AKfycbwE2wvo2ynB6IejZ2kxtyDge9knxeYfCKmszqFLGRYlJSYCCeA4ZIt7-LoUZRoB4lLw/exec') return;
+  try {
+    await fetch(OKR_SHEET_URL, {
+      method: 'POST',
+      body: JSON.stringify({ id, pct, obs }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch(err) {
+    console.warn('Error guardando en Sheet:', err);
+  }
+}
+
+function okrAvg(arr){ return arr.length ? Math.round(arr.reduce((s,v)=>s+v,0)/arr.length) : 0; }
+function okrEntId(oi, ki, ei) {
+  // Match the IDs in the Google Sheet
+  const idMap = {
+    '0-0-0':'OBJ1-KR1-E1','0-0-1':'OBJ1-KR1-E2','0-0-2':'OBJ1-KR1-E3','0-0-3':'OBJ1-KR1-E4',
+    '0-1-0':'OBJ1-KR2a-E1','0-1-1':'OBJ1-KR2a-E2','0-1-2':'OBJ1-KR2a-E3',
+    '0-2-0':'OBJ1-KR2b-E1','0-2-1':'OBJ1-KR2b-E2','0-2-2':'OBJ1-KR2b-E3','0-2-3':'OBJ1-KR2b-E4',
+    '0-3-0':'OBJ1-KR2c-E1','0-3-1':'OBJ1-KR2c-E2','0-3-2':'OBJ1-KR2c-E3',
+    '1-0-0':'OBJ2-KR1-E1','1-0-1':'OBJ2-KR1-E2','1-0-2':'OBJ2-KR1-E3','1-0-3':'OBJ2-KR1-E4',
+    '1-1-0':'OBJ2-KR2-E1','1-1-1':'OBJ2-KR2-E2','1-1-2':'OBJ2-KR2-E3','1-1-3':'OBJ2-KR2-E4',
+    '1-2-0':'OBJ2-KR3-E1','1-2-1':'OBJ2-KR3-E2','1-2-2':'OBJ2-KR3-E3',
+    '1-3-0':'OBJ2-KR4-E1','1-3-1':'OBJ2-KR4-E2','1-3-2':'OBJ2-KR4-E3',
+    '2-0-0':'OBJ3-KR1-E1','2-0-1':'OBJ3-KR1-E2','2-0-2':'OBJ3-KR1-E3','2-0-3':'OBJ3-KR1-E4',
+    '2-1-0':'OBJ3-KR2-E1','2-1-1':'OBJ3-KR2-E2','2-1-2':'OBJ3-KR2-E3','2-1-3':'OBJ3-KR2-E4',
+    '3-0-0':'OBJ4-KR1-E1','3-0-1':'OBJ4-KR1-E2','3-0-2':'OBJ4-KR1-E3','3-0-3':'OBJ4-KR1-E4',
+    '3-1-0':'OBJ4-KR2-E1','3-1-1':'OBJ4-KR2-E2','3-1-2':'OBJ4-KR2-E3',
+    '3-2-0':'OBJ4-KR3-E1','3-2-1':'OBJ4-KR3-E2','3-2-2':'OBJ4-KR3-E3','3-2-3':'OBJ4-KR3-E4',
+    '3-3-0':'OBJ4-KR4-E1','3-3-1':'OBJ4-KR4-E2',
+    '3-4-0':'OBJ4-KR5-E1','3-4-1':'OBJ4-KR5-E2','3-4-2':'OBJ4-KR5-E3',
+    '4-0-0':'OBJ5-KR1-E1','4-0-1':'OBJ5-KR1-E2','4-0-2':'OBJ5-KR1-E3','4-0-3':'OBJ5-KR1-E4',
+    '4-1-0':'OBJ5-KR2-E1','4-1-1':'OBJ5-KR2-E2','4-1-2':'OBJ5-KR2-E3',
+    '4-2-0':'OBJ5-KR3-E1','4-2-1':'OBJ5-KR3-E2','4-2-2':'OBJ5-KR3-E3',
+    '4-3-0':'OBJ5-KR4-E1','4-3-1':'OBJ5-KR4-E2','4-3-2':'OBJ5-KR4-E3',
+    '4-4-0':'OBJ5-KR5-E1','4-4-1':'OBJ5-KR5-E2',
+    '4-5-0':'OBJ5-KR6-E1','4-5-1':'OBJ5-KR6-E2','4-5-2':'OBJ5-KR6-E3',
+    '4-6-0':'OBJ5-KR7-E1','4-6-1':'OBJ5-KR7-E2','4-6-2':'OBJ5-KR7-E3',
+    '5-0-0':'OBJ6-KR1-E1','5-0-1':'OBJ6-KR1-E2','5-0-2':'OBJ6-KR1-E3',
+    '5-1-0':'OBJ6-KR3-E1','5-1-1':'OBJ6-KR3-E2','5-1-2':'OBJ6-KR3-E3',
+    '6-0-0':'OBJ7-KR1-E1','6-0-1':'OBJ7-KR1-E2','6-0-2':'OBJ7-KR1-E3','6-0-3':'OBJ7-KR1-E4',
+    '6-1-0':'OBJ7-KR2-E1','6-1-1':'OBJ7-KR2-E2','6-1-2':'OBJ7-KR2-E3',
+    '6-2-0':'OBJ7-KR3-E1','6-2-1':'OBJ7-KR3-E2','6-2-2':'OBJ7-KR3-E3',
+    '6-3-0':'OBJ7-KR4-E1','6-3-1':'OBJ7-KR4-E2','6-3-2':'OBJ7-KR4-E3','6-3-3':'OBJ7-KR4-E4',
+  };
+  return idMap[oi+'-'+ki+'-'+ei] || (oi+'-'+ki+'-'+ei);
+}
+function okrStatus(p){
+  if(p===0)   return {label:'Sin iniciar', bg:'var(--surface2)', color:'var(--dim)'};
+  if(p<40)    return {label:'En progreso', bg:'#FEF3C7', color:'#92400E'};
+  if(p<80)    return {label:'Avanzando',   bg:'#DBEAFE', color:'#1D4ED8'};
+  if(p<100)   return {label:'Casi listo',  bg:'#D1FAE5', color:'#065F46'};
+  return             {label:'Completo ✓',  bg:'#DCFCE7', color:'#15803D'};
+}
+function okrRespLabel(resp){ return resp.length>1 ? resp.join('+') : resp[0]; }
+function okrMatchesFilter(kr){ return okrActiveFilter==='all' || kr.resp.includes(okrActiveFilter); }
+
+function updateOKRGlobal(){
+  let allPcts = [];
+  OKR_DATA.forEach(obj => obj.krs.forEach(kr => { if(okrMatchesFilter(kr)) kr.entregables.forEach(e=>allPcts.push(e.pct)); }));
+  const gp = okrAvg(allPcts);
+  document.getElementById('okr-global-pct').textContent = gp+'%';
+  const offset = OKR_CIRC - (gp/100)*OKR_CIRC;
+  const ring = document.getElementById('okr-global-ring');
+  ring.style.strokeDashoffset = offset;
+  ring.style.stroke = gp<40?'#d97706':gp<80?'#F54927':'#16a34a';
+
+  const barsEl = document.getElementById('okr-global-bars');
+  barsEl.innerHTML = '';
+  OKR_DATA.forEach((obj,oi) => {
+    let pcts = [];
+    obj.krs.forEach(kr => { if(okrMatchesFilter(kr)) kr.entregables.forEach(e=>pcts.push(e.pct)); });
+    if(!pcts.length) return;
+    const op = okrAvg(pcts);
+    barsEl.innerHTML += `<div class="okr-gbar-row">
+      <span class="okr-gbar-label">${obj.label}</span>
+      <div class="okr-gbar-bg"><div class="okr-gbar-fill" id="okrgbar-${oi}" style="width:${op}%;background:${OKR_OBJ_COLORS[oi]}"></div></div>
+      <span class="okr-gbar-pct" id="okrgbarpct-${oi}">${op}%</span>
+    </div>`;
+  });
+}
+
+function okrForceSync(){
+  const btn = document.getElementById('okrSyncBtn');
+  btn.textContent = '↻ Cargando...';
+  btn.disabled = true;
+  const app = document.getElementById('okr-app');
+  app.dataset.rendered = '';
+  app.innerHTML = '';
+  okrLoadFromSheet().then(()=>{
+    renderOKRs();
+    btn.textContent = '↻ Sincronizar';
+    btn.disabled = false;
+  });
+}
+function renderOKRs(){
+  const app = document.getElementById('okr-app');
+  if(app.dataset.rendered) { updateOKRGlobal(); return; }
+  // Load latest data from Google Sheet on first open
+  okrLoadFromSheet();
+  app.dataset.rendered = '1';
+  app.innerHTML = '';
+
+  OKR_DATA.forEach((obj, oi) => {
+    const color = OKR_OBJ_COLORS[oi];
+    const visibleKrs = obj.krs.filter(okrMatchesFilter);
+    const allPcts = visibleKrs.flatMap(kr=>kr.entregables.map(e=>e.pct));
+    const objPct = okrAvg(allPcts);
+    const st = okrStatus(objPct);
+
+    const block = document.createElement('div');
+    block.className = 'obj-block' + (visibleKrs.length===0?' hidden':'');
+    block.dataset.oi = oi;
+
+    const hdr = document.createElement('div');
+    hdr.className = 'obj-header';
+    hdr.innerHTML = `
+      <div>
+        <div class="obj-label-tag"><span style="background:${color}22;color:${color};padding:1px 7px;border-radius:99px;font-size:10px;font-weight:700">${obj.label}</span> <span class="okr-toggle-arrow" id="okrtog-${oi}">▾</span></div>
+        <div class="obj-name">${obj.name}</div>
+      </div>
+      <div class="obj-right">
+        <div class="obj-pct-big" id="okropct-${oi}" style="color:${color}">${objPct}%</div>
+        <div class="badge" id="okrbadge-${oi}" style="background:${st.bg};color:${st.color};font-size:11px;padding:2px 8px;border-radius:99px">${st.label}</div>
+      </div>`;
+
+    const barBg = document.createElement('div');
+    barBg.className = 'obj-bar-track';
+    barBg.innerHTML = `<div class="obj-bar-fill" id="okrobar-${oi}" style="width:${objPct}%;background:${color}"></div>`;
+
+    const krContent = document.createElement('div');
+    krContent.className = 'okr-kr-content';
+    krContent.id = `okrcont-${oi}`;
+    krContent.style.maxHeight = '9999px';
+
+    obj.krs.forEach((kr, ki) => {
+      const rl = okrRespLabel(kr.resp);
+      const rc = OKR_RESP_COLORS[rl] || OKR_RESP_COLORS[kr.resp[0]] || {bg:'var(--surface2)',color:'var(--muted)'};
+      const krPcts = kr.entregables.map(e=>e.pct);
+      const krPct = okrAvg(krPcts);
+
+      const krBlock = document.createElement('div');
+      krBlock.className = 'kr-block';
+      krBlock.style.borderLeftColor = color;
+      if(!okrMatchesFilter(kr)) krBlock.style.display='none';
+      krBlock.dataset.ki = ki;
+
+      krBlock.innerHTML = `<div class="kr-header">
+        <span class="kr-title">${kr.title}</span>
+        <div class="kr-meta">
+          <span class="resp-tag" style="background:${rc.bg};color:${rc.color}">${rl}</span>
+          <span class="kr-pct-lbl" id="okrkrpct-${oi}-${ki}">${krPct}%</span>
+        </div>
+      </div>`;
+
+      kr.entregables.forEach((ent, ei) => {
+        const obsBoxId = `okrobs-${oi}-${ki}-${ei}`;
+        const entDiv = document.createElement('div');
+        entDiv.className = 'entregable';
+        entDiv.innerHTML = `
+          <div class="ent-header">
+            <span class="ent-name">${ent.name}</span>
+            <span class="ent-pct-lbl" id="okrepct-${oi}-${ki}-${ei}" style="color:${color}">${ent.pct}%</span>
+          </div>
+          <div class="okr-slider-wrap">
+            <div class="okr-bar-bg"><div class="okr-bar-fill" id="okrefill-${oi}-${ki}-${ei}" style="width:${ent.pct}%;background:${color}"></div></div>
+            <div class="okr-thumb" id="okrthumb-${oi}-${ki}-${ei}" style="background:${color};left:${ent.pct}%"></div>
+            <input type="range" class="okr-range" min="0" max="100" step="5" value="${ent.pct}" data-oi="${oi}" data-ki="${ki}" data-ei="${ei}">
+          </div>
+          <button class="obs-toggle-btn" data-box="${obsBoxId}">📝 <span>${ent.obs?'Ver observación':'Agregar observación'}</span></button>
+          <div class="obs-box ${ent.obs?'open':''}" id="${obsBoxId}">
+            <textarea class="obs-textarea" placeholder="¿Por qué está en este estado? ¿Qué falta? ¿Qué lo bloqueó?" data-oi="${oi}" data-ki="${ki}" data-ei="${ei}">${ent.obs}</textarea>
+          </div>`;
+        krBlock.appendChild(entDiv);
+      });
+
+      krContent.appendChild(krBlock);
+    });
+
+    hdr.addEventListener('click', () => {
+      const c = document.getElementById(`okrcont-${oi}`);
+      const t = document.getElementById(`okrtog-${oi}`);
+      if(c.style.maxHeight==='0px'){ c.style.maxHeight='9999px'; t.style.transform=''; }
+      else { c.style.maxHeight='0px'; t.style.transform='rotate(-90deg)'; }
+    });
+
+    block.appendChild(hdr); block.appendChild(barBg); block.appendChild(krContent);
+    app.appendChild(block);
+  });
+
+  // ── Events ──
+  app.addEventListener('input', function(e){
+    if(e.target.classList.contains('okr-range')){
+      const oi=+e.target.dataset.oi, ki=+e.target.dataset.ki, ei=+e.target.dataset.ei, val=+e.target.value;
+      OKR_DATA[oi].krs[ki].entregables[ei].pct = val;
+      document.getElementById(`okrepct-${oi}-${ki}-${ei}`).textContent = val+'%';
+      document.getElementById(`okrefill-${oi}-${ki}-${ei}`).style.width = val+'%';
+      document.getElementById(`okrthumb-${oi}-${ki}-${ei}`).style.left = val+'%';
+      okrSaveToSheet(okrEntId(oi,ki,ei), val, OKR_DATA[oi].krs[ki].entregables[ei].obs);
+      const krPct = okrAvg(OKR_DATA[oi].krs[ki].entregables.map(e=>e.pct));
+      document.getElementById(`okrkrpct-${oi}-${ki}`).textContent = krPct+'%';
+      const visKrs = OKR_DATA[oi].krs.filter(okrMatchesFilter);
+      const objPct = okrAvg(visKrs.flatMap(kr=>kr.entregables.map(e=>e.pct)));
+      document.getElementById(`okropct-${oi}`).textContent = objPct+'%';
+      document.getElementById(`okrobar-${oi}`).style.width = objPct+'%';
+      const st = okrStatus(objPct);
+      const badge = document.getElementById(`okrbadge-${oi}`);
+      badge.textContent=st.label; badge.style.background=st.bg; badge.style.color=st.color;
+      updateOKRGlobal();
+    }
+    if(e.target.tagName==='TEXTAREA'){
+      const oi=+e.target.dataset.oi, ki=+e.target.dataset.ki, ei=+e.target.dataset.ei;
+      OKR_DATA[oi].krs[ki].entregables[ei].obs = e.target.value;
+      const btn = e.target.closest('.entregable').querySelector('.obs-toggle-btn span');
+      if(btn) btn.textContent = e.target.value.trim()?'Ver observación':'Agregar observación';
+    }
+  });
+
+  app.addEventListener('click', function(e){
+    const btn = e.target.closest('.obs-toggle-btn');
+    if(!btn) return;
+    e.stopPropagation();
+    const box = document.getElementById(btn.dataset.box);
+    if(box) box.classList.toggle('open');
+  });
+
+  // Filter buttons
+  document.querySelectorAll('.okr-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      okrActiveFilter = this.dataset.okrfilter;
+      document.querySelectorAll('.okr-filter-btn').forEach(b=>b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('#okr-app .kr-block').forEach(krEl => {
+        const oi=+krEl.closest('.obj-block').dataset.oi, ki=+krEl.dataset.ki;
+        krEl.style.display = okrMatchesFilter(OKR_DATA[oi].krs[ki])?'':'none';
+      });
+      document.querySelectorAll('#okr-app .obj-block').forEach(objEl => {
+        const oi=+objEl.dataset.oi;
+        const hasVisible = OKR_DATA[oi].krs.some(okrMatchesFilter);
+        objEl.classList.toggle('hidden',!hasVisible);
+        const visKrs = OKR_DATA[oi].krs.filter(okrMatchesFilter);
+        const objPct = visKrs.length ? okrAvg(visKrs.flatMap(kr=>kr.entregables.map(e=>e.pct))) : 0;
+        const oEl=document.getElementById(`okropct-${oi}`); if(oEl) oEl.textContent=objPct+'%';
+        const bEl=document.getElementById(`okrobar-${oi}`); if(bEl) bEl.style.width=objPct+'%';
+        const dEl=document.getElementById(`okrbadge-${oi}`);
+        if(dEl){const st=okrStatus(objPct);dEl.textContent=st.label;dEl.style.background=st.bg;dEl.style.color=st.color;}
+      });
+      updateOKRGlobal();
+    });
+  });
+
+  updateOKRGlobal();
+}
+
 // ── INIT ──────────────────────────────────────────────
+updateFooterLabel();
 renderResumen();
 </script>
 </body>
