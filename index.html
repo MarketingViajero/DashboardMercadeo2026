@@ -259,11 +259,120 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
 .world-map-wrap{position:relative;margin-bottom:20px}
 
 /* Number formatter helpers handled in JS */
+
+/* ── MOBILE RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --sidebar: 0px; }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    z-index: 200;
+    width: 280px;
+    box-shadow: none;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 199;
+  }
+  .sidebar-overlay.open { display: block; }
+
+  .mob-topbar {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    z-index: 198;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .mob-brand {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .mob-brand span { color: var(--accent); }
+  .mob-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: var(--rs);
+  }
+  .mob-menu-btn:hover { background: var(--surface2); }
+  .mob-menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .mob-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mob-menu-btn.open span:nth-child(2) { opacity: 0; }
+  .mob-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  main {
+    margin-left: 0 !important;
+    max-width: 100vw !important;
+    padding: 72px 16px 24px !important;
+  }
+
+  .two-col, .three-col { grid-template-columns: 1fr !important; }
+
+  .metrics-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  .page-title { font-size: 20px !important; }
+
+  .okr-global-card { flex-direction: column; }
+
+  .chart-card { padding: 14px 14px !important; }
+
+  .tbl { font-size: 11px; }
+
+  .q-selector { padding: 12px 14px; }
+
+  .sb-header { padding: 20px 16px 16px; }
+}
+@media (min-width: 769px) {
+  .mob-topbar { display: none !important; }
+  .sidebar-overlay { display: none !important; }
+}
+
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
+<!-- Mobile overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- Mobile top bar -->
+<div class="mob-topbar">
+  <div class="mob-brand">Mercadeo <span>2026</span></div>
+  <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleSidebar()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<aside class="sidebar" id="sidebar">
   <div class="sb-header">
     <div class="sb-brand">Mercadeo<br><span>2026</span></div>
     <div class="sb-sub">Viajero Hostels · Reporte anual</div>
@@ -1271,6 +1380,7 @@ function showPage(id, el){
   document.getElementById('page-'+id).classList.add('active');
   if(el) el.classList.add('active');
   renderPage(id);
+  closeSidebarOnNav();
   // Auto-sync Sheet when opening OKR page for the first time
   if (id === 'okrs') {
     const app = document.getElementById('okr-app');
@@ -2483,6 +2593,27 @@ function renderOKRs(){
   });
 
   updateOKRGlobal();
+}
+
+// ── MOBILE SIDEBAR ──────────────────────────────────────────────
+function toggleSidebar() {
+  const sb  = document.getElementById('sidebar');
+  const ov  = document.getElementById('sidebarOverlay');
+  const btn = document.getElementById('mobMenuBtn');
+  const open = sb.classList.toggle('open');
+  ov.classList.toggle('open', open);
+  btn.classList.toggle('open', open);
+}
+
+function closeSidebarOnNav() {
+  if (window.innerWidth <= 768) {
+    const sb  = document.getElementById('sidebar');
+    const ov  = document.getElementById('sidebarOverlay');
+    const btn = document.getElementById('mobMenuBtn');
+    sb.classList.remove('open');
+    ov.classList.remove('open');
+    btn.classList.remove('open');
+  }
 }
 
 // ── INIT ──────────────────────────────────────────────
