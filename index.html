@@ -2391,10 +2391,25 @@ function renderOKRs(){
             <div class="okr-thumb" id="okrthumb-${oi}-${ki}-${ei}" style="background:${color};left:${ent.pct}%"></div>
             <input type="range" class="okr-range" min="0" max="100" step="5" value="${ent.pct}" data-oi="${oi}" data-ki="${ki}" data-ei="${ei}">
           </div>
-          <button class="obs-toggle-btn" data-box="${obsBoxId}">📝 <span>${ent.obs?'Ver observación':'Agregar observación'}</span></button>
+          <button class="obs-toggle-btn" id="obsbtn-${obsBoxId}" type="button">📝 <span id="obsspan-${obsBoxId}">${ent.obs?'Ver observación':'Agregar observación'}</span></button>
           <div class="obs-box ${ent.obs?'open':''}" id="${obsBoxId}">
             <textarea class="obs-textarea" placeholder="¿Por qué está en este estado? ¿Qué falta? ¿Qué lo bloqueó?" data-oi="${oi}" data-ki="${ki}" data-ei="${ei}">${ent.obs}</textarea>
           </div>`;
+        // Attach click directly on the button — avoids any delegation issues
+        entDiv.querySelector('#obsbtn-'+obsBoxId).addEventListener('click', function(ev){
+          ev.stopPropagation();
+          const box = document.getElementById(obsBoxId);
+          if(box) box.classList.toggle('open');
+        });
+        // Direct textarea listener for save + label update
+        const ta = entDiv.querySelector('.obs-textarea');
+        const spanEl = entDiv.querySelector('#obsspan-'+obsBoxId);
+        ta.addEventListener('input', function(){
+          OKR_DATA[oi].krs[ki].entregables[ei].obs = this.value;
+          if(spanEl) spanEl.textContent = this.value.trim()?'Ver observación':'Agregar observación';
+          clearTimeout(this._deb);
+          this._deb = setTimeout(()=>okrSaveToSheet(okrEntId(oi,ki,ei), OKR_DATA[oi].krs[ki].entregables[ei].pct, this.value), 800);
+        });
         krBlock.appendChild(entDiv);
       });
 
@@ -2440,13 +2455,7 @@ function renderOKRs(){
     }
   });
 
-  app.addEventListener('click', function(e){
-    const btn = e.target.closest('.obs-toggle-btn');
-    if(!btn) return;
-    e.stopPropagation();
-    const box = document.getElementById(btn.dataset.box);
-    if(box) box.classList.toggle('open');
-  });
+  // obs-toggle handled via direct listeners on each button (see entDiv creation above)
 
   // Filter buttons
   document.querySelectorAll('.okr-filter-btn').forEach(btn => {
