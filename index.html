@@ -133,16 +133,85 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
 .tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
 /* ── PDF EXPORT ── */
 @media print {
-  body { margin: 0; }
-  .sidebar, .mob-topbar, .sidebar-overlay { display: none !important; }
-  main { margin-left: 0 !important; max-width: 100% !important; padding: 24px !important; }
-  .page { display: block !important; opacity: 1 !important; }
-  .page:not(.active) { display: none !important; }
-  .pdf-export-btn, button[onclick*="openNewProject"], button[onclick*="backlogLoad"],
-  button[onclick*="okrForceSync"], .obs-toggle-btn, .tracker-add-btn { display: none !important; }
-  canvas { max-width: 100% !important; }
-  .chart-card, .metric-card, .platform-block, .obj-block { break-inside: avoid; }
-  @page { margin: 15mm; size: A4; }
+  @page { margin: 12mm 14mm; size: A4; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  body { margin: 0; background: #fff !important; }
+
+  /* Hide UI chrome */
+  .sidebar, .mob-topbar, .sidebar-overlay,
+  .pdf-export-btn, .q-selector,
+  button, .obs-toggle-btn, .tracker-add-btn,
+  .tracker-new-form, .tracker-item-delete,
+  .proj-expand-btn, #newProjectForm,
+  #insightSaveStatus, #okr-toast,
+  .okr-filter-wrap, #okrSyncBtn,
+  .emailFilt, #emailTableWrap,
+  .q-badge,
+  [id$="SyncBtn"] { display: none !important; }
+
+  /* Layout */
+  main {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .page { display: none !important; }
+  .page.active { display: block !important; }
+
+  /* Page header */
+  .page-header { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #F54927; }
+  .page-title { font-size: 22px !important; }
+
+  /* Cards & sections */
+  .metrics-grid { grid-template-columns: repeat(4,1fr) !important; gap: 8px !important; }
+  .metric-card { padding: 12px !important; break-inside: avoid; box-shadow: none !important; }
+  .two-col, .three-col { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .chart-card { padding: 14px !important; break-inside: avoid; box-shadow: none !important; margin-bottom: 10px !important; }
+
+  /* Project cards */
+  .proj-grid { grid-template-columns: repeat(2,1fr) !important; gap: 10px !important; }
+  .proj-card { break-inside: avoid; padding: 12px !important; box-shadow: none !important; }
+  .proj-card.expanded .proj-tracker { display: block !important; }
+  .proj-tracker { display: block !important; border-top: 1px solid #EBE7E6; margin-top: 10px; padding-top: 10px; }
+
+  /* Sliders → show as clean progress bars */
+  .tracker-slider-wrap { height: 8px !important; margin-bottom: 8px; }
+  .tracker-bar-bg { height: 6px !important; border-radius: 99px; }
+  .tracker-bar-fill { height: 6px !important; border-radius: 99px; }
+  .tracker-thumb, input.tracker-range, input.okr-range { display: none !important; }
+  .okr-slider-wrap { height: 8px !important; }
+  .okr-bar-bg { height: 5px !important; }
+  .okr-bar-fill { height: 5px !important; }
+  .okr-thumb { display: none !important; }
+
+  /* OKR */
+  .obj-block { break-inside: avoid; margin-bottom: 10px !important; }
+  .okr-kr-content { max-height: none !important; }
+  .obs-box { display: none !important; }
+
+  /* Platform blocks */
+  .platform-block { break-inside: avoid; margin-bottom: 12px !important; }
+  .platform-charts { grid-template-columns: 1fr 1fr !important; }
+
+  /* Insight box */
+  .insight { break-inside: avoid; }
+  #proyectosInsightTextarea { border: none !important; resize: none !important; }
+
+  /* Tables */
+  .tbl { font-size: 10px !important; }
+  .tbl th, .tbl td { padding: 5px 8px !important; }
+
+  /* Section titles */
+  .section-title { font-size: 11px !important; margin: 14px 0 8px !important; }
+
+  /* Global ring card */
+  .okr-global-card { break-inside: avoid; }
+
+  /* Hide email table (too long) */
+  #emailTableWrap { display: none !important; }
+  #emailCards { display: none !important; }
+  #otasCards { grid-template-columns: repeat(3,1fr) !important; }
 }
 /* Quarter selector */
 .q-all-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:7px 12px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:8px;letter-spacing:0.03em;transition:background 0.15s}
@@ -189,16 +258,85 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
 .tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
 /* ── PDF EXPORT ── */
 @media print {
-  body { margin: 0; }
-  .sidebar, .mob-topbar, .sidebar-overlay { display: none !important; }
-  main { margin-left: 0 !important; max-width: 100% !important; padding: 24px !important; }
-  .page { display: block !important; opacity: 1 !important; }
-  .page:not(.active) { display: none !important; }
-  .pdf-export-btn, button[onclick*="openNewProject"], button[onclick*="backlogLoad"],
-  button[onclick*="okrForceSync"], .obs-toggle-btn, .tracker-add-btn { display: none !important; }
-  canvas { max-width: 100% !important; }
-  .chart-card, .metric-card, .platform-block, .obj-block { break-inside: avoid; }
-  @page { margin: 15mm; size: A4; }
+  @page { margin: 12mm 14mm; size: A4; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  body { margin: 0; background: #fff !important; }
+
+  /* Hide UI chrome */
+  .sidebar, .mob-topbar, .sidebar-overlay,
+  .pdf-export-btn, .q-selector,
+  button, .obs-toggle-btn, .tracker-add-btn,
+  .tracker-new-form, .tracker-item-delete,
+  .proj-expand-btn, #newProjectForm,
+  #insightSaveStatus, #okr-toast,
+  .okr-filter-wrap, #okrSyncBtn,
+  .emailFilt, #emailTableWrap,
+  .q-badge,
+  [id$="SyncBtn"] { display: none !important; }
+
+  /* Layout */
+  main {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .page { display: none !important; }
+  .page.active { display: block !important; }
+
+  /* Page header */
+  .page-header { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #F54927; }
+  .page-title { font-size: 22px !important; }
+
+  /* Cards & sections */
+  .metrics-grid { grid-template-columns: repeat(4,1fr) !important; gap: 8px !important; }
+  .metric-card { padding: 12px !important; break-inside: avoid; box-shadow: none !important; }
+  .two-col, .three-col { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .chart-card { padding: 14px !important; break-inside: avoid; box-shadow: none !important; margin-bottom: 10px !important; }
+
+  /* Project cards */
+  .proj-grid { grid-template-columns: repeat(2,1fr) !important; gap: 10px !important; }
+  .proj-card { break-inside: avoid; padding: 12px !important; box-shadow: none !important; }
+  .proj-card.expanded .proj-tracker { display: block !important; }
+  .proj-tracker { display: block !important; border-top: 1px solid #EBE7E6; margin-top: 10px; padding-top: 10px; }
+
+  /* Sliders → show as clean progress bars */
+  .tracker-slider-wrap { height: 8px !important; margin-bottom: 8px; }
+  .tracker-bar-bg { height: 6px !important; border-radius: 99px; }
+  .tracker-bar-fill { height: 6px !important; border-radius: 99px; }
+  .tracker-thumb, input.tracker-range, input.okr-range { display: none !important; }
+  .okr-slider-wrap { height: 8px !important; }
+  .okr-bar-bg { height: 5px !important; }
+  .okr-bar-fill { height: 5px !important; }
+  .okr-thumb { display: none !important; }
+
+  /* OKR */
+  .obj-block { break-inside: avoid; margin-bottom: 10px !important; }
+  .okr-kr-content { max-height: none !important; }
+  .obs-box { display: none !important; }
+
+  /* Platform blocks */
+  .platform-block { break-inside: avoid; margin-bottom: 12px !important; }
+  .platform-charts { grid-template-columns: 1fr 1fr !important; }
+
+  /* Insight box */
+  .insight { break-inside: avoid; }
+  #proyectosInsightTextarea { border: none !important; resize: none !important; }
+
+  /* Tables */
+  .tbl { font-size: 10px !important; }
+  .tbl th, .tbl td { padding: 5px 8px !important; }
+
+  /* Section titles */
+  .section-title { font-size: 11px !important; margin: 14px 0 8px !important; }
+
+  /* Global ring card */
+  .okr-global-card { break-inside: avoid; }
+
+  /* Hide email table (too long) */
+  #emailTableWrap { display: none !important; }
+  #emailCards { display: none !important; }
+  #otasCards { grid-template-columns: repeat(3,1fr) !important; }
 }
 /* Quarter selector */
 .q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
@@ -3414,6 +3552,10 @@ function renderBI() {
 }
 
 // ── PROJECT TRACKER FUNCTIONS ──────────────────────────────────
+function trackerColor(pct) {
+  return pct >= 60 ? '#16a34a' : pct >= 30 ? '#d97706' : '#dc2626';
+}
+
 function renderTrackerItems(container, trackers, storageKey) {
   container.innerHTML = '';
   if(!trackers.length) {
@@ -3426,14 +3568,14 @@ function renderTrackerItems(container, trackers, storageKey) {
     item.innerHTML = `
       <div class="tracker-item-header">
         <span class="tracker-item-name">${t.name}</span>
-        <span class="tracker-item-pct" id="tpct-${storageKey}-${i}">${t.pct}%</span>
+        <span class="tracker-item-pct" id="tpct-${storageKey}-${i}" style="color:${trackerColor(t.pct)}">${t.pct}%</span>
         <button class="tracker-item-delete" title="Eliminar" onclick="deleteTracker('${storageKey}',${i},this)">✕</button>
       </div>
       <div class="tracker-slider-wrap">
         <div class="tracker-bar-bg">
-          <div class="tracker-bar-fill" id="tfill-${storageKey}-${i}" style="width:${t.pct}%"></div>
+          <div class="tracker-bar-fill" id="tfill-${storageKey}-${i}" style="width:${t.pct}%;background:${trackerColor(t.pct)}"></div>
         </div>
-        <div class="tracker-thumb" id="tthumb-${storageKey}-${i}" style="left:${t.pct}%"></div>
+        <div class="tracker-thumb" id="tthumb-${storageKey}-${i}" style="left:${t.pct}%;background:${trackerColor(t.pct)}"></div>
         <input type="range" class="tracker-range" min="0" max="100" step="5" value="${t.pct}"
           data-key="${storageKey}" data-idx="${i}"
           oninput="updateTracker(this)">
@@ -3452,9 +3594,13 @@ function updateTracker(input) {
   localStorage.setItem(key, JSON.stringify(trackers));
   const projName = key.replace('proj_tracker_','').replace(/_/g,' ');
   backlogSaveTrackers(projName, trackers);
+  const tCol = trackerColor(val);
   document.getElementById('tfill-'+key+'-'+idx).style.width = val+'%';
+  document.getElementById('tfill-'+key+'-'+idx).style.background = tCol;
   document.getElementById('tthumb-'+key+'-'+idx).style.left = val+'%';
+  document.getElementById('tthumb-'+key+'-'+idx).style.background = tCol;
   document.getElementById('tpct-'+key+'-'+idx).textContent = val+'%';
+  document.getElementById('tpct-'+key+'-'+idx).style.color = tCol;
   // Recalc big % on the card
   const avg = Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length);
   const card = input.closest('.proj-card');
@@ -3776,18 +3922,20 @@ function exportPDF() {
   okrToast('⬇ Generando PDF...', 'info');
 
   // Small delay to let charts render
+  // Hide toast before printing
+  const toast = document.getElementById('okr-toast');
+  if(toast) toast.style.display = 'none';
+
+  // Expand all project cards for print
+  document.querySelectorAll('.proj-card').forEach(c => c.classList.add('expanded'));
+
   setTimeout(() => {
-    const titleEl = document.createElement('div');
-    titleEl.id = 'pdf-header-temp';
-    titleEl.style.cssText = 'display:none;font-family:Geomanist,sans-serif;font-size:11px;color:#9E9594;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #EBE7E6';
-    titleEl.textContent = 'Viajero Hostels · Dashboard Mercadeo 2026 · Exportado el ' + now;
-    document.querySelector('main').prepend(titleEl);
-
     window.print();
-
-    // Remove after print
-    setTimeout(() => titleEl.remove(), 1000);
-  }, 300);
+    // Restore after print
+    setTimeout(() => {
+      if(toast) toast.style.display = '';
+    }, 1000);
+  }, 400);
 }
 
 // ── INIT ──────────────────────────────────────────────
