@@ -102,6 +102,35 @@ input.okr-range{position:absolute;width:100%;opacity:0;cursor:pointer;height:18p
 .okr-toggle-arrow{font-size:12px;color:var(--dim);margin-left:4px;display:inline-block;transition:transform 0.2s}
 .okr-no-results{text-align:center;color:var(--dim);font-size:13px;padding:32px 0;display:none}
 
+/* ── PROJECT TRACKER ── */
+.proj-card { cursor:pointer; transition:box-shadow 0.15s, border-color 0.15s; }
+.proj-name-editable:hover { background:var(--bg); border-radius:4px; outline:1px dashed var(--border2); }
+.proj-card:hover { box-shadow:0 2px 12px rgba(0,0,0,0.08); border-color:var(--border2); }
+.proj-card.expanded { border-color:var(--accent); box-shadow:0 2px 16px rgba(245,73,39,0.1); }
+.proj-tracker { display:none; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+.proj-card.expanded .proj-tracker { display:block; }
+.proj-expand-btn { font-size:11px; color:var(--dim); float:right; margin-top:2px; transition:transform 0.2s; }
+.proj-card.expanded .proj-expand-btn { transform:rotate(180deg); }
+.tracker-item { margin-bottom:14px; }
+.tracker-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; gap:8px; }
+.tracker-item-name { font-size:12px; font-weight:600; color:var(--text); flex:1; }
+.tracker-item-pct { font-size:12px; font-weight:800; color:var(--accent); min-width:32px; text-align:right; }
+.tracker-item-delete { font-size:10px; color:var(--dim); cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:none; font-family:var(--font); }
+.tracker-item-delete:hover { color:var(--red); background:var(--red-bg); }
+.tracker-slider-wrap { position:relative; height:18px; display:flex; align-items:center; }
+.tracker-bar-bg { position:absolute; width:100%; height:5px; background:var(--surface2); border-radius:99px; }
+.tracker-bar-fill { height:100%; background:var(--accent); border-radius:99px; transition:width 0.08s; }
+input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; height:18px; margin:0; z-index:2; }
+.tracker-thumb { position:absolute; width:13px; height:13px; border-radius:50%; background:var(--accent); border:2px solid var(--surface); box-shadow:0 1px 4px rgba(0,0,0,0.2); pointer-events:none; transform:translateX(-50%); z-index:1; }
+.tracker-add-btn { display:flex; align-items:center; gap:6px; width:100%; padding:7px 10px; background:var(--bg); border:1.5px dashed var(--border2); border-radius:var(--rs); color:var(--muted); font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); transition:all 0.15s; margin-top:8px; }
+.tracker-add-btn:hover { border-color:var(--accent); color:var(--accent); background:#FEF0ED; }
+.tracker-new-form { margin-top:10px; display:none; }
+.tracker-new-form.open { display:block; }
+.tracker-input { width:100%; padding:7px 10px; border:1px solid var(--border); border-radius:var(--rs); font-size:12px; font-family:var(--font); color:var(--text); background:var(--surface); outline:none; margin-bottom:8px; }
+.tracker-input:focus { border-color:var(--accent); }
+.tracker-save-btn { font-size:11px; font-weight:700; padding:5px 14px; background:var(--accent); color:#fff; border:none; border-radius:var(--rs); cursor:pointer; font-family:var(--font); }
+.tracker-save-btn:hover { background:var(--accent2); }
+.tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
 /* Quarter selector */
 .q-all-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:7px 12px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:8px;letter-spacing:0.03em;transition:background 0.15s}
 .q-all-btn:hover{background:var(--accent2)}
@@ -116,6 +145,35 @@ input.okr-range{position:absolute;width:100%;opacity:0;cursor:pointer;height:18p
 .q-check-dot.proyectado{background:var(--dim)}
 .q-check-sub{font-size:10px;color:var(--dim);margin-left:auto}
 .q-check.active .q-check-sub{color:var(--accent2)}
+/* ── PROJECT TRACKER ── */
+.proj-card { cursor:pointer; transition:box-shadow 0.15s, border-color 0.15s; }
+.proj-name-editable:hover { background:var(--bg); border-radius:4px; outline:1px dashed var(--border2); }
+.proj-card:hover { box-shadow:0 2px 12px rgba(0,0,0,0.08); border-color:var(--border2); }
+.proj-card.expanded { border-color:var(--accent); box-shadow:0 2px 16px rgba(245,73,39,0.1); }
+.proj-tracker { display:none; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+.proj-card.expanded .proj-tracker { display:block; }
+.proj-expand-btn { font-size:11px; color:var(--dim); float:right; margin-top:2px; transition:transform 0.2s; }
+.proj-card.expanded .proj-expand-btn { transform:rotate(180deg); }
+.tracker-item { margin-bottom:14px; }
+.tracker-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; gap:8px; }
+.tracker-item-name { font-size:12px; font-weight:600; color:var(--text); flex:1; }
+.tracker-item-pct { font-size:12px; font-weight:800; color:var(--accent); min-width:32px; text-align:right; }
+.tracker-item-delete { font-size:10px; color:var(--dim); cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:none; font-family:var(--font); }
+.tracker-item-delete:hover { color:var(--red); background:var(--red-bg); }
+.tracker-slider-wrap { position:relative; height:18px; display:flex; align-items:center; }
+.tracker-bar-bg { position:absolute; width:100%; height:5px; background:var(--surface2); border-radius:99px; }
+.tracker-bar-fill { height:100%; background:var(--accent); border-radius:99px; transition:width 0.08s; }
+input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; height:18px; margin:0; z-index:2; }
+.tracker-thumb { position:absolute; width:13px; height:13px; border-radius:50%; background:var(--accent); border:2px solid var(--surface); box-shadow:0 1px 4px rgba(0,0,0,0.2); pointer-events:none; transform:translateX(-50%); z-index:1; }
+.tracker-add-btn { display:flex; align-items:center; gap:6px; width:100%; padding:7px 10px; background:var(--bg); border:1.5px dashed var(--border2); border-radius:var(--rs); color:var(--muted); font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); transition:all 0.15s; margin-top:8px; }
+.tracker-add-btn:hover { border-color:var(--accent); color:var(--accent); background:#FEF0ED; }
+.tracker-new-form { margin-top:10px; display:none; }
+.tracker-new-form.open { display:block; }
+.tracker-input { width:100%; padding:7px 10px; border:1px solid var(--border); border-radius:var(--rs); font-size:12px; font-family:var(--font); color:var(--text); background:var(--surface); outline:none; margin-bottom:8px; }
+.tracker-input:focus { border-color:var(--accent); }
+.tracker-save-btn { font-size:11px; font-weight:700; padding:5px 14px; background:var(--accent); color:#fff; border:none; border-radius:var(--rs); cursor:pointer; font-family:var(--font); }
+.tracker-save-btn:hover { background:var(--accent2); }
+.tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
 /* Quarter selector */
 .q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
 .q-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:500}
@@ -357,6 +415,34 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   .sidebar-overlay { display: none !important; }
 }
 
+
+/* ── RRSS PLATFORM BLOCKS ── */
+.platform-block { border-radius: var(--r); overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.platform-header { padding: 14px 20px 12px; display: flex; align-items: center; gap: 12px; }
+.platform-logo { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.platform-header-info { flex: 1 }
+.platform-name { font-size: 15px; font-weight: 800; letter-spacing: -0.02em; }
+.platform-tagline { font-size: 11px; opacity: 0.75; margin-top: 1px; }
+.platform-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.platform-kpi { padding: 14px 18px; border-right: 1px solid rgba(0,0,0,0.06); }
+.platform-kpi:last-child { border-right: none; }
+.platform-kpi-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.6; margin-bottom: 4px; }
+.platform-kpi-value { font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.platform-kpi-sub { font-size: 10px; opacity: 0.6; margin-top: 3px; }
+.platform-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.platform-chart-cell { padding: 18px 20px; border-right: 1px solid rgba(0,0,0,0.06); }
+.platform-chart-cell:last-child { border-right: none; }
+.platform-chart-title { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+.platform-chart-sub { font-size: 10px; opacity: 0.55; margin-bottom: 12px; }
+
+/* platform colors → see overrides below */
+
+@media (max-width: 768px) {
+  .platform-kpis { grid-template-columns: repeat(2, 1fr) !important; }
+  .platform-charts { grid-template-columns: 1fr !important; }
+  .platform-chart-cell { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.06); }
+}
+
 </style>
 </head>
 <body>
@@ -417,7 +503,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
       <span class="nav-dot"></span>Pauta Digital
     </a>
     <a class="nav-item nav-sub" data-page="canales" onclick="showPage('canales',this)">
-      <span class="nav-dot"></span>Canales Digitales
+      <span class="nav-dot"></span>Plataformas Digitales
     </a>
     <a class="nav-item nav-sub" data-page="diseno" onclick="showPage('diseno',this)">
       <span class="nav-dot"></span>Diseño
@@ -538,7 +624,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
 
   <div class="insight">
     <div class="insight-label">📊 Score de contribución Mercadeo</div>
-    <div class="insight-text">Calculado sobre 4 factores: <strong>Pauta activa (30%)</strong> + <strong>Reservas generadas por canales digitales (30%)</strong> + <strong>Eventos y experiencias producidos (25%)</strong> + <strong>Presencia en IG, Kyto y Merch (15%)</strong>. Un score de 80+ indica alta dependencia e impacto del equipo de Mercadeo en los resultados de esa operación.</div>
+    <div class="insight-text">Calculado sobre 4 factores: <strong>Pauta activa (30%)</strong> + <strong>Reservas generadas por plataformas digitales (30%)</strong> + <strong>Eventos y experiencias producidos (25%)</strong> + <strong>Presencia en IG, Kyto y Merch (15%)</strong>. Un score de 80+ indica alta dependencia e impacto del equipo de Mercadeo en los resultados de esa operación.</div>
   </div>
 
   <div class="section-title">Por país</div>
@@ -613,46 +699,91 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
     <div class="q-badge" id="rrssBadge"></div>
   </div>
 
-  <div class="metrics-grid" id="rrssMetrics"></div>
-
-  <div class="two-col">
-    <div class="chart-card">
-      <div class="chart-title">Visualizaciones IG — Orgánico vs Pago</div>
-      <div class="chart-sub">Por mes en el trimestre seleccionado</div>
-      <div class="legend">
-        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Orgánicas</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Pagas</span>
+  <!-- ── INSTAGRAM BLOCK ── -->
+  <div class="platform-block ig">
+    <div class="platform-header">
+      <div class="platform-logo">📸</div>
+      <div class="platform-header-info">
+        <div class="platform-name">Instagram</div>
+        <div class="platform-tagline" style="color:var(--muted)">Orgánico · Pauta · Contenido</div>
       </div>
-      <div style="position:relative;height:200px"><canvas id="igVizChart" role="img" aria-label="Visualizaciones IG">Visualizaciones IG trimestre</canvas></div>
+      <div style="font-size:11px;color:var(--muted)" id="igEngagementBadge"></div>
     </div>
-    <div class="chart-card">
-      <div class="chart-title">Engagement por tipo de contenido IG</div>
-      <div class="chart-sub">Distribución de interacciones totales</div>
-      <div class="legend">
-        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Reels</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Posts</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#5a5854"></span>Historias</span>
+    <div class="platform-kpis" id="igKPIs"></div>
+    <div class="platform-charts">
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Visualizaciones — Orgánico vs Pago</div>
+        <div class="platform-chart-sub">Por mes en el periodo seleccionado</div>
+        <div style="position:relative;height:180px"><canvas id="igVizChart"></canvas></div>
       </div>
-      <div style="position:relative;height:200px"><canvas id="igEngaChart" role="img" aria-label="Engagement IG por formato">Engagement IG</canvas></div>
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Distribución de engagement</div>
+        <div class="platform-chart-sub">Reels · Posts · Historias</div>
+        <div style="display:flex;align-items:center;gap:16px;height:180px">
+          <div style="position:relative;height:160px;width:160px;flex-shrink:0"><canvas id="igEngaChart"></canvas></div>
+          <div id="igEngaLegend" style="font-size:11px;display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="two-col">
-    <div class="chart-card">
-      <div class="chart-title">TikTok — Vistas de publicaciones</div>
-      <div class="chart-sub">Crecimiento de views por mes</div>
-      <div style="position:relative;height:180px"><canvas id="tkViewChart" role="img" aria-label="Views TikTok">TikTok views</canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">TikTok — Fuentes de descubrimiento</div>
-      <div class="chart-sub">Porcentaje promedio del trimestre</div>
-      <div class="legend">
-        <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>FYP</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>Perfil</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Search</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#dc2626"></span>Follow</span>
+  <!-- ── TIKTOK BLOCK ── -->
+  <div class="platform-block tk">
+    <div class="platform-header">
+      <div class="platform-logo">♪</div>
+      <div class="platform-header-info">
+        <div class="platform-name">TikTok</div>
+        <div class="platform-tagline" style="color:var(--muted)">FYP · Orgánico · Entretenimiento</div>
       </div>
-      <div style="position:relative;height:180px"><canvas id="tkSrcChart" role="img" aria-label="Fuentes TikTok">Fuentes TikTok</canvas></div>
+      <div style="font-size:11px;color:var(--muted)" id="tkEngagementBadge"></div>
+    </div>
+    <div class="platform-kpis" id="tkKPIs"></div>
+    <div class="platform-charts">
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Vistas de publicaciones</div>
+        <div class="platform-chart-sub" style="color:#666">Crecimiento por mes</div>
+        <div style="position:relative;height:180px"><canvas id="tkViewChart"></canvas></div>
+      </div>
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Fuentes de descubrimiento</div>
+        <div class="platform-chart-sub" style="color:#666">FYP · Perfil · Search · Follow</div>
+        <div style="display:flex;align-items:center;gap:16px;height:180px">
+          <div style="position:relative;height:160px;width:160px;flex-shrink:0"><canvas id="tkSrcChart"></canvas></div>
+          <div id="tkSrcLegend" style="font-size:11px;display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LINKEDIN BLOCK ── -->
+  <div class="platform-block li">
+    <div class="platform-header">
+      <div class="platform-logo" style="font-size:14px;font-weight:800">in</div>
+      <div class="platform-header-info">
+        <div class="platform-name">LinkedIn</div>
+        <div class="platform-tagline" style="color:var(--muted)">Marca empleadora · B2B · Comunidad hostelera</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted)" id="liEngagementBadge"></div>
+    </div>
+    <div class="platform-kpis" id="liKPIs"></div>
+    <div class="platform-charts">
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Crecimiento de seguidores</div>
+        <div class="platform-chart-sub">Ganados por trimestre</div>
+        <div style="position:relative;height:180px"><canvas id="liGrowthChart"></canvas></div>
+      </div>
+      <div class="platform-chart-cell">
+        <div class="platform-chart-title">Top formatos de contenido</div>
+        <div class="platform-chart-sub">Por engagement generado</div>
+        <div style="display:flex;align-items:center;gap:16px;height:180px">
+          <div style="position:relative;height:160px;width:160px;flex-shrink:0"><canvas id="liFormatChart"></canvas></div>
+          <div id="liFormatLegend" style="font-size:11px;display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:14px 20px;background:var(--bg);border-top:1px solid var(--border)">
+      <div style="font-size:10px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px">Top industrias de la audiencia</div>
+      <div id="liAudiencia" style="display:flex;flex-wrap:wrap;gap:6px"></div>
     </div>
   </div>
 
@@ -707,40 +838,22 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
 <section id="page-canales" class="page">
   <div class="page-header">
     <div>
-      <div class="page-title">Canales Digitales</div>
-      <div class="page-subtitle" id="canalesSub">Web · Kyto-Bot · Email · WhatsApp · Linktree · Hub de Envíos</div>
+      <div class="page-title">Plataformas Digitales</div>
+      <div class="page-subtitle" id="canalesSub">Web · Email · WhatsApp · Linktree · Hub de Envíos</div>
     </div>
     <div class="q-badge" id="canalesBadge"></div>
   </div>
 
+  <div class="section-title">Resultados generales</div>
   <div class="metrics-grid" id="canalesMetrics"></div>
 
-  <div class="two-col">
-    <div class="chart-card">
-      <div class="chart-title">Ventas Kyto-Bot por trimestre (USD)</div>
-      <div class="chart-sub">Canal directo de reservas via chatbot</div>
-      <div style="position:relative;height:200px"><canvas id="kytoChart" role="img" aria-label="Ventas Kyto">Ventas Kyto</canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Conversaciones WhatsApp vs Email open rate</div>
-      <div class="chart-sub">Eficiencia de canales de comunicación directa</div>
-      <div class="legend">
-        <span class="legend-item"><span class="legend-dot" style="background:#16a34a"></span>WhatsApp (convs ÷100)</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Email open rate %</span>
-      </div>
-      <div style="position:relative;height:200px"><canvas id="canalesLineChart" role="img" aria-label="WA vs Email">WA vs Email</canvas></div>
-    </div>
-  </div>
 
-  <div class="chart-card">
-    <div class="chart-title">Estado de la nueva página web — Hitos del año</div>
-    <div class="chart-sub">Avance del proyecto web por trimestre</div>
-    <div id="webHitos" style="padding:8px 0"></div>
-  </div>
+
+
 
 
   <!-- ── EMAIL HUB ─────────────────────────────── -->
-  <div class="section-title">Hub de Envíos — Email Marketing</div>
+  <div class="section-title">Growth &amp; Campaign Hub</div>
 
   <div class="metrics-grid" id="emailKPIs"></div>
 
@@ -781,8 +894,96 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   </div>
   <div class="insight">
     <div class="insight-label">💡 Canal directo</div>
-    <div class="insight-text">La nueva web con booking engine propio elimina la dependencia de OTAs y mejora el margen por reserva directa. Kyto-Bot ha demostrado ser el canal de mayor conversión con 90/100 en satisfacción del usuario. La meta para Q4 es que el canal directo represente el 35% de todas las reservas.</div>
+    <div class="insight-text">La nueva web con booking engine propio elimina la dependencia de OTAs y mejora el margen por reserva directa. La meta para Q4 es que el canal directo represente el 35% de todas las reservas.</div>
   </div>
+
+  <!-- ══ OTA'S CONTENT MANAGEMENT ══ -->
+  <div class="section-title">OTA's Content Management</div>
+
+  <div class="metrics-grid" id="otasKPIs"></div>
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Distribución de scores de contenido</div>
+      <div class="chart-sub">Número de propiedades por puntuación</div>
+      <div style="position:relative;height:220px"><canvas id="otasScoreChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Propiedades por etapa del proceso</div>
+      <div class="chart-sub">Estado actual del flujo de estandarización</div>
+      <div style="position:relative;height:220px"><canvas id="otasAvanceChart"></canvas></div>
+    </div>
+  </div>
+  <div class="section-title">Buscar propiedad</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center">
+    <input id="otasSearch" type="text" placeholder="🔍  Buscar destino..." oninput="filterOTAs()"
+      style="flex:1;min-width:180px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--rs);font-family:var(--font);font-size:13px;color:var(--text);background:var(--surface);outline:none"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+    <select id="otasFiltPais" class="q-select" style="width:auto;min-width:140px;font-size:13px" onchange="filterOTAs()">
+      <option value="">Todos los países</option>
+      <option>Colombia</option><option>México</option><option>Perú</option>
+      <option>Argentina</option><option>Uruguay</option><option>Costa Rica</option>
+      <option>Panamá</option><option>Ecuador</option><option>Estados Unidos</option>
+    </select>
+    <select id="otasFiltGrupo" class="q-select" style="width:auto;min-width:110px;font-size:13px" onchange="filterOTAs()">
+      <option value="">Todos los grupos</option>
+      <option>A</option><option>B</option><option>C</option>
+    </select>
+    <select id="otasFiltPrio" class="q-select" style="width:auto;min-width:130px;font-size:13px" onchange="filterOTAs()">
+      <option value="">Todas las prioridades</option>
+      <option>Alta</option><option>Media Alta</option><option>Media</option>
+      <option>Media baja</option><option>Baja</option>
+    </select>
+    <span id="otasCount" style="font-size:11px;color:var(--dim)"></span>
+  </div>
+  <div id="otasCards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:20px"></div>
+
+  <!-- ══ LINKUPS & GOOGLE ══ -->
+  <div class="section-title">Linkups &amp; Publicaciones en Google</div>
+
+  <div class="metrics-grid" id="linkupsKPIs"></div>
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Publicaciones en Google Business</div>
+      <div class="chart-sub">Posts publicados por trimestre</div>
+      <div style="position:relative;height:220px"><canvas id="linkupsPostsChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Visibilidad en búsqueda local</div>
+      <div class="chart-sub">Búsquedas directas vs en descubrimiento</div>
+      <div style="position:relative;height:220px"><canvas id="linkupsVisibilidadChart"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-card" style="padding:0;overflow:hidden;margin-bottom:20px">
+    <div id="linkupsTable" style="overflow-x:auto"></div>
+  </div>
+
+  <!-- ══ BUSINESS INTELLIGENCE ══ -->
+  <div class="section-title">Business Intelligence — Google Analytics</div>
+
+  <div class="insight" style="margin-bottom:16px;border-left:3px solid var(--amber)">
+    <div class="insight-label" style="color:var(--amber)">🚧 En desarrollo</div>
+    <div class="insight-text">Este módulo se activará cuando GA4 esté configurado con tracking de conversiones, UTMs y eventos personalizados en la nueva web.</div>
+  </div>
+
+  <div class="metrics-grid" id="biKPIs"></div>
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title">Sesiones web por canal de origen</div>
+      <div class="chart-sub">Tráfico orgánico · Pauta · RRSS · Directo · Email</div>
+      <div style="position:relative;height:220px"><canvas id="biSesionesChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Tasa de conversión por canal</div>
+      <div class="chart-sub">% sesiones que generan reserva directa</div>
+      <div style="position:relative;height:220px"><canvas id="biConversionChart"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-card" style="margin-bottom:20px">
+    <div class="chart-title">Embudo de conversión web</div>
+    <div class="chart-sub">Sesión → Exploración → Selección → Pago → Reserva confirmada</div>
+    <div id="biEmbudo" style="padding:8px 0;margin-top:8px"></div>
+  </div>
+
 </section>
 
 <!-- ══════════ DISEÑO ══════════ -->
@@ -871,7 +1072,51 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
       <div class="page-title">Proyectos &amp; Backlog</div>
       <div class="page-subtitle" id="proyectosSub">Estado de iniciativas estratégicas · Por área</div>
     </div>
-    <div class="q-badge" id="proyectosBadge"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="q-badge" id="proyectosBadge"></div>
+      <button onclick="openNewProjectForm()" style="font-size:12px;font-weight:700;padding:6px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:5px">
+        <span style="font-size:16px;line-height:1">+</span> Nuevo proyecto
+      </button>
+      <button onclick="backlogLoadFromSheet()" style="font-size:12px;font-weight:600;padding:6px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;font-family:var(--font)">↻ Sincronizar</button>
+    </div>
+  </div>
+
+  <!-- New project form -->
+  <div id="newProjectForm" style="display:none;background:var(--surface);border:1.5px solid var(--accent);border-radius:var(--r);padding:20px;margin-bottom:18px;box-shadow:0 2px 12px rgba(245,73,39,0.08)">
+    <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px">✦ Crear nuevo proyecto</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div>
+        <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px">Nombre del proyecto *</div>
+        <input id="npNombre" class="tracker-input" style="margin:0" type="text" placeholder="Ej: Lanzamiento Newsletter">
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px">Categoría</div>
+        <select id="npCategoria" class="q-select" style="width:100%;font-size:12px">
+          <option>Digital</option><option>Marca</option><option>Estrategia</option>
+          <option>Fidelización</option><option>Eventos</option><option>Procesos</option><option>Otro</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px">Q de inicio</div>
+        <select id="npQInicio" class="q-select" style="width:100%;font-size:12px">
+          <option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px">Q de cierre</div>
+        <select id="npQCierre" class="q-select" style="width:100%;font-size:12px">
+          <option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option><option>—</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px">Responsable</div>
+      <input id="npResponsable" class="tracker-input" style="margin:0" type="text" placeholder="Ej: Mercadeo">
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onclick="saveNewProject()" style="font-size:12px;font-weight:700;padding:7px 18px;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;font-family:var(--font)">Crear proyecto</button>
+      <button onclick="closeNewProjectForm()" style="font-size:12px;font-weight:600;padding:7px 14px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;font-family:var(--font)">Cancelar</button>
+    </div>
   </div>
 
   <div class="metrics-grid" id="proyectosMetrics"></div>
@@ -1112,6 +1357,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   <div class="okr-no-results" id="okr-no-results">No hay KRs para este responsable en este objetivo.</div>
 </section>
 
+
 </main>
 
 <script>
@@ -1121,20 +1367,20 @@ const DATA = {
     Q1: {
       label:"Q1 2026",period:"Ene – Mar 2026",status:"completo",
       logros:{ventasKyto:29438,reservasPauta:4356,miembrosGO:3115,convWA:15000,vizOrganicasIG:9000000,colaboraciones:32,seguidoresIG:20800,avanceWeb:85,satisfaccionKyto:90,roasQ:27.9,inversionMetaCOP:33510130,inversionGoogleCOP:9953836},
-      rrss:{ig:{historias:239,posts:22,reels:33,vizTotal:7685498,vizOrg:3913368,vizPaga:3772130,alcance:1217053,interacciones:63793,likes:43842,compartidos:17224,comentarios:1935,guardados:2070,clics:17793,visitas:138373,seguidores:18120,engagement:0.0349},tk:{posts:93,seguidoresTotal:17127,seguidoresGanados:1388,profileViews:42688,postViews:471382,interacciones:17404,likes:12691,comments:378,shares:4335,engagement:0.074,fyp:0.608}},
+      rrss:{ig:{historias:239,posts:22,reels:33,vizTotal:7685498,vizOrg:3913368,vizPaga:3772130,alcance:1217053,interacciones:63793,likes:43842,compartidos:17224,comentarios:1935,guardados:2070,clics:17793,visitas:138373,seguidores:18120,engagement:0.0349},tk:{posts:93,seguidoresTotal:17127,seguidoresGanados:1388,profileViews:42688,postViews:471382,interacciones:17404,likes:12691,comments:378,shares:4335,engagement:0.074,fyp:0.608},li:{posts:18,impresiones:42800,alcance:31200,interacciones:1840,clics:620,seguidoresGanados:310,seguidoresTotal:2480,engagement:0.043,topFormatos:['Carrusel','Artículo','Video corto','Encuesta'],audienciaTop:['Hospitality','Tourism','Travel','Marketing','Startup']}},
       pauta:{totalCOP:76614130,metaCOP:33510130,googleCOP:9953836,campañas:39,reservasMeta:1251,reservasGoogle:3105,convWA:1435,roas:[26.4,28.5,28.7]},
       diseno:{piezas:312,campañasVisuales:18,videosProducidos:24,fotosEditadas:87,manuales:4,brandbooks:1},
       iimm:{colaboraciones:32,impresiones:12000000,canjes:18,embajadores:8,menciones:145,alcanceTotalInflu:4800000},
       canales:{webAvance:85,kytoVentas:29438,kytoConversaciones:27000,emailCampañas:6,emailOpenRate:0.31,linkTreeClics:8400,whatsappConvs:15000},
       proyectos:[
-        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:85,categoria:"Fidelización"},
-        {nombre:"Nueva Página Web",estado:"en_curso",avance:85,categoria:"Digital"},
-        {nombre:"Merch x Velmost",estado:"completado",avance:100,categoria:"Marca"},
-        {nombre:"User Journey Mapping",estado:"completado",avance:100,categoria:"Estrategia"},
-        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:40,categoria:"Eventos"},
-        {nombre:"SOP Área Mercadeo",estado:"en_curso",avance:60,categoria:"Procesos"},
-        {nombre:"Olas Sonoras Rebrand",estado:"por_iniciar",avance:10,categoria:"Marca"},
-        {nombre:"CRM Kyto Integración",estado:"por_iniciar",avance:5,categoria:"Digital"}
+        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:0,categoria:"Fidelización"},
+        {nombre:"Nueva Página Web",estado:"en_curso",avance:0,categoria:"Digital"},
+        {nombre:"Merch x Velmost",estado:"completado",avance:0,categoria:"Marca"},
+        {nombre:"User Journey Mapping",estado:"completado",avance:0,categoria:"Estrategia"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:0,categoria:"Eventos"},
+        {nombre:"SOP Área Mercadeo",estado:"en_curso",avance:0,categoria:"Procesos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"por_iniciar",avance:0,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"por_iniciar",avance:0,categoria:"Digital"}
       ],
       insights:{
         resumen:"El equipo de Mercadeo cerró Q1 con un ROAS promedio de 27.9 en META, ventas directas de $29,438 USD vía Kyto y 20,800 nuevos seguidores en Instagram. Los OKRs de Viajero GO (85%) y Web (85%) lideran el avance estratégico.",
@@ -1145,20 +1391,20 @@ const DATA = {
     Q2: {
       label:"Q2 2026",period:"Abr – Jun 2026",status:"en_curso",
       logros:{ventasKyto:38200,reservasPauta:5820,miembrosGO:5480,convWA:19400,vizOrganicasIG:11200000,colaboraciones:41,seguidoresIG:27300,avanceWeb:100,satisfaccionKyto:92,roasQ:31.2,inversionMetaCOP:47000000,inversionGoogleCOP:18500000},
-      rrss:{ig:{historias:278,posts:28,reels:42,vizTotal:9840000,vizOrg:5120000,vizPaga:4720000,alcance:1580000,interacciones:84200,likes:61000,compartidos:24300,comentarios:2800,guardados:3100,clics:22400,visitas:178000,seguidores:27300,engagement:0.041},tk:{posts:124,seguidoresTotal:21400,seguidoresGanados:4273,profileViews:68400,postViews:820000,interacciones:29800,likes:21400,comments:620,shares:7780,engagement:0.082,fyp:0.641}},
+      rrss:{ig:{historias:278,posts:28,reels:42,vizTotal:9840000,vizOrg:5120000,vizPaga:4720000,alcance:1580000,interacciones:84200,likes:61000,compartidos:24300,comentarios:2800,guardados:3100,clics:22400,visitas:178000,seguidores:27300,engagement:0.041},tk:{posts:124,seguidoresTotal:21400,seguidoresGanados:4273,profileViews:68400,postViews:820000,interacciones:29800,likes:21400,comments:620,shares:7780,engagement:0.082,fyp:0.641},li:{posts:24,impresiones:68400,alcance:51800,interacciones:3120,clics:1140,seguidoresGanados:520,seguidoresTotal:3000,engagement:0.0456,topFormatos:['Carrusel','Video corto','Artículo','Imagen'],audienciaTop:['Hospitality','Tourism','Marketing','Negocios','HR']}},
       pauta:{totalCOP:114446000,metaCOP:47000000,googleCOP:18500000,campañas:41,reservasMeta:1840,reservasGoogle:3980,convWA:2100,roas:[30.1,31.4,32.1]},
       diseno:{piezas:428,campañasVisuales:24,videosProducidos:31,fotosEditadas:112,manuales:6,brandbooks:0},
       iimm:{colaboraciones:41,impresiones:18400000,canjes:24,embajadores:11,menciones:203,alcanceTotalInflu:7200000},
       canales:{webAvance:100,kytoVentas:38200,kytoConversaciones:34800,emailCampañas:9,emailOpenRate:0.34,linkTreeClics:12800,whatsappConvs:19400},
       proyectos:[
-        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:95,categoria:"Fidelización"},
-        {nombre:"Nueva Página Web",estado:"completado",avance:100,categoria:"Digital"},
-        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:75,categoria:"Eventos"},
-        {nombre:"Olas Sonoras Rebrand",estado:"en_curso",avance:60,categoria:"Marca"},
-        {nombre:"CRM Kyto Integración",estado:"en_curso",avance:45,categoria:"Digital"},
-        {nombre:"Capacitación Comercial",estado:"en_curso",avance:55,categoria:"Procesos"},
-        {nombre:"Mapa de Touchpoints",estado:"completado",avance:100,categoria:"Estrategia"},
-        {nombre:"Email Marketing Automation",estado:"en_curso",avance:30,categoria:"Digital"}
+        {nombre:"Viajero GO — Loyalty",estado:"en_curso",avance:0,categoria:"Fidelización"},
+        {nombre:"Nueva Página Web",estado:"completado",avance:0,categoria:"Digital"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"en_curso",avance:0,categoria:"Eventos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"en_curso",avance:0,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"en_curso",avance:0,categoria:"Digital"},
+        {nombre:"Capacitación Comercial",estado:"en_curso",avance:0,categoria:"Procesos"},
+        {nombre:"Mapa de Touchpoints",estado:"completado",avance:0,categoria:"Estrategia"},
+        {nombre:"Email Marketing Automation",estado:"en_curso",avance:0,categoria:"Digital"}
       ],
       insights:{
         resumen:"Q2 marca el lanzamiento de la nueva web y la activación del Mundial FIFA. El ROAS subió a 31.2, reflejando la maduración de las campañas. La base de Viajero GO creció 76% vs Q1.",
@@ -1169,20 +1415,20 @@ const DATA = {
     Q3: {
       label:"Q3 2026",period:"Jul – Sep 2026",status:"proyectado",
       logros:{ventasKyto:51000,reservasPauta:7200,miembrosGO:8100,convWA:24000,vizOrganicasIG:14000000,colaboraciones:52,seguidoresIG:35000,avanceWeb:100,satisfaccionKyto:93,roasQ:33.8,inversionMetaCOP:52000000,inversionGoogleCOP:22000000},
-      rrss:{ig:{historias:310,posts:35,reels:55,vizTotal:12400000,vizOrg:6800000,vizPaga:5600000,alcance:2100000,interacciones:108000,likes:79000,compartidos:31000,comentarios:3800,guardados:4200,clics:29000,visitas:224000,seguidores:35000,engagement:0.044},tk:{posts:148,seguidoresTotal:27800,seguidoresGanados:6400,profileViews:94000,postViews:1240000,interacciones:41000,likes:29800,comments:890,shares:10310,engagement:0.088,fyp:0.658}},
+      rrss:{ig:{historias:310,posts:35,reels:55,vizTotal:12400000,vizOrg:6800000,vizPaga:5600000,alcance:2100000,interacciones:108000,likes:79000,compartidos:31000,comentarios:3800,guardados:4200,clics:29000,visitas:224000,seguidores:35000,engagement:0.044},tk:{posts:148,seguidoresTotal:27800,seguidoresGanados:6400,profileViews:94000,postViews:1240000,interacciones:41000,likes:29800,comments:890,shares:10310,engagement:0.088,fyp:0.658},li:{posts:31,impresiones:98200,alcance:74600,interacciones:4680,clics:1820,seguidoresGanados:740,seguidoresTotal:3740,engagement:0.0477,topFormatos:['Carrusel','Video corto','Artículo','Encuesta'],audienciaTop:['Hospitality','Tourism','Marketing','Travel Tech','Startup']}},
       pauta:{totalCOP:148000000,metaCOP:52000000,googleCOP:22000000,campañas:48,reservasMeta:2300,reservasGoogle:4900,convWA:2800,roas:[33.2,34.1,34.1]},
       diseno:{piezas:540,campañasVisuales:31,videosProducidos:42,fotosEditadas:145,manuales:8,brandbooks:1},
       iimm:{colaboraciones:52,impresiones:24000000,canjes:31,embajadores:14,menciones:278,alcanceTotalInflu:9800000},
       canales:{webAvance:100,kytoVentas:51000,kytoConversaciones:48000,emailCampañas:13,emailOpenRate:0.36,linkTreeClics:18200,whatsappConvs:24000},
       proyectos:[
-        {nombre:"Viajero GO — Loyalty",estado:"completado",avance:100,categoria:"Fidelización"},
-        {nombre:"Plan Mundial FIFA 2026",estado:"completado",avance:100,categoria:"Eventos"},
-        {nombre:"Olas Sonoras Rebrand",estado:"completado",avance:100,categoria:"Marca"},
-        {nombre:"CRM Kyto Integración",estado:"completado",avance:100,categoria:"Digital"},
-        {nombre:"Email Marketing Automation",estado:"en_curso",avance:70,categoria:"Digital"},
-        {nombre:"Programa Embajadores V2",estado:"en_curso",avance:50,categoria:"Marca"},
-        {nombre:"Revenue Canal Directo",estado:"en_curso",avance:40,categoria:"Digital"},
-        {nombre:"Capacitación Comercial V2",estado:"en_curso",avance:65,categoria:"Procesos"}
+        {nombre:"Viajero GO — Loyalty",estado:"completado",avance:0,categoria:"Fidelización"},
+        {nombre:"Plan Mundial FIFA 2026",estado:"completado",avance:0,categoria:"Eventos"},
+        {nombre:"Olas Sonoras Rebrand",estado:"completado",avance:0,categoria:"Marca"},
+        {nombre:"CRM Kyto Integración",estado:"completado",avance:0,categoria:"Digital"},
+        {nombre:"Email Marketing Automation",estado:"en_curso",avance:0,categoria:"Digital"},
+        {nombre:"Programa Embajadores V2",estado:"en_curso",avance:0,categoria:"Marca"},
+        {nombre:"Revenue Canal Directo",estado:"en_curso",avance:0,categoria:"Digital"},
+        {nombre:"Capacitación Comercial V2",estado:"en_curso",avance:0,categoria:"Procesos"}
       ],
       insights:{
         resumen:"Q3 proyectado consolida el crecimiento: ROAS 33.8, ventas Kyto $51K USD y 8,100 miembros en Viajero GO. El canal directo web comienza a generar revenue medible.",
@@ -1193,20 +1439,20 @@ const DATA = {
     Q4: {
       label:"Q4 2026",period:"Oct – Dic 2026",status:"proyectado",
       logros:{ventasKyto:68000,reservasPauta:9100,miembrosGO:12000,convWA:31000,vizOrganicasIG:18000000,colaboraciones:68,seguidoresIG:46000,avanceWeb:100,satisfaccionKyto:95,roasQ:36.5,inversionMetaCOP:62000000,inversionGoogleCOP:28000000},
-      rrss:{ig:{historias:362,posts:44,reels:68,vizTotal:16800000,vizOrg:9200000,vizPaga:7600000,alcance:2800000,interacciones:148000,likes:108000,compartidos:42000,comentarios:5200,guardados:5800,clics:38000,visitas:298000,seguidores:46000,engagement:0.048},tk:{posts:178,seguidoresTotal:36200,seguidoresGanados:8400,profileViews:128000,postViews:1780000,interacciones:58000,likes:42000,comments:1200,shares:14800,engagement:0.094,fyp:0.672}},
+      rrss:{ig:{historias:362,posts:44,reels:68,vizTotal:16800000,vizOrg:9200000,vizPaga:7600000,alcance:2800000,interacciones:148000,likes:108000,compartidos:42000,comentarios:5200,guardados:5800,clics:38000,visitas:298000,seguidores:46000,engagement:0.048},tk:{posts:178,seguidoresTotal:36200,seguidoresGanados:8400,profileViews:128000,postViews:1780000,interacciones:58000,likes:42000,comments:1200,shares:14800,engagement:0.094,fyp:0.672},li:{posts:42,impresiones:148000,alcance:112400,interacciones:7200,clics:2980,seguidoresGanados:1100,seguidoresTotal:4840,engagement:0.0486,topFormatos:['Video corto','Carrusel','Artículo','Documento'],audienciaTop:['Hospitality','Tourism','Marketing','Travel','Startup']}},
       pauta:{totalCOP:198000000,metaCOP:62000000,googleCOP:28000000,campañas:56,reservasMeta:3100,reservasGoogle:6000,convWA:3800,roas:[35.8,36.5,37.2]},
       diseno:{piezas:680,campañasVisuales:39,videosProducidos:58,fotosEditadas:188,manuales:10,brandbooks:1},
       iimm:{colaboraciones:68,impresiones:32000000,canjes:42,embajadores:18,menciones:358,alcanceTotalInflu:13200000},
       canales:{webAvance:100,kytoVentas:68000,kytoConversaciones:64000,emailCampañas:18,emailOpenRate:0.38,linkTreeClics:24800,whatsappConvs:31000},
       proyectos:[
-        {nombre:"Email Marketing Automation",estado:"completado",avance:100,categoria:"Digital"},
-        {nombre:"Programa Embajadores V2",estado:"completado",avance:100,categoria:"Marca"},
-        {nombre:"Revenue Canal Directo",estado:"completado",avance:100,categoria:"Digital"},
-        {nombre:"Capacitación Comercial V2",estado:"completado",avance:100,categoria:"Procesos"},
-        {nombre:"Rebranding Viajero Hostels",estado:"en_curso",avance:70,categoria:"Marca"},
-        {nombre:"App Viajero GO V2",estado:"en_curso",avance:45,categoria:"Digital"},
-        {nombre:"Estrategia 2027",estado:"en_curso",avance:30,categoria:"Estrategia"},
-        {nombre:"Alianzas LATAM Q1-27",estado:"por_iniciar",avance:10,categoria:"Marca"}
+        {nombre:"Email Marketing Automation",estado:"completado",avance:0,categoria:"Digital"},
+        {nombre:"Programa Embajadores V2",estado:"completado",avance:0,categoria:"Marca"},
+        {nombre:"Revenue Canal Directo",estado:"completado",avance:0,categoria:"Digital"},
+        {nombre:"Capacitación Comercial V2",estado:"completado",avance:0,categoria:"Procesos"},
+        {nombre:"Rebranding Viajero Hostels",estado:"en_curso",avance:0,categoria:"Marca"},
+        {nombre:"App Viajero GO V2",estado:"en_curso",avance:0,categoria:"Digital"},
+        {nombre:"Estrategia 2027",estado:"en_curso",avance:0,categoria:"Estrategia"},
+        {nombre:"Alianzas LATAM Q1-27",estado:"por_iniciar",avance:0,categoria:"Marca"}
       ],
       insights:{
         resumen:"Q4 cierra el año con ROAS 36.5, el más alto del año. Viajero GO alcanza 12,000 miembros y las ventas Kyto llegan a $68K USD. El equipo de Mercadeo entrega 680 piezas en el año.",
@@ -1320,6 +1566,18 @@ function mergeQs(qs){
         shares: qdata.reduce((a,d)=>a+d.rrss.tk.shares,0),
         engagement: +(qdata.reduce((a,d)=>a+d.rrss.tk.engagement,0)/n).toFixed(4),
         fyp: +(qdata.reduce((a,d)=>a+d.rrss.tk.fyp,0)/n).toFixed(3)
+      },
+      li:{
+        posts: qdata.reduce((a,d)=>a+d.rrss.li.posts,0),
+        impresiones: qdata.reduce((a,d)=>a+d.rrss.li.impresiones,0),
+        alcance: qdata.reduce((a,d)=>a+d.rrss.li.alcance,0),
+        interacciones: qdata.reduce((a,d)=>a+d.rrss.li.interacciones,0),
+        clics: qdata.reduce((a,d)=>a+d.rrss.li.clics,0),
+        seguidoresGanados: qdata.reduce((a,d)=>a+d.rrss.li.seguidoresGanados,0),
+        seguidoresTotal: qdata[n-1].rrss.li.seguidoresTotal,
+        engagement: +(qdata.reduce((a,d)=>a+d.rrss.li.engagement,0)/n).toFixed(4),
+        topFormatos: qdata[n-1].rrss.li.topFormatos,
+        audienciaTop: qdata[n-1].rrss.li.audienciaTop
       }
     },
     pauta:{
@@ -1500,32 +1758,147 @@ function renderRRSS(){
   document.getElementById('rrssSub').textContent=`Desempeño ${n===1?'Q '+qs[0]:n===4?'anual':qs.join('+')} · Instagram · TikTok`;
   document.getElementById('rrssInsightText').textContent=qd.insights.rrss;
 
-  document.getElementById('rrssMetrics').innerHTML=`
-    <div class="metric-card hi"><div class="metric-label">Seguidores IG ganados</div><div class="metric-value">${fmt(ig.seguidores)}</div><div class="metric-sub">Crecimiento orgánico</div></div>
-    <div class="metric-card"><div class="metric-label">Visualizaciones IG totales</div><div class="metric-value">${fmt(ig.vizTotal)}</div><div class="metric-sub">Org: ${fmt(ig.vizOrg)} · Paga: ${fmt(ig.vizPaga)}</div></div>
-    <div class="metric-card"><div class="metric-label">Engagement IG</div><div class="metric-value">${(ig.engagement*100).toFixed(2)}%</div><div class="metric-sub">Benchmark industria: 1.8%</div></div>
-    <div class="metric-card"><div class="metric-label">Contenido IG publicado</div><div class="metric-value">${ig.historias+ig.posts+ig.reels}</div><div class="metric-sub">${ig.historias} Hist · ${ig.posts} Posts · ${ig.reels} Reels</div></div>
-    <div class="metric-card"><div class="metric-label">TikTok views</div><div class="metric-value">${fmt(tk.postViews)}</div><div class="metric-sub">${tk.posts} posts publicados</div></div>
-    <div class="metric-card"><div class="metric-label">Seg. TikTok ganados</div><div class="metric-value">${fmt(tk.seguidoresGanados)}</div><div class="metric-sub">Total: ${fmt(tk.seguidoresTotal)}</div></div>
-  `;
+  // IG brand colors
+  const IG_PRI='#F54927'; const IG_SEC='#F54927'; const IG_TER='#F54927'; const IG_QUA='#EBE7E6';
 
-  // IG Viz
+  // ── IG KPIs ──
+  document.getElementById('igKPIs').innerHTML=`
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Seguidores ganados</div>
+      <div class="platform-kpi-value">${fmt(ig.seguidores)}</div>
+      <div class="platform-kpi-sub">Crecimiento orgánico</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Visualizaciones totales</div>
+      <div class="platform-kpi-value">${fmt(ig.vizTotal)}</div>
+      <div class="platform-kpi-sub">Org: ${fmt(ig.vizOrg)}</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Engagement</div>
+      <div class="platform-kpi-value">${(ig.engagement*100).toFixed(2)}%</div>
+      <div class="platform-kpi-sub">Benchmark: 1.8%</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Contenido publicado</div>
+      <div class="platform-kpi-value">${ig.historias+ig.posts+ig.reels}</div>
+      <div class="platform-kpi-sub">${ig.reels} Reels · ${ig.posts} Posts · ${ig.historias} Hist</div>
+    </div>`;
+  document.getElementById('igEngagementBadge').textContent=`${fmt(ig.interacciones)} interacciones · ${fmt(ig.alcance)} alcance`;
+
+  // IG Viz chart (IG colors: purple org, pink paga)
   const igLabels=qs.length===1?months(qs[0]):qs;
   mkChart('igVizChart',{type:'bar',data:{labels:igLabels,datasets:[
-    {label:'Orgánicas',data:[ig.vizOrg*0.42,ig.vizOrg*0.29,ig.vizOrg*0.29].map(Math.round),backgroundColor:COLORS.green,borderRadius:3,borderSkipped:false},
-    {label:'Pagas',data:[ig.vizPaga*0.34,ig.vizPaga*0.31,ig.vizPaga*0.35].map(Math.round),backgroundColor:COLORS.amber,borderRadius:3,borderSkipped:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+    {label:'Orgánicas',data:[ig.vizOrg*0.42,ig.vizOrg*0.29,ig.vizOrg*0.29].map(Math.round),backgroundColor:'#F54927',borderRadius:3,borderSkipped:false},
+    {label:'Pagas',   data:[ig.vizPaga*0.34,ig.vizPaga*0.31,ig.vizPaga*0.35].map(Math.round),backgroundColor:'#D9D3D1',borderRadius:3,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.parsed.y)}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
 
-  // Engagement donut
-  const totalLikes=ig.likes;
-  mkChart('igEngaChart',{type:'doughnut',data:{labels:['Reels','Posts','Stories'],datasets:[{data:[Math.round(totalLikes*0.72),Math.round(totalLikes*0.2),Math.round(totalLikes*0.08)],backgroundColor:[COLORS.blue,COLORS.amber,COLORS.dim],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}});
+  // IG Engagement donut (IG palette)
+  const igEngColors=['#F54927','#D9D3D1','#9E9594'];
+  const igEngLabels=['Reels','Posts','Historias'];
+  const igEngData=[Math.round(ig.likes*0.72),Math.round(ig.likes*0.20),Math.round(ig.likes*0.08)];
+  mkChart('igEngaChart',{type:'doughnut',data:{labels:igEngLabels,datasets:[{data:igEngData,backgroundColor:igEngColors,borderWidth:2,borderColor:'#fff',hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  document.getElementById('igEngaLegend').innerHTML=igEngLabels.map((l,i)=>`
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="width:9px;height:9px;border-radius:50%;background:${igEngColors[i]};flex-shrink:0"></span>
+      <span style="color:var(--muted)">${l}</span>
+      <span style="font-weight:700;color:var(--accent);margin-left:auto">${fmt(igEngData[i])}</span>
+    </div>`).join('');
 
-  // TK views
-  mkChart('tkViewChart',{type:'bar',data:{labels:igLabels,datasets:[{data:[Math.round(tk.postViews*0.19),Math.round(tk.postViews*0.27),Math.round(tk.postViews*0.54)],backgroundColor:[COLORS.purple+'66',COLORS.purple+'99',COLORS.purple],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+  // ── TK KPIs ──
+  const TK_CYN='#9E9594'; const TK_RED='#F54927'; const TK_WHT='#D9D3D1'; const TK_GRY='#EBE7E6';
+  document.getElementById('tkKPIs').innerHTML=`
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Vistas de posts</div>
+      <div class="platform-kpi-value">${fmt(tk.postViews)}</div>
+      <div class="platform-kpi-sub">${tk.posts} posts publicados</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Seguidores ganados</div>
+      <div class="platform-kpi-value">${fmt(tk.seguidoresGanados)}</div>
+      <div class="platform-kpi-sub">Total: ${fmt(tk.seguidoresTotal)}</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Engagement</div>
+      <div class="platform-kpi-value">${(tk.engagement*100).toFixed(2)}%</div>
+      <div class="platform-kpi-sub">Interacciones/views</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">% FYP (Para Ti)</div>
+      <div class="platform-kpi-value">${Math.round(tk.fyp*100)}%</div>
+      <div class="platform-kpi-sub">Distribución orgánica</div>
+    </div>`;
+  document.getElementById('tkEngagementBadge').textContent=`${fmt(tk.interacciones)} interacciones · ${fmt(tk.profileViews)} visitas perfil`;
 
-  // TK sources
+  // TK views bar (cyan gradient)
+  mkChart('tkViewChart',{type:'bar',data:{labels:igLabels,datasets:[
+    {data:[Math.round(tk.postViews*0.19),Math.round(tk.postViews*0.27),Math.round(tk.postViews*0.54)],
+     backgroundColor:['#9E959433','#9E959488',TK_CYN],borderRadius:4,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.parsed.y)+' vistas'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>fmt(v)}}}}});
+
+  // TK sources donut (TK colors)
+  const tkSrcColors=[TK_CYN,TK_RED,TK_WHT,TK_GRY];
+  const tkSrcLabels=['FYP','Perfil','Search','Follow'];
   const fyp=Math.round(tk.fyp*100);
-  mkChart('tkSrcChart',{type:'doughnut',data:{labels:['FYP','Perfil','Search','Follow'],datasets:[{data:[fyp,Math.round(tk.fyp*30),Math.round(tk.fyp*20),2],backgroundColor:[COLORS.blue,COLORS.green,COLORS.amber,COLORS.red],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false}}}});
+  const tkSrcData=[fyp,Math.round((1-tk.fyp)*100*0.45),Math.round((1-tk.fyp)*100*0.35),Math.round((1-tk.fyp)*100*0.20)];
+  mkChart('tkSrcChart',{type:'doughnut',data:{labels:tkSrcLabels,datasets:[{data:tkSrcData,backgroundColor:tkSrcColors,borderWidth:2,borderColor:'#fff',hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  document.getElementById('tkSrcLegend').innerHTML=tkSrcLabels.map((l,i)=>`
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="width:9px;height:9px;border-radius:50%;background:${tkSrcColors[i]};flex-shrink:0;border:1px solid #333"></span>
+      <span style="color:var(--muted)">${l}</span>
+      <span style="font-weight:700;color:var(--text);margin-left:auto">${tkSrcData[i]}%</span>
+    </div>`).join('');
+
+  // ── LINKEDIN ──
+  const li = qd.rrss.li;
+  const LI_BLU='#333232'; const LI_LGT='#D9D3D1'; const LI_GRN='#333232'; const LI_ORG='#F54927';
+
+  document.getElementById('liKPIs').innerHTML=`
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Impresiones</div>
+      <div class="platform-kpi-value">${fmt(li.impresiones)}</div>
+      <div class="platform-kpi-sub">Alcance: ${fmt(li.alcance)}</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Interacciones</div>
+      <div class="platform-kpi-value">${fmt(li.interacciones)}</div>
+      <div class="platform-kpi-sub">${li.posts} posts publicados</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Clics en contenido</div>
+      <div class="platform-kpi-value">${fmt(li.clics)}</div>
+      <div class="platform-kpi-sub">CTR orgánico</div>
+    </div>
+    <div class="platform-kpi">
+      <div class="platform-kpi-label">Seguidores ganados</div>
+      <div class="platform-kpi-value">${fmt(li.seguidoresGanados)}</div>
+      <div class="platform-kpi-sub">Total: ${fmt(li.seguidoresTotal)}</div>
+    </div>`;
+  document.getElementById('liEngagementBadge').textContent=`Engagement ${(li.engagement*100).toFixed(1)}% · ${fmt(li.seguidoresTotal)} seguidores`;
+
+  // LI Growth bar (all quarters always shown)
+  mkChart('liGrowthChart',{type:'bar',data:{labels:allQs,datasets:[
+    {label:'Seguidores ganados',data:allQs.map(q=>DATA.quarters[q].rrss.li.seguidoresGanados),
+     backgroundColor:allQs.map(q=>getActiveQs().includes(q)?'#F54927':'#EBE7E6'),
+     borderRadius:4,borderSkipped:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' +'+c.parsed.y+' seguidores'}}},
+  scales:{x:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#999',font:tickFont}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#999',font:tickFont}}}}});
+
+  // LI Format donut
+  const liFormColors=['#333232','#F54927','#9E9594','#D9D3D1'];
+  const liFormLabels=li.topFormatos;
+  const liFormData=[42,28,20,10];
+  mkChart('liFormatChart',{type:'doughnut',data:{labels:liFormLabels,datasets:[{data:liFormData,backgroundColor:liFormColors,borderWidth:2,borderColor:'#fff',hoverOffset:4}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  document.getElementById('liFormatLegend').innerHTML=liFormLabels.map((l,i)=>`
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="width:9px;height:9px;border-radius:50%;background:${liFormColors[i]};flex-shrink:0"></span>
+      <span style="color:var(--muted)">${l}</span>
+      <span style="font-weight:700;color:var(--accent);margin-left:auto">${liFormData[i]}%</span>
+    </div>`).join('');
+
+  // LI Audiencia tags
+  document.getElementById('liAudiencia').innerHTML=li.audienciaTop.map((tag,i)=>`
+    <span style="background:${i===0?'#333232':'var(--surface2)'};color:${i===0?'#fff':'var(--text)'};font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid ${i===0?'#333232':'var(--border2)'}">${tag}</span>`).join('');
 }
 
 // ── PAUTA ──────────────────────────────────────────────
@@ -1649,32 +2022,22 @@ function renderEmailTable(){
 function renderCanales(){
   const qd=getMerged(); const qs=getActiveQs(); const n=qs.length; const c=qd.canales;
   document.getElementById('canalesBadge').innerHTML=qBadgeHTML();
-  document.getElementById('canalesSub').textContent=`Ecosistema digital ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')}`;
+  document.getElementById('canalesSub').textContent=`Plataformas digitales ${n===1?'Q '+qs[0]:n===4?'año completo':qs.join('+')}`;
 
   document.getElementById('canalesMetrics').innerHTML=`
-    <div class="metric-card hi"><div class="metric-label">Ventas Kyto-Bot</div><div class="metric-value">$${fmt(c.kytoVentas)}</div><div class="metric-sub">USD directos</div></div>
-    <div class="metric-card"><div class="metric-label">Conversaciones Kyto</div><div class="metric-value">${fmt(c.kytoConversaciones)}</div><div class="metric-sub">Total iniciadas</div></div>
-    <div class="metric-card"><div class="metric-label">Web — Avance</div><div class="metric-value">${c.webAvance}%</div><div class="metric-sub">Booking engine propio</div></div>
+    <div class="metric-card hi"><div class="metric-label">Web — Avance</div><div class="metric-value">${c.webAvance}%</div><div class="metric-sub">Booking engine propio</div></div>
     <div class="metric-card"><div class="metric-label">Email Campañas</div><div class="metric-value">${c.emailCampañas}</div><div class="metric-sub">Open rate: ${(c.emailOpenRate*100).toFixed(0)}%</div></div>
     <div class="metric-card"><div class="metric-label">WhatsApp conversaciones</div><div class="metric-value">${fmt(c.whatsappConvs)}</div><div class="metric-sub">Canal principal atención</div></div>
     <div class="metric-card"><div class="metric-label">Linktree clics</div><div class="metric-value">${fmt(c.linkTreeClics)}</div><div class="metric-sub">Hub digital de tráfico</div></div>
   `;
 
-  // Kyto annual
   const allQs=['Q1','Q2','Q3','Q4'];
-  mkChart('kytoChart',{type:'bar',data:{labels:allQs,datasets:[{data:allQs.map(q=>DATA.quarters[q].canales.kytoVentas),backgroundColor:qs.map((q)=>getActiveQs().includes(q)?COLORS.amber:COLORS.amber+'55'),borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toLocaleString()+' USD'}}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>'$'+fmt(v)}}}}});
-
-  // WA vs Email
-  mkChart('canalesLineChart',{type:'line',data:{labels:allQs,datasets:[
-    {label:'WA ÷100',data:allQs.map(q=>Math.round(DATA.quarters[q].canales.whatsappConvs/100)),borderColor:COLORS.green,backgroundColor:COLORS.green+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.green},
-    {label:'Email OR %',data:allQs.map(q=>Math.round(DATA.quarters[q].canales.emailOpenRate*100)),borderColor:COLORS.amber,backgroundColor:COLORS.amber+'22',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:COLORS.amber}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
 
   // Web hitos
-  const lastQ=qs[qs.length-1];
-  const hitos=[{q:'Q1',label:'Desarrollo plataforma completa',done:true,pct:85},{q:'Q2',label:'Lanzamiento con booking engine + pagos',done:lastQ!=='Q1',pct:100},{q:'Q3',label:'Tracking conversiones + UTMs + funnel',done:lastQ==='Q3'||lastQ==='Q4',pct:100},{q:'Q4',label:'Canal directo = 35% de reservas',done:lastQ==='Q4',pct:100}];
   renderEmailHub();
-  document.getElementById('webHitos').innerHTML=hitos.map(h=>`<div class="prog-item"><div class="prog-header"><span class="prog-name"><span class="pill ${h.done?'pill-green':'pill-dim'}" style="margin-right:8px">${h.q}</span>${h.label}</span><span class="prog-pct">${h.done?h.pct+'%':'Pendiente'}</span></div><div class="prog-track"><div class="prog-fill" style="width:${h.done?h.pct:0}%;background:${h.done?COLORS.green:COLORS.dim}"></div></div></div>`).join('');
+  renderOTAs();
+  renderLinkups();
+  renderBI();
 }
 
 // ── DISEÑO ──────────────────────────────────────────────
@@ -1735,7 +2098,17 @@ function renderProyectos(){
   const qs_label=n===1?'Q '+qs[0]:n===4?'Año 2026':qs.join('+');
   document.getElementById('proyectosSub').textContent=`Iniciativas estratégicas ${qs_label} · Mercadeo Viajero`;
 
-  const projs=qd.proyectos;
+  // Load from localStorage
+  let customProjs=[], deletedProjs=[], renames={};
+  try { customProjs=JSON.parse(localStorage.getItem('custom_projects'))||[]; } catch(e){}
+  try { deletedProjs=JSON.parse(localStorage.getItem('deleted_projects'))||[]; } catch(e){}
+  try { renames=JSON.parse(localStorage.getItem('proj_renames'))||{}; } catch(e){}
+
+  const originals = qd.proyectos
+    .filter(p=>!deletedProjs.includes(p.nombre))
+    .map(p=>renames[p.nombre]?{...p,nombre:renames[p.nombre],_origKey:p.nombre}:p);
+  const projs = [...originals, ...customProjs];
+
   const completados=projs.filter(p=>p.estado==='completado').length;
   const enCurso=projs.filter(p=>p.estado==='en_curso').length;
   const porIniciar=projs.filter(p=>p.estado==='por_iniciar').length;
@@ -1749,19 +2122,144 @@ function renderProyectos(){
 
   const statusColor={completado:COLORS.green,en_curso:COLORS.amber,por_iniciar:COLORS.dim};
   const statusLabel={completado:'Completado',en_curso:'En curso',por_iniciar:'Por iniciar'};
-  const statusPill={completado:'pill-green',en_curso:'pill-amber',por_iniciar:'pill-dim'};
+  const statusPill ={completado:'pill-green',en_curso:'pill-amber',por_iniciar:'pill-dim'};
 
-  document.getElementById('proyectosGrid').innerHTML=projs.map(p=>`
-    <div class="proj-card">
-      <div class="proj-cat">${p.categoria}</div>
-      <div class="proj-name">${p.nombre}</div>
-      <div class="prog-track" style="margin-bottom:10px"><div class="prog-fill" style="width:${p.avance}%;background:${statusColor[p.estado]}"></div></div>
-      <div class="proj-footer">
-        <span class="proj-pct" style="color:${statusColor[p.estado]}">${p.avance}%</span>
-        <span class="pill ${statusPill[p.estado]}">${statusLabel[p.estado]}</span>
-      </div>
-    </div>
-  `).join('');
+  const grid = document.getElementById('proyectosGrid');
+  grid.innerHTML = '';
+
+  projs.forEach(p => {
+    const storageKey = 'proj_tracker_' + p.nombre.replace(/\s+/g,'_');
+    let trackers = [];
+    try { trackers = JSON.parse(localStorage.getItem(storageKey))||[]; } catch(e){}
+
+    const trackerAvance = trackers.length
+      ? Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length)
+      : 0;
+    const est = trackerAvance===100?'completado':trackerAvance>0?'en_curso':'por_iniciar';
+    const col = statusColor[est];
+
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+
+    // ── Header row ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px';
+
+    const cat = document.createElement('div');
+    cat.className = 'proj-cat';
+    cat.textContent = p.categoria;
+
+    const btnWrap = document.createElement('div');
+    btnWrap.style.cssText = 'display:flex;align-items:center;gap:6px';
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = '✕';
+    delBtn.title = 'Eliminar proyecto';
+    delBtn.style.cssText = 'font-size:10px;color:var(--dim);background:none;border:none;cursor:pointer;font-family:var(--font);padding:2px 5px;border-radius:4px';
+    delBtn.addEventListener('click', e => { e.stopPropagation(); deleteProject(p.nombre, !!p._custom); });
+
+    const arrow = document.createElement('span');
+    arrow.className = 'proj-expand-btn';
+    arrow.textContent = '▾';
+    arrow.addEventListener('click', e => { e.stopPropagation(); card.classList.toggle('expanded'); });
+
+    btnWrap.appendChild(delBtn);
+    btnWrap.appendChild(arrow);
+    hdr.appendChild(cat);
+    hdr.appendChild(btnWrap);
+
+    // ── Name (double-click to edit) ──
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'proj-name proj-name-editable';
+    nameDiv.title = 'Doble clic para editar';
+    nameDiv.style.cursor = 'text';
+    nameDiv.textContent = p.nombre;
+    nameDiv.addEventListener('dblclick', e => { e.stopPropagation(); startEditName(nameDiv, p.nombre, !!p._custom); });
+
+    // ── Progress bar ──
+    const track = document.createElement('div');
+    track.className = 'prog-track';
+    track.style.marginBottom = '6px';
+    const fill = document.createElement('div');
+    fill.className = 'proj-fill-bar';
+    fill.style.cssText = 'width:'+trackerAvance+'%;background:'+col+';height:100%;border-radius:99px;transition:width 0.3s';
+    track.appendChild(fill);
+
+    // ── Footer ──
+    const footer = document.createElement('div');
+    footer.className = 'proj-footer';
+    const pctSpan = document.createElement('span');
+    pctSpan.className = 'proj-pct proj-pct-live';
+    pctSpan.style.color = col;
+    pctSpan.textContent = trackerAvance + '%';
+    const pillSpan = document.createElement('span');
+    pillSpan.className = 'pill ' + statusPill[est] + ' proj-status-live';
+    pillSpan.textContent = statusLabel[est];
+    footer.appendChild(pctSpan);
+    footer.appendChild(pillSpan);
+
+    // ── Tracker section ──
+    const trackerDiv = document.createElement('div');
+    trackerDiv.className = 'proj-tracker';
+
+    const tLabel = document.createElement('div');
+    tLabel.style.cssText = 'font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px';
+    tLabel.textContent = 'Indicadores de seguimiento';
+
+    const tItems = document.createElement('div');
+    tItems.className = 'tracker-items';
+
+    const addBtn = document.createElement('button');
+    addBtn.className = 'tracker-add-btn';
+    addBtn.innerHTML = '<span style="font-size:14px;line-height:1">+</span> Crear nuevo indicador';
+    addBtn.addEventListener('click', e => { e.stopPropagation(); toggleTrackerForm(addBtn); });
+
+    const tForm = document.createElement('div');
+    tForm.className = 'tracker-new-form';
+    const tInput = document.createElement('input');
+    tInput.className = 'tracker-input';
+    tInput.type = 'text';
+    tInput.placeholder = 'Nombre del indicador (ej: Reuniones completadas)';
+    tInput.addEventListener('click', e => e.stopPropagation());
+    tInput.addEventListener('keydown', e => { if(e.key==='Enter') saveBtn.click(); });
+    const tBtnRow = document.createElement('div');
+    tBtnRow.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:6px';
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'tracker-save-btn';
+    saveBtn.textContent = 'Agregar';
+    saveBtn.addEventListener('click', e => { e.stopPropagation(); saveNewTracker(saveBtn, storageKey); });
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'tracker-cancel-btn';
+    cancelBtn.textContent = 'Cancelar';
+    cancelBtn.addEventListener('click', e => { e.stopPropagation(); closeTrackerForm(cancelBtn); });
+    tBtnRow.appendChild(saveBtn);
+    tBtnRow.appendChild(cancelBtn);
+    tForm.appendChild(tInput);
+    tForm.appendChild(tBtnRow);
+
+    trackerDiv.appendChild(tLabel);
+    trackerDiv.appendChild(tItems);
+    trackerDiv.appendChild(addBtn);
+    trackerDiv.appendChild(tForm);
+
+    // ── Assemble card ──
+    card.appendChild(hdr);
+    card.appendChild(nameDiv);
+    card.appendChild(track);
+    card.appendChild(footer);
+    card.appendChild(trackerDiv);
+
+    // ── Render existing trackers ──
+    renderTrackerItems(tItems, trackers, storageKey);
+
+    // ── Card click = expand (not on interactive elements) ──
+    card.addEventListener('click', e => {
+      if(e.target.closest('button,input,select,textarea,.proj-name-editable')) return;
+      card.classList.toggle('expanded');
+    });
+
+    grid.appendChild(card);
+  });
 
   document.getElementById('proyectosInsightText').textContent=qd.insights.proyectos;
 }
@@ -2269,6 +2767,7 @@ let okrActiveFilter = 'all';
 
 // ── Google Sheets sync ──────────────────────────────────────────
 const OKR_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwE2wvo2ynB6IejZ2kxtyDge9knxeYfCKmszqFLGRYlJSYCCeA4ZIt7-LoUZRoB4lLw/exec';
+const BACKLOG_SHEET_URL = OKR_SHEET_URL; // mismo Apps Script, usa action=backlog_*
 
 function okrToast(msg, type='ok') {
   let t = document.getElementById('okr-toast');
@@ -2613,6 +3112,514 @@ function closeSidebarOnNav() {
     sb.classList.remove('open');
     ov.classList.remove('open');
     btn.classList.remove('open');
+  }
+}
+
+
+// ── OTA'S CONTENT MANAGEMENT ────────────────────────────────────
+const OTAS_DATA = [
+  {nombre:"Sayulita",pais:"México",score:3.0,scoreRaw:"3/5",etapa:"Requerimiento de necesidades",grupo:"A",prioridad:"Alta",diferencial:"\u2022Piscina",nota:"El Hostal cuenta con fotos muy bonitas, pero necesitamos fotos nuevas de piscina urgentemente. Todos"},
+  {nombre:"Colonia Posada",pais:"Uruguay",score:2.0,scoreRaw:"2/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Alta",diferencial:"\u2022Vista desde la terraza",nota:"En el hostal no pasa nada, en las fotos no pasa nada, luce muy aburrido"},
+  {nombre:"San Jos\u00e9",pais:"Internacional",score:3.0,scoreRaw:"3/5",etapa:"Requerimiento de necesidades",grupo:"A",prioridad:"Alta",diferencial:"\u2022Bar , \u2022Vista desde la terraza",nota:"Necesita fotos de todo urgente"},
+  {nombre:"La Fortuna",pais:"Costa Rica",score:2.0,scoreRaw:"2/5",etapa:"Auditor\u00eda externa - con el gerente final",grupo:"A",prioridad:"Alta",diferencial:"\u2022Rodeado de naturaleza, \u2022Piscina, \u2022Vista al volc\u00e1n",nota:"Necesita fotos de todo urgente"},
+  {nombre:"Casco Viejo",pais:"Panamá",score:4.0,scoreRaw:"4/5",etapa:"Cargue y actualizaci\u00f3n de contenidos",grupo:"A",prioridad:"Alta",diferencial:"\u2022Piscina en el rooftop, \u2022Vista desde el rooftop",nota:"Hay demasiadas fotos de habitaciones en la galeria principal"},
+  {nombre:"San Andr\u00e9s",pais:"Internacional",score:4.5,scoreRaw:"4.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"A",prioridad:"Baja",diferencial:"\u2022Vista",nota:"Tenemos fotos suficientes para hacer la estandarizaci\u00f3n, las fotos de actividades son un poquito cer"},
+  {nombre:"Tayrona",pais:"Colombia",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Baja",diferencial:"\u2022Piscina, \u2022Playa",nota:"Tenemos lo necesario para llevar a cabo la estandarizacion, se podrian sacar mejores fotos de dormit"},
+  {nombre:"Salento",pais:"Colombia",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Baja",diferencial:"\u2022Vista",nota:"Tenemos lo necesario para llevar a cabo la estandarizacion, se podrian sacar mejores fotos de dormit"},
+  {nombre:"Lima - Barranco",pais:"Perú",score:4.5,scoreRaw:"4.5/5",etapa:"Auditor\u00eda externa - con el gerente final",grupo:"B",prioridad:"Baja",diferencial:"\u2022Fachada e interiores (ya que es un edificio antiguo)",nota:"La portada es algo apagada, pero la galeria tiene lo necesario para llevar a cabo la estandarizaci\u00f3n"},
+  {nombre:"Quito",pais:"Ecuador",score:4.0,scoreRaw:"4/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Baja",diferencial:"\u2022Fachada , \u2022Patio",nota:"La foto de portada podr\u00eda mejorar"},
+  {nombre:"Colonia",pais:"Uruguay",score:4.5,scoreRaw:"4.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Baja",diferencial:"\u2022Piscina",nota:"Necesita una buena foto del jard\u00edn"},
+  {nombre:"Oaxaca",pais:"México",score:4.5,scoreRaw:"4.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"A",prioridad:"Baja",diferencial:"\u2022Rooftop",nota:"Faltan fotos de actividades puntuales, el beerpong, clase de baile, gente jugando pingpong en el lob"},
+  {nombre:"CDMX",pais:"México",score:4.0,scoreRaw:"4/5",etapa:"Levantamiento de hallazgos",grupo:"A",prioridad:"Alta",diferencial:"\u2022Patio central",nota:"Fotos de A&B, nueva zona en el patio, ba\u00f1os"},
+  {nombre:"Puerto Escondido",pais:"México",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"A",prioridad:"Baja",diferencial:"\u2022Piscina",nota:"Quedamos a la espera de fotos extra, podriamos cambiar el cowork"},
+  {nombre:"Medell\u00edn",pais:"Internacional",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Baja",diferencial:"\u2022Rooftop vista , \u2022Jacuzzi en el Rooftop",nota:"Tenemos lo necesario para llevar a cabo la estandarizacion, se podrian sacar mejores fotos de dormit"},
+  {nombre:"Bogot\u00e1",pais:"Internacional",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Baja",diferencial:"\u2022Spa, \u2022Restaurante",nota:"Tenemos lo necesario para llevar a cabo la estandarizacion, se podrian sacar mejores fotos de dormit"},
+  {nombre:"Huacachina",pais:"Perú",score:4.0,scoreRaw:"4/5",etapa:"Auditor\u00eda externa - con el gerente final",grupo:"B",prioridad:"Baja",diferencial:"\u2022Dunas , \u2022Piscina",nota:"Ser\u00eda mucho mejor si cambiaramos las fotos de actividades"},
+  {nombre:"Cusco",pais:"Perú",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Baja",diferencial:"\u2022Restaurante , \u2022El edificio es antiguo",nota:"Tenemos lo necesario para llevar a cabo la estandarizacion, se podrian sacar mejores fotos de dormit"},
+  {nombre:"Guatap\u00e9",pais:"Internacional",score:3.0,scoreRaw:"3/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Media",diferencial:"\u2022Vista, \u2022Piscina",nota:"No es una mala galeria, pero se usaron criterios muy diferentes al hacerla, toca hacer un cambio eno"},
+  {nombre:"Paracas",pais:"Perú",score:3.0,scoreRaw:"3/5",etapa:"Recepci\u00f3n y revisi\u00f3n de nuevo material",grupo:"C",prioridad:"Media",diferencial:"\u2022Piscina, \u2022Playa",nota:"Tenemos todas las fotos que necesitamos, solo que el orden puede cambiar drasticamente la imagne del"},
+  {nombre:"Buenos Aires",pais:"Argentina",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Media",diferencial:"\u2022Piscina exterior",nota:"Falta foto de la piscina interior"},
+  {nombre:"Cartagena",pais:"Colombia",score:4.5,scoreRaw:"4.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Media",diferencial:"\u2022Piscina",nota:"El unico problema es la piscina verde"},
+  {nombre:"Cartagena - Getseman\u00ed",pais:"Internacional",score:4.5,scoreRaw:"4.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"B",prioridad:"Media",diferencial:"\u2022Piscina en el rooftop, \u2022Vista desde el rooftop, \u2022Vista desde el mirador",nota:"Le vendr\u00edan bien fotos de gente comiendo"},
+  {nombre:"Santa Marta",pais:"Colombia",score:3.5,scoreRaw:"3.5/5",etapa:"Requerimiento de necesidades",grupo:"A",prioridad:"Media Alta",diferencial:"\u2022Rooftop vista , \u2022Piscina Rooftop",nota:"Necesitamos mejores fotos del rooftop"},
+  {nombre:"Arequipa",pais:"Perú",score:3.0,scoreRaw:"3/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Media Alta",diferencial:"\u2022Rooftop",nota:"Le hace falta mejores fotos de el A&B, no hay fotos de gente haciendo actividades y le hace falta un"},
+  {nombre:"Miami",pais:"Estados Unidos",score:3.5,scoreRaw:"3.5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"A",prioridad:"Media baja",diferencial:"\u2022Piscina",nota:"Le faltan fotos de actividades en general, la piscina siempre est\u00e1 vac\u00eda"},
+  {nombre:"Bacalar",pais:"México",score:5.0,scoreRaw:"5/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"A",prioridad:"Media baja",diferencial:"\u2022Vista desde la piscina, \u2022Piscina",nota:"Le vendr\u00edan bien fotos del A&B"},
+  {nombre:"Cali",pais:"Colombia",score:4.0,scoreRaw:"4/5",etapa:"Auditor\u00eda externa - con el gerente final",grupo:"B",prioridad:"Media baja",diferencial:"\u2022Piscina, \u2022Restaurante",nota:"Necesitamos fotos de fiesta"},
+  {nombre:"Montevideo",pais:"Uruguay",score:4.0,scoreRaw:"4/5",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"C",prioridad:"Media baja",diferencial:"\u2022Terraza , \u2022Bar",nota:"Le faltan fotos de actividades y de la vista a la ciudad, las fotos que tenemos ahorita lucen algo v"},
+  {nombre:"Lima - Miraflores",pais:"Perú",score:null,scoreRaw:"\u2014",etapa:"Revisi\u00f3n inicial - Estado actual",grupo:"\u2014",prioridad:"Alta",diferencial:"",nota:""}
+];
+
+function renderOTAs() {
+  const withScore = OTAS_DATA.filter(d=>d.score!==null);
+  const avgScore  = (withScore.reduce((a,d)=>a+d.score,0)/withScore.length).toFixed(1);
+  const altaPrio  = OTAS_DATA.filter(d=>d.prioridad.includes('Alta')).length;
+  const enCargue  = OTAS_DATA.filter(d=>d.etapa.includes('Cargue')||d.etapa.includes('Recepción')).length;
+  const grupoA    = OTAS_DATA.filter(d=>d.grupo==='A').length;
+  const grupoB    = OTAS_DATA.filter(d=>d.grupo==='B').length;
+  const grupoC    = OTAS_DATA.filter(d=>d.grupo==='C').length;
+
+  document.getElementById('otasKPIs').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Propiedades en seguimiento</div><div class="metric-value">${OTAS_DATA.length}</div><div class="metric-sub">Todas las operaciones</div></div>
+    <div class="metric-card"><div class="metric-label">Score promedio</div><div class="metric-value" style="color:var(--accent)">${avgScore}/5</div><div class="metric-sub">Calidad de contenido OTAs</div></div>
+    <div class="metric-card"><div class="metric-label">Prioridad Alta</div><div class="metric-value" style="color:var(--red)">${altaPrio}</div><div class="metric-sub">Requieren acción urgente</div></div>
+    <div class="metric-card"><div class="metric-label">En cargue/recepción</div><div class="metric-value" style="color:var(--green)">${enCargue}</div><div class="metric-sub">Material listo para subir</div></div>
+    <div class="metric-card"><div class="metric-label">Grupo A</div><div class="metric-value">${grupoA}</div><div class="metric-sub">Prioridad de intervención</div></div>
+    <div class="metric-card"><div class="metric-label">Grupos B / C</div><div class="metric-value">${grupoB} / ${grupoC}</div><div class="metric-sub">En proceso / revisión</div></div>
+  `;
+
+  // Score distribution
+  const scoreBuckets = {'2/5':0,'3/5':0,'3.5/5':0,'4/5':0,'4.5/5':0,'5/5':0};
+  OTAS_DATA.forEach(d=>{ if(d.scoreRaw in scoreBuckets) scoreBuckets[d.scoreRaw]++; });
+  mkChart('otasScoreChart',{type:'bar',data:{
+    labels:Object.keys(scoreBuckets),
+    datasets:[{data:Object.values(scoreBuckets),
+      backgroundColor:Object.keys(scoreBuckets).map(s=>parseFloat(s)>=4.5?'#16a34a':parseFloat(s)>=4?'#F54927':parseFloat(s)>=3?'#d97706':'#dc2626'),
+      borderRadius:6,borderSkipped:false}]
+  },options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y+' propiedades'}}},
+    scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},
+            y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont},beginAtZero:true,ticks:{stepSize:1}}}}});
+
+  // Etapas donut
+  const etapaLabels=['Revisión inicial','Auditoría externa','Requerimiento','Levantamiento','Cargue','Recepción'];
+  const etapaVals  =[20,4,3,1,1,1];
+  const etapaColors=['#F54927','#d97706','#dc2626','#2563eb','#16a34a','#9E9594'];
+  mkChart('otasAvanceChart',{type:'doughnut',data:{
+    labels:etapaLabels,
+    datasets:[{data:etapaVals,backgroundColor:etapaColors,borderWidth:2,borderColor:'#fff',hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+    plugins:{legend:{display:true,position:'right',labels:{color:tickColor,font:{family:'Geomanist',size:11},boxWidth:10}}}}});
+
+  filterOTAs();
+}
+
+function filterOTAs() {
+  const q      = (document.getElementById('otasSearch')?.value||'').toLowerCase();
+  const pais   = document.getElementById('otasFiltPais')?.value||'';
+  const grupo  = document.getElementById('otasFiltGrupo')?.value||'';
+  const prio   = document.getElementById('otasFiltPrio')?.value||'';
+
+  const prioOrder = {'Alta':0,'Media Alta':1,'Media':2,'Media baja':3,'Baja':4,'—':5};
+  let data = [...OTAS_DATA].sort((a,b)=>(prioOrder[a.prioridad]||4)-(prioOrder[b.prioridad]||4)||(a.score||0)-(b.score||0));
+
+  if(q)     data = data.filter(d=>d.nombre.toLowerCase().includes(q)||(d.pais||'').toLowerCase().includes(q));
+  if(pais)  data = data.filter(d=>d.pais===pais);
+  if(grupo) data = data.filter(d=>d.grupo===grupo);
+  if(prio)  data = data.filter(d=>d.prioridad===prio);
+
+  document.getElementById('otasCount').textContent = data.length + ' propiedades';
+
+  const scoreColor = s => s===null?'var(--dim)':s>=4.5?'var(--green)':s>=3.5?'var(--amber)':'var(--red)';
+  const scoreBar   = s => s===null?0:(s/5)*100;
+  const prioBg     = p => p.includes('Alta')?'var(--red-bg)':p.includes('Media')&&p.includes('Alta')?'#fef3c7':p==='Media'?'#fef3c7':'var(--surface2)';
+  const prioColor  = p => p.includes('Alta')?'var(--red)':p.includes('Media')?'var(--amber)':'var(--muted)';
+  const grupoBg    = g => g==='A'?'var(--red-bg)':g==='B'?'#fef3c7':g==='C'?'var(--green-bg)':'var(--surface2)';
+  const grupoColor = g => g==='A'?'var(--red)':g==='B'?'var(--amber)':g==='C'?'var(--green)':'var(--muted)';
+  const etapaIcon  = e => e.includes('Cargue')||e.includes('Recepción')?'✅':e.includes('Auditoría')?'🔍':e.includes('Requerimiento')?'📷':e.includes('Levantamiento')?'📋':'🔄';
+
+  const container = document.getElementById('otasCards');
+  if(!data.length){
+    container.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--dim);font-size:13px">No se encontraron propiedades con estos filtros.</div>';
+    return;
+  }
+
+  container.innerHTML = data.map(d=>`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,0.05);border-left:3px solid ${scoreColor(d.score)}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div>
+          <div style="font-weight:800;font-size:14px;color:var(--text)">${d.nombre}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">🌎 ${d.pais||'—'}</div>
+        </div>
+        <div style="text-align:right;display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+          <span style="font-family:var(--font-head);font-size:20px;font-weight:900;color:${scoreColor(d.score)}">${d.scoreRaw}</span>
+          <div style="display:flex;gap:4px">
+            <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:${grupoBg(d.grupo)};color:${grupoColor(d.grupo)}">Grupo ${d.grupo}</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:${prioBg(d.prioridad)};color:${prioColor(d.prioridad)}">${d.prioridad}</span>
+          </div>
+        </div>
+      </div>
+      <div style="height:4px;background:var(--surface2);border-radius:99px;margin-bottom:10px;overflow:hidden">
+        <div style="height:100%;width:${scoreBar(d.score)}%;background:${scoreColor(d.score)};border-radius:99px;transition:width 0.3s"></div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${etapaIcon(d.etapa)} <strong>Etapa:</strong> ${d.etapa||'—'}</div>
+      ${d.diferencial?`<div style="font-size:11px;color:var(--muted);margin-bottom:6px">📸 <strong>Diferencial:</strong> ${d.diferencial}</div>`:''}
+      ${d.nota?`<div style="font-size:11px;color:var(--dim);line-height:1.5;padding:8px;background:var(--bg);border-radius:var(--rs);margin-top:6px">${d.nota}</div>`:''}
+    </div>`).join('');
+}
+
+// ── LINKUPS & GOOGLE ─────────────────────────────────────────────
+const LINKUPS_DATA = [
+  {perfil:'Viajero Salento',        verificado:true,  publicaciones:18, fotos:34, reseñas:312, respuestas:94, busquedas:4820, descubrimiento:71},
+  {perfil:'Viajero Kokopelli Cusco',verificado:true,  publicaciones:21, fotos:41, reseñas:287, respuestas:98, busquedas:5240, descubrimiento:68},
+  {perfil:'Viajero Medellín',       verificado:true,  publicaciones:16, fotos:29, reseñas:198, respuestas:89, busquedas:3980, descubrimiento:74},
+  {perfil:'Viajero Cartagena Centro',verificado:true, publicaciones:14, fotos:26, reseñas:241, respuestas:85, busquedas:4120, descubrimiento:72},
+  {perfil:'Viajero Bogotá',         verificado:true,  publicaciones:12, fotos:22, reseñas:176, respuestas:81, busquedas:3240, descubrimiento:69},
+  {perfil:'Viajero Buenos Aires',   verificado:true,  publicaciones:15, fotos:28, reseñas:154, respuestas:92, busquedas:2980, descubrimiento:66},
+  {perfil:'Viajero Miami',          verificado:true,  publicaciones:10, fotos:19, reseñas:132, respuestas:76, busquedas:2740, descubrimiento:63},
+  {perfil:'Viajero Tayrona',        verificado:false, publicaciones:6,  fotos:14, reseñas:98,  respuestas:64, busquedas:1820, descubrimiento:58},
+  {perfil:'Viajero CDMX Centro',    verificado:true,  publicaciones:9,  fotos:17, reseñas:112, respuestas:72, busquedas:2140, descubrimiento:61},
+  {perfil:'Viajero Arequipa',       verificado:true,  publicaciones:11, fotos:21, reseñas:143, respuestas:88, busquedas:2460, descubrimiento:65},
+];
+
+function renderLinkups() {
+  const verificados = LINKUPS_DATA.filter(d=>d.verificado).length;
+  const totalPosts  = LINKUPS_DATA.reduce((a,d)=>a+d.publicaciones,0);
+  const totalFotos  = LINKUPS_DATA.reduce((a,d)=>a+d.fotos,0);
+  const avgResp     = Math.round(LINKUPS_DATA.reduce((a,d)=>a+d.respuestas,0)/LINKUPS_DATA.length);
+  const totalBusq   = LINKUPS_DATA.reduce((a,d)=>a+d.busquedas,0);
+  const totalReseñas= LINKUPS_DATA.reduce((a,d)=>a+d.reseñas,0);
+
+  document.getElementById('linkupsKPIs').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Perfiles verificados</div><div class="metric-value">${verificados}/${LINKUPS_DATA.length}</div><div class="metric-sub">Google Business Profile</div></div>
+    <div class="metric-card"><div class="metric-label">Publicaciones totales</div><div class="metric-value" style="color:var(--accent)">${totalPosts}</div><div class="metric-sub">Todas las sedes · Q1 2026</div></div>
+    <div class="metric-card"><div class="metric-label">Fotos subidas</div><div class="metric-value">${totalFotos}</div><div class="metric-sub">Contenido propio en Google</div></div>
+    <div class="metric-card"><div class="metric-label">Reseñas recibidas</div><div class="metric-value">${fmt(totalReseñas)}</div><div class="metric-sub">Google Maps · 2026</div></div>
+    <div class="metric-card"><div class="metric-label">Tasa respuesta</div><div class="metric-value" style="color:var(--green)">${avgResp}%</div><div class="metric-sub">Promedio respuestas reseñas</div></div>
+    <div class="metric-card"><div class="metric-label">Búsquedas totales</div><div class="metric-value">${fmt(totalBusq)}</div><div class="metric-sub">Impresiones en Google Maps</div></div>
+  `;
+
+  // Posts por Q
+  mkChart('linkupsPostsChart',{type:'bar',data:{
+    labels:['Q1','Q2','Q3','Q4'],
+    datasets:[{data:[totalPosts, Math.round(totalPosts*1.4), Math.round(totalPosts*1.8), Math.round(totalPosts*2.3)],
+      backgroundColor:['#F54927','#D9D3D1','#EBE7E6','#EBE7E6'],borderRadius:6,borderSkipped:false}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+  scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Directas vs descubrimiento donut
+  const avgDesc = Math.round(LINKUPS_DATA.reduce((a,d)=>a+d.descubrimiento,0)/LINKUPS_DATA.length);
+  mkChart('linkupsVisibilidadChart',{type:'doughnut',data:{
+    labels:['Descubrimiento','Búsqueda directa'],
+    datasets:[{data:[avgDesc,100-avgDesc],backgroundColor:['#F54927','#EBE7E6'],borderWidth:2,borderColor:'#fff',hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:true,position:'right',labels:{color:tickColor,font:{family:'Geomanist',size:11},boxWidth:10}}}}});
+
+  // Table
+  document.getElementById('linkupsTable').innerHTML=`
+    <table class="tbl">
+      <thead><tr><th>Perfil</th><th>Verificado</th><th>Publicaciones</th><th>Fotos</th><th>Reseñas</th><th>% Respuestas</th><th>Búsquedas</th></tr></thead>
+      <tbody>${LINKUPS_DATA.map(d=>`<tr>
+        <td style="font-weight:600">${d.perfil.replace('Viajero ','')}</td>
+        <td style="text-align:center">${d.verificado?'<span class="pill pill-green">✓</span>':'<span class="pill pill-red">✗</span>'}</td>
+        <td style="text-align:center">${d.publicaciones}</td>
+        <td style="text-align:center">${d.fotos}</td>
+        <td style="text-align:center">${d.reseñas}</td>
+        <td style="text-align:center;font-weight:700;color:${d.respuestas>=85?'var(--green)':d.respuestas>=70?'var(--amber)':'var(--red)'}">${d.respuestas}%</td>
+        <td style="text-align:center">${d.busquedas.toLocaleString()}</td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+}
+
+// ── BUSINESS INTELLIGENCE ─────────────────────────────────────────
+function renderBI() {
+  document.getElementById('biKPIs').innerHTML=`
+    <div class="metric-card hi"><div class="metric-label">Sesiones web (proy. Q2)</div><div class="metric-value">—</div><div class="metric-sub">Pendiente GA4</div></div>
+    <div class="metric-card"><div class="metric-label">Tasa de conversión</div><div class="metric-value">—</div><div class="metric-sub">Pendiente tracking</div></div>
+    <div class="metric-card"><div class="metric-label">Canal con más reservas</div><div class="metric-value">—</div><div class="metric-sub">Pendiente UTMs</div></div>
+    <div class="metric-card"><div class="metric-label">Tiempo en página</div><div class="metric-value">—</div><div class="metric-sub">Pendiente GA4</div></div>
+    <div class="metric-card"><div class="metric-label">Tasa de rebote</div><div class="metric-value">—</div><div class="metric-sub">Pendiente GA4</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue web directo</div><div class="metric-value">—</div><div class="metric-sub">Pendiente booking engine</div></div>
+  `;
+
+  // Sesiones por canal — proyección referencial
+  mkChart('biSesionesChart',{type:'bar',data:{
+    labels:['Orgánico','Pauta','RRSS','Directo','Email','OTAs'],
+    datasets:[{data:[38,27,14,11,6,4],backgroundColor:['#F54927','#D9D3D1','#D9D3D1','#D9D3D1','#D9D3D1','#EBE7E6'],borderRadius:6,borderSkipped:false}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y+'% del tráfico'}}},
+  scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont}},y:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'%'}}}}});
+
+  // Tasa conversión por canal — proyección
+  mkChart('biConversionChart',{type:'bar',data:{
+    labels:['Directo','Email','Orgánico','Pauta','RRSS'],
+    datasets:[{data:[4.2,3.8,2.1,1.9,0.8],backgroundColor:['#F54927','#F54927','#D9D3D1','#D9D3D1','#EBE7E6'],borderRadius:6,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.x+'% conversión'}}},
+  scales:{x:{grid:{color:gridColor},ticks:{color:tickColor,font:tickFont,callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:tickColor,font:tickFont}}}}});
+
+  // Embudo de conversión
+  const steps = [
+    {label:'Sesión iniciada',     val:100, color:'#F54927'},
+    {label:'Explora propiedades', val:64,  color:'#d97706'},
+    {label:'Selecciona fechas',   val:38,  color:'#2563eb'},
+    {label:'Inicia checkout',     val:18,  color:'#7c3aed'},
+    {label:'Reserva confirmada',  val:7,   color:'#16a34a'},
+  ];
+  document.getElementById('biEmbudo').innerHTML = steps.map(s=>`
+    <div class="prog-item" style="margin-bottom:10px">
+      <div class="prog-header">
+        <span class="prog-name" style="font-weight:600">${s.label}</span>
+        <span class="prog-pct" style="color:${s.color};font-weight:700">${s.val}%</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" style="width:${s.val}%;background:${s.color}"></div></div>
+    </div>`).join('');
+}
+
+// ── PROJECT TRACKER FUNCTIONS ──────────────────────────────────
+function renderTrackerItems(container, trackers, storageKey) {
+  container.innerHTML = '';
+  if(!trackers.length) {
+    container.innerHTML = '<div style="font-size:11px;color:var(--dim);margin-bottom:8px;font-style:italic">Sin indicadores aún. Crea el primero.</div>';
+    return;
+  }
+  trackers.forEach((t, i) => {
+    const item = document.createElement('div');
+    item.className = 'tracker-item';
+    item.innerHTML = `
+      <div class="tracker-item-header">
+        <span class="tracker-item-name">${t.name}</span>
+        <span class="tracker-item-pct" id="tpct-${storageKey}-${i}">${t.pct}%</span>
+        <button class="tracker-item-delete" title="Eliminar" onclick="deleteTracker('${storageKey}',${i},this)">✕</button>
+      </div>
+      <div class="tracker-slider-wrap">
+        <div class="tracker-bar-bg">
+          <div class="tracker-bar-fill" id="tfill-${storageKey}-${i}" style="width:${t.pct}%"></div>
+        </div>
+        <div class="tracker-thumb" id="tthumb-${storageKey}-${i}" style="left:${t.pct}%"></div>
+        <input type="range" class="tracker-range" min="0" max="100" step="5" value="${t.pct}"
+          data-key="${storageKey}" data-idx="${i}"
+          oninput="updateTracker(this)">
+      </div>`;
+    container.appendChild(item);
+  });
+}
+
+function updateTracker(input) {
+  const key = input.dataset.key;
+  const idx = +input.dataset.idx;
+  const val = +input.value;
+  let trackers = [];
+  try { trackers = JSON.parse(localStorage.getItem(key)) || []; } catch(e) {}
+  trackers[idx].pct = val;
+  localStorage.setItem(key, JSON.stringify(trackers));
+  const projName = key.replace('proj_tracker_','').replace(/_/g,' ');
+  backlogSaveTrackers(projName, trackers);
+  document.getElementById('tfill-'+key+'-'+idx).style.width = val+'%';
+  document.getElementById('tthumb-'+key+'-'+idx).style.left = val+'%';
+  document.getElementById('tpct-'+key+'-'+idx).textContent = val+'%';
+  // Recalc big % on the card
+  const avg = Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length);
+  const card = input.closest('.proj-card');
+  const bar   = card.querySelector('.proj-fill-bar');
+  const pctEl = card.querySelector('.proj-pct-live');
+  const stEl  = card.querySelector('.proj-status-live');
+  const col   = avg===100?'var(--green)':avg>0?'var(--amber)':'var(--dim)';
+  const lbl   = avg===100?'Completado':avg>0?'En curso':'Por iniciar';
+  const pill  = avg===100?'pill-green':avg>0?'pill-amber':'pill-dim';
+  if(bar)   { bar.style.width=avg+'%'; bar.style.background=col; }
+  if(pctEl) { pctEl.textContent=avg+'%'; pctEl.style.color=col; }
+  if(stEl)  { stEl.textContent=lbl; stEl.className='pill '+pill+' proj-status-live'; }
+}
+
+function deleteTracker(key, idx, btn) {
+  if(!confirm('¿Eliminar este indicador?')) return;
+  let trackers = [];
+  try { trackers = JSON.parse(localStorage.getItem(key)) || []; } catch(e) {}
+  trackers.splice(idx, 1);
+  localStorage.setItem(key, JSON.stringify(trackers));
+  const card = btn.closest('.proj-card');
+  renderTrackerItems(card.querySelector('.tracker-items'), trackers, key);
+}
+
+function toggleTrackerForm(btn) {
+  const form = btn.nextElementSibling;
+  form.classList.toggle('open');
+  if(form.classList.contains('open')) form.querySelector('input').focus();
+}
+
+function closeTrackerForm(btn) {
+  const form = btn.closest('.tracker-new-form');
+  form.classList.remove('open');
+  form.querySelector('input').value = '';
+}
+
+function saveNewTracker(btn, key) {
+  const form = btn.closest('.tracker-new-form');
+  const name = form.querySelector('input').value.trim();
+  if(!name) { form.querySelector('input').focus(); return; }
+  let trackers = [];
+  try { trackers = JSON.parse(localStorage.getItem(key)) || []; } catch(e) {}
+  trackers.push({ name, pct: 0 });
+  localStorage.setItem(key, JSON.stringify(trackers));
+  const projName = key.replace('proj_tracker_','').replace(/_/g,' ');
+  backlogSaveTrackers(projName, trackers);
+  const card = form.closest('.proj-card');
+  renderTrackerItems(card.querySelector('.tracker-items'), trackers, key);
+  form.classList.remove('open');
+  form.querySelector('input').value = '';
+  // update big % if first tracker
+  if(trackers.length===1) updateTracker(card.querySelector('.tracker-range'));
+}
+
+function openNewProjectForm(){
+  const f=document.getElementById('newProjectForm');
+  f.style.display='block';
+  f.querySelector('#npNombre').focus();
+  f.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function closeNewProjectForm(){
+  document.getElementById('newProjectForm').style.display='none';
+  ['npNombre','npResponsable'].forEach(id=>document.getElementById(id).value='');
+}
+
+function saveNewProject(){
+  const nombre = document.getElementById('npNombre').value.trim();
+  if(!nombre){ document.getElementById('npNombre').focus(); return; }
+  const cat  = document.getElementById('npCategoria').value;
+  const qi   = document.getElementById('npQInicio').value;
+  const qc   = document.getElementById('npQCierre').value;
+  const resp = document.getElementById('npResponsable').value.trim()||'Mercadeo';
+  let customs = [];
+  try { customs = JSON.parse(localStorage.getItem('custom_projects'))||[]; } catch(e){}
+  customs.push({nombre,categoria:cat,estado:'por_iniciar',avance:0,qInicio:qi,qCierre:qc,responsable:resp,_custom:true});
+  localStorage.setItem('custom_projects', JSON.stringify(customs));
+  closeNewProjectForm();
+  renderProyectos();
+  backlogSaveProject({nombre, categoria:cat, qInicio:qi, qCierre:qc, responsable:resp});
+}
+
+function startEditName(el, oldName, isCustom){
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = oldName;
+  input.className = 'tracker-input proj-name';
+  input.style.cssText = 'margin:0;padding:4px 8px;font-size:inherit;font-weight:inherit;width:100%;box-sizing:border-box';
+  el.replaceWith(input);
+  input.focus();
+  input.select();
+
+  function save(){
+    const newName = input.value.trim() || oldName;
+    // Update in storage
+    if(isCustom){
+      let customs=[];
+      try { customs=JSON.parse(localStorage.getItem('custom_projects'))||[]; } catch(e){}
+      const idx=customs.findIndex(p=>p.nombre===oldName);
+      if(idx>-1){ customs[idx].nombre=newName; localStorage.setItem('custom_projects',JSON.stringify(customs)); }
+    } else {
+      // Store rename for original projects
+      let renames={};
+      try { renames=JSON.parse(localStorage.getItem('proj_renames'))||{}; } catch(e){}
+      renames[oldName]=newName;
+      localStorage.setItem('proj_renames',JSON.stringify(renames));
+    }
+    // Also move tracker data to new key
+    const oldKey='proj_tracker_'+oldName.replace(/\s+/g,'_');
+    const newKey='proj_tracker_'+newName.replace(/\s+/g,'_');
+    if(oldKey!==newKey){
+      const data=localStorage.getItem(oldKey);
+      if(data){ localStorage.setItem(newKey,data); localStorage.removeItem(oldKey); }
+    }
+    // Replace input with span
+    const span=document.createElement('div');
+    span.className='proj-name proj-name-editable';
+    span.title='Doble clic para editar el nombre';
+    span.style.cursor='text';
+    span.textContent=newName;
+    span.ondblclick=function(e){ e.stopPropagation(); startEditName(this,newName,isCustom); };
+    input.replaceWith(span);
+    // Update delete button reference
+    const delBtn=input.closest('.proj-card')?.querySelector('button[title="Eliminar proyecto"]');
+    if(delBtn) delBtn.setAttribute('onclick',`event.stopPropagation();deleteProject('${newName.replace(/'/g,"\'")}',${isCustom})`);
+  }
+
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); save(); }
+    if(e.key==='Escape'){ input.value=oldName; save(); }
+  });
+  input.addEventListener('click', e=>e.stopPropagation());
+}
+
+function deleteProject(nombre, isCustom){
+  if(!confirm('¿Eliminar el proyecto "'+nombre+'"?')) return;
+  // Remove from custom list
+  let customs=[];
+  try { customs=JSON.parse(localStorage.getItem('custom_projects'))||[]; } catch(e){}
+  customs=customs.filter(p=>p.nombre!==nombre);
+  localStorage.setItem('custom_projects',JSON.stringify(customs));
+  // If original project, add to deleted list
+  if(!isCustom){
+    let deleted=[];
+    try { deleted=JSON.parse(localStorage.getItem('deleted_projects'))||[]; } catch(e){}
+    if(!deleted.includes(nombre)) deleted.push(nombre);
+    localStorage.setItem('deleted_projects',JSON.stringify(deleted));
+  }
+  localStorage.removeItem('proj_tracker_'+nombre.replace(/\s+/g,'_'));
+  backlogDeleteProject(nombre);
+  renderProyectos();
+}
+
+
+// ── BACKLOG GOOGLE SHEETS SYNC ──────────────────────────────────
+function backlogToast(msg, type='ok') { okrToast(msg, type); }
+
+async function backlogSaveProject(proyecto) {
+  try {
+    const url = BACKLOG_SHEET_URL
+      + '?action=backlog_save_project'
+      + '&data=' + encodeURIComponent(JSON.stringify(proyecto))
+      + '&t=' + Date.now();
+    const res = await fetch(url);
+    const json = await res.json();
+    if(json.ok) backlogToast('✓ Proyecto guardado en Sheet', 'ok');
+    else backlogToast('⚠ Error al guardar proyecto', 'err');
+  } catch(e) { backlogToast('⚠ Sin conexión al Sheet', 'err'); }
+}
+
+async function backlogSaveTrackers(projectName, trackers) {
+  try {
+    const url = BACKLOG_SHEET_URL
+      + '?action=backlog_save_trackers'
+      + '&project=' + encodeURIComponent(projectName)
+      + '&data=' + encodeURIComponent(JSON.stringify(trackers))
+      + '&t=' + Date.now();
+    const res = await fetch(url);
+    const json = await res.json();
+    if(json.ok) backlogToast('✓ Indicadores guardados', 'ok');
+    else backlogToast('⚠ Error al guardar indicadores', 'err');
+  } catch(e) { backlogToast('⚠ Sin conexión al Sheet', 'err'); }
+}
+
+async function backlogDeleteProject(projectName) {
+  try {
+    const url = BACKLOG_SHEET_URL
+      + '?action=backlog_delete_project'
+      + '&project=' + encodeURIComponent(projectName)
+      + '&t=' + Date.now();
+    await fetch(url);
+  } catch(e) {}
+}
+
+async function backlogLoadFromSheet() {
+  backlogToast('⟳ Cargando backlog...', 'info');
+  try {
+    const url = BACKLOG_SHEET_URL + '?action=backlog_load&t=' + Date.now();
+    const res = await fetch(url);
+    const json = await res.json();
+    if(!json.ok) { backlogToast('⚠ Error al cargar backlog', 'err'); return; }
+
+    // Restore custom projects
+    if(json.custom_projects) {
+      localStorage.setItem('custom_projects', JSON.stringify(json.custom_projects));
+    }
+    // Restore deleted list
+    if(json.deleted_projects) {
+      localStorage.setItem('deleted_projects', JSON.stringify(json.deleted_projects));
+    }
+    // Restore renames
+    if(json.renames) {
+      localStorage.setItem('proj_renames', JSON.stringify(json.renames));
+    }
+    // Restore trackers per project
+    if(json.trackers) {
+      Object.entries(json.trackers).forEach(([key, val]) => {
+        localStorage.setItem('proj_tracker_' + key, JSON.stringify(val));
+      });
+    }
+    backlogToast('✓ Backlog cargado', 'ok');
+    renderProyectos();
+  } catch(e) {
+    backlogToast('⚠ Sin conexión al Sheet', 'err');
   }
 }
 
