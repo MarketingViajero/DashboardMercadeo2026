@@ -136,6 +136,9 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
   @page {
     size: A4 landscape;
     margin: 10mm 14mm;
+    /* Quitar header y footer del navegador */
+    @top-center { content: none; }
+    @bottom-center { content: none; }
   }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
 
@@ -366,6 +369,9 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
   @page {
     size: A4 landscape;
     margin: 10mm 14mm;
+    /* Quitar header y footer del navegador */
+    @top-center { content: none; }
+    @bottom-center { content: none; }
   }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
 
