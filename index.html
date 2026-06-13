@@ -131,6 +131,19 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
 .tracker-save-btn { font-size:11px; font-weight:700; padding:5px 14px; background:var(--accent); color:#fff; border:none; border-radius:var(--rs); cursor:pointer; font-family:var(--font); }
 .tracker-save-btn:hover { background:var(--accent2); }
 .tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
+/* ── PDF EXPORT ── */
+@media print {
+  body { margin: 0; }
+  .sidebar, .mob-topbar, .sidebar-overlay { display: none !important; }
+  main { margin-left: 0 !important; max-width: 100% !important; padding: 24px !important; }
+  .page { display: block !important; opacity: 1 !important; }
+  .page:not(.active) { display: none !important; }
+  .pdf-export-btn, button[onclick*="openNewProject"], button[onclick*="backlogLoad"],
+  button[onclick*="okrForceSync"], .obs-toggle-btn, .tracker-add-btn { display: none !important; }
+  canvas { max-width: 100% !important; }
+  .chart-card, .metric-card, .platform-block, .obj-block { break-inside: avoid; }
+  @page { margin: 15mm; size: A4; }
+}
 /* Quarter selector */
 .q-all-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:7px 12px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:8px;letter-spacing:0.03em;transition:background 0.15s}
 .q-all-btn:hover{background:var(--accent2)}
@@ -174,6 +187,19 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
 .tracker-save-btn { font-size:11px; font-weight:700; padding:5px 14px; background:var(--accent); color:#fff; border:none; border-radius:var(--rs); cursor:pointer; font-family:var(--font); }
 .tracker-save-btn:hover { background:var(--accent2); }
 .tracker-cancel-btn { font-size:11px; font-weight:600; padding:5px 10px; background:none; color:var(--muted); border:none; cursor:pointer; font-family:var(--font); margin-left:4px; }
+/* ── PDF EXPORT ── */
+@media print {
+  body { margin: 0; }
+  .sidebar, .mob-topbar, .sidebar-overlay { display: none !important; }
+  main { margin-left: 0 !important; max-width: 100% !important; padding: 24px !important; }
+  .page { display: block !important; opacity: 1 !important; }
+  .page:not(.active) { display: none !important; }
+  .pdf-export-btn, button[onclick*="openNewProject"], button[onclick*="backlogLoad"],
+  button[onclick*="okrForceSync"], .obs-toggle-btn, .tracker-add-btn { display: none !important; }
+  canvas { max-width: 100% !important; }
+  .chart-card, .metric-card, .platform-block, .obj-block { break-inside: avoid; }
+  @page { margin: 15mm; size: A4; }
+}
 /* Quarter selector */
 .q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
 .q-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:500}
@@ -1078,6 +1104,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
         <span style="font-size:16px;line-height:1">+</span> Nuevo proyecto
       </button>
       <button onclick="backlogLoadFromSheet()" style="font-size:12px;font-weight:600;padding:6px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;font-family:var(--font)">↻ Sincronizar</button>
+      <button onclick="exportPDF()" style="font-size:12px;font-weight:600;padding:6px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;font-family:var(--font)">⬇ Export</button>
     </div>
   </div>
 
@@ -1119,14 +1146,37 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
     </div>
   </div>
 
+  <div class="section-title">Resultados generales</div>
+
+  <!-- Big global % -->
+  <div style="display:flex;align-items:center;gap:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 28px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,0.05)">
+    <div style="position:relative;width:96px;height:96px;flex-shrink:0">
+      <svg viewBox="0 0 96 96" width="96" height="96" style="transform:rotate(-90deg)">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="var(--surface2)" stroke-width="9"/>
+        <circle id="globalProjRing" cx="48" cy="48" r="40" fill="none" stroke="var(--accent)" stroke-width="9"
+          stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" style="transition:stroke-dashoffset 0.5s ease"/>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:20px;font-weight:900;color:var(--text)" id="globalProjPct">0%</div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Cumplimiento global de Mercadeo</div>
+      <div style="font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Promedio de todos los proyectos activos</div>
+      <div id="globalProjBars" style="display:flex;gap:16px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+
   <div class="metrics-grid" id="proyectosMetrics"></div>
 
-  <div class="section-title">Estado de proyectos</div>
+  <div class="section-title">Proyectos</div>
   <div id="proyectosGrid" class="proj-grid"></div>
 
-  <div class="insight">
-    <div class="insight-label">📋 Gestión del backlog</div>
-    <div class="insight-text" id="proyectosInsightText"></div>
+  <div class="insight" style="position:relative">
+    <div class="insight-label">📋 Apreciaciones del equipo</div>
+    <textarea id="proyectosInsightTextarea"
+      placeholder="Escribe aquí tus apreciaciones sobre el estado general de los proyectos..."
+      oninput="saveInsightText(this.value)"
+      style="width:100%;min-height:80px;font-size:13px;color:var(--text);background:transparent;border:none;outline:none;resize:vertical;font-family:var(--font);line-height:1.6;padding:0;margin-top:4px"></textarea>
+    <div style="font-size:10px;color:var(--dim);margin-top:4px" id="insightSaveStatus"></div>
   </div>
 </section>
 
@@ -2109,9 +2159,16 @@ function renderProyectos(){
     .map(p=>renames[p.nombre]?{...p,nombre:renames[p.nombre],_origKey:p.nombre}:p);
   const projs = [...originals, ...customProjs];
 
-  const completados=projs.filter(p=>p.estado==='completado').length;
-  const enCurso=projs.filter(p=>p.estado==='en_curso').length;
-  const porIniciar=projs.filter(p=>p.estado==='por_iniciar').length;
+  // Calculate real status from tracker averages
+  function getProjAvance(p) {
+    const key = 'proj_tracker_' + p.nombre.replace(/\s+/g,'_');
+    let trackers = [];
+    try { trackers = JSON.parse(localStorage.getItem(key))||[]; } catch(e){}
+    return trackers.length ? Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length) : 0;
+  }
+  const completados = projs.filter(p=>getProjAvance(p)===100).length;
+  const enCurso     = projs.filter(p=>{ const a=getProjAvance(p); return a>0&&a<100; }).length;
+  const porIniciar  = projs.filter(p=>getProjAvance(p)===0).length;
 
   document.getElementById('proyectosMetrics').innerHTML=`
     <div class="metric-card hi"><div class="metric-label">Total proyectos</div><div class="metric-value">${projs.length}</div><div class="metric-sub">En el trimestre</div></div>
@@ -2261,7 +2318,10 @@ function renderProyectos(){
     grid.appendChild(card);
   });
 
-  document.getElementById('proyectosInsightText').textContent=qd.insights.proyectos;
+  // Load saved insight text
+  const savedInsight = localStorage.getItem('proyectos_insight_text') || qd.insights.proyectos;
+  const ta = document.getElementById('proyectosInsightTextarea');
+  if(ta) ta.value = savedInsight;
 }
 
 // ── OPERACIONES ──────────────────────────────────────────────
@@ -3407,6 +3467,82 @@ function updateTracker(input) {
   if(bar)   { bar.style.width=avg+'%'; bar.style.background=col; }
   if(pctEl) { pctEl.textContent=avg+'%'; pctEl.style.color=col; }
   if(stEl)  { stEl.textContent=lbl; stEl.className='pill '+pill+' proj-status-live'; }
+  // Refresh top KPIs
+  refreshProyectosKPIs();
+}
+
+function refreshProyectosKPIs() {
+  const grid = document.getElementById('proyectosGrid');
+  if(!grid) return;
+  const cards = grid.querySelectorAll('.proj-card');
+  let completados=0, enCurso=0, porIniciar=0, totalPct=0, count=0;
+  cards.forEach(card => {
+    const pctEl = card.querySelector('.proj-pct-live');
+    if(!pctEl) return;
+    const pct = parseInt(pctEl.textContent)||0;
+    totalPct += pct; count++;
+    if(pct===100) completados++;
+    else if(pct>0) enCurso++;
+    else porIniciar++;
+  });
+  const total = cards.length;
+  const globalPct = count>0 ? Math.round(totalPct/count) : 0;
+
+  // Update global ring
+  const ring = document.getElementById('globalProjRing');
+  const label = document.getElementById('globalProjPct');
+  if(ring) {
+    const circ = 251.3;
+    ring.style.strokeDashoffset = circ - (globalPct/100)*circ;
+    ring.style.stroke = globalPct===100?'var(--green)':globalPct>=50?'var(--accent)':'var(--amber)';
+  }
+  if(label) label.textContent = globalPct+'%';
+
+  // Mini bars by status
+  const barsEl = document.getElementById('globalProjBars');
+  if(barsEl) barsEl.innerHTML = [
+    {label:'Completados', val:completados, color:'var(--green)'},
+    {label:'En curso',    val:enCurso,     color:'var(--accent)'},
+    {label:'Por iniciar', val:porIniciar,  color:'var(--dim)'},
+  ].map(b=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px">
+    <span style="width:10px;height:10px;border-radius:50%;background:${b.color};flex-shrink:0"></span>
+    <span style="color:var(--muted)">${b.label}</span>
+    <span style="font-weight:800;color:var(--text)">${b.val}</span>
+  </div>`).join('');
+
+  const metricsEl = document.getElementById('proyectosMetrics');
+  if(!metricsEl) return;
+  metricsEl.innerHTML = `
+    <div class="metric-card hi"><div class="metric-label">Total proyectos</div><div class="metric-value">${total}</div><div class="metric-sub">En el trimestre</div></div>
+    <div class="metric-card"><div class="metric-label">Completados</div><div class="metric-value">${completados}</div><div class="metric-sub metric-up">✓ Entregados</div></div>
+    <div class="metric-card"><div class="metric-label">En curso</div><div class="metric-value">${enCurso}</div><div class="metric-sub">Activos</div></div>
+    <div class="metric-card"><div class="metric-label">Por iniciar</div><div class="metric-value">${porIniciar}</div><div class="metric-sub">En backlog</div></div>
+  `;
+}
+
+function saveInsightText(val) {
+  localStorage.setItem('proyectos_insight_text', val);
+  const status = document.getElementById('insightSaveStatus');
+  if(status) { status.textContent = '↻ Guardando...'; }
+  clearTimeout(window._insightDebounce);
+  window._insightDebounce = setTimeout(async () => {
+    try {
+      const url = BACKLOG_SHEET_URL
+        + '?action=backlog_save_config'
+        + '&key=apreciaciones'
+        + '&val=' + encodeURIComponent(val)
+        + '&t=' + Date.now();
+      const res = await fetch(url);
+      const json = await res.json();
+      if(status) {
+        status.textContent = json.ok ? '✓ Guardado en Sheet' : '⚠ Error al guardar';
+        clearTimeout(status._t);
+        status._t = setTimeout(()=>status.textContent='', 3000);
+      }
+    } catch(e) {
+      if(status) { status.textContent = '⚠ Sin conexión'; status._t = setTimeout(()=>status.textContent='',3000); }
+    }
+  }, 900);
 }
 
 function deleteTracker(key, idx, btn) {
@@ -3616,11 +3752,42 @@ async function backlogLoadFromSheet() {
         localStorage.setItem('proj_tracker_' + key, JSON.stringify(val));
       });
     }
+    // Restore apreciaciones
+    if(json.apreciaciones !== undefined) {
+      localStorage.setItem('proyectos_insight_text', json.apreciaciones);
+      const ta = document.getElementById('proyectosInsightTextarea');
+      if(ta) ta.value = json.apreciaciones;
+    }
     backlogToast('✓ Backlog cargado', 'ok');
     renderProyectos();
   } catch(e) {
     backlogToast('⚠ Sin conexión al Sheet', 'err');
   }
+}
+
+// ── PDF EXPORT ──────────────────────────────────────────────────
+function exportPDF() {
+  // Add a temporary title with date
+  const now = new Date().toLocaleDateString('es-CO', {year:'numeric',month:'long',day:'numeric'});
+  const activePage = document.querySelector('.page.active');
+  const pageTitle = activePage ? activePage.querySelector('.page-title')?.textContent : 'Dashboard';
+
+  // Show a toast
+  okrToast('⬇ Generando PDF...', 'info');
+
+  // Small delay to let charts render
+  setTimeout(() => {
+    const titleEl = document.createElement('div');
+    titleEl.id = 'pdf-header-temp';
+    titleEl.style.cssText = 'display:none;font-family:Geomanist,sans-serif;font-size:11px;color:#9E9594;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #EBE7E6';
+    titleEl.textContent = 'Viajero Hostels · Dashboard Mercadeo 2026 · Exportado el ' + now;
+    document.querySelector('main').prepend(titleEl);
+
+    window.print();
+
+    // Remove after print
+    setTimeout(() => titleEl.remove(), 1000);
+  }, 300);
 }
 
 // ── INIT ──────────────────────────────────────────────
