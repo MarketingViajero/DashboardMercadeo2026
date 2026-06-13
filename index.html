@@ -298,11 +298,26 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
   #otasCards { grid-template-columns: repeat(4,1fr) !important; gap: 6px !important; }
 
   /* ── Global proj ring ── */
-  #globalProjRing, #globalProjPct { display: block !important; }
+  #globalProjRingWrap { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
   /* ── Sentiment ── */
   .platform-block.ig, .platform-block.tk, .platform-block.li { break-inside: avoid; }
 }
+.pdm-section-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.pdm-field-label{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px}
+.pdm-field-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-family:var(--font);font-size:12px;color:var(--text);outline:none}
+.pdm-field-input:focus{border-color:var(--accent)}
+.pdm-photo-slot{aspect-ratio:1;border-radius:var(--rs);border:1.5px dashed var(--border2);background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s}
+.pdm-photo-slot:hover{border-color:var(--accent)}
+.pdm-photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pdm-photo-slot .pdm-photo-remove{position:absolute;top:3px;right:3px;background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+.pdm-photo-slot:hover .pdm-photo-remove{display:flex}
+.pdm-link-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg);border-radius:var(--rs);margin-bottom:6px}
+.pdm-link-item a{flex:1;font-size:12px;color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdm-link-item a:hover{text-decoration:underline}
+.pdm-link-remove{background:none;border:none;cursor:pointer;color:var(--dim);font-size:11px;padding:2px 5px;border-radius:3px}
+.pdm-link-remove:hover{color:var(--red)}
+/* Quarter selector */
 /* Quarter selector */
 .q-all-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:7px 12px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;margin-bottom:8px;letter-spacing:0.03em;transition:background 0.15s}
 .q-all-btn:hover{background:var(--accent2)}
@@ -513,11 +528,26 @@ input.tracker-range { position:absolute; width:100%; opacity:0; cursor:pointer; 
   #otasCards { grid-template-columns: repeat(4,1fr) !important; gap: 6px !important; }
 
   /* ── Global proj ring ── */
-  #globalProjRing, #globalProjPct { display: block !important; }
+  #globalProjRingWrap { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
   /* ── Sentiment ── */
   .platform-block.ig, .platform-block.tk, .platform-block.li { break-inside: avoid; }
 }
+.pdm-section-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.pdm-field-label{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px}
+.pdm-field-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:6px 10px;font-family:var(--font);font-size:12px;color:var(--text);outline:none}
+.pdm-field-input:focus{border-color:var(--accent)}
+.pdm-photo-slot{aspect-ratio:1;border-radius:var(--rs);border:1.5px dashed var(--border2);background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s}
+.pdm-photo-slot:hover{border-color:var(--accent)}
+.pdm-photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pdm-photo-slot .pdm-photo-remove{position:absolute;top:3px;right:3px;background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+.pdm-photo-slot:hover .pdm-photo-remove{display:flex}
+.pdm-link-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg);border-radius:var(--rs);margin-bottom:6px}
+.pdm-link-item a{flex:1;font-size:12px;color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdm-link-item a:hover{text-decoration:underline}
+.pdm-link-remove{background:none;border:none;cursor:pointer;color:var(--dim);font-size:11px;padding:2px 5px;border-radius:3px}
+.pdm-link-remove:hover{color:var(--red)}
+/* Quarter selector */
 /* Quarter selector */
 .q-selector{padding:16px 22px;border-bottom:1px solid var(--border)}
 .q-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:500}
@@ -835,7 +865,7 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
     <a class="nav-item nav-sub" data-page="proyectos" onclick="showPage('proyectos',this)">
       <span class="nav-dot"></span>Backlog
     </a>
-    <a class="nav-item nav-sub" data-page="okrs" onclick="showPage('okrs',this)">
+<a class="nav-item nav-sub" data-page="okrs" onclick="showPage('okrs',this)">
       <span class="nav-dot"></span>OKR Tracker
     </a>
 
@@ -1468,13 +1498,8 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
 
   <!-- Big global % -->
   <div style="display:flex;align-items:center;gap:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 28px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,0.05)">
-    <div style="position:relative;width:96px;height:96px;flex-shrink:0">
-      <svg viewBox="0 0 96 96" width="96" height="96" style="transform:rotate(-90deg)">
-        <circle cx="48" cy="48" r="40" fill="none" stroke="var(--surface2)" stroke-width="9"/>
-        <circle id="globalProjRing" cx="48" cy="48" r="40" fill="none" stroke="var(--accent)" stroke-width="9"
-          stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" style="transition:stroke-dashoffset 0.5s ease"/>
-      </svg>
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:20px;font-weight:900;color:var(--text)" id="globalProjPct">0%</div>
+    <div id="globalProjRingWrap" style="position:relative;width:96px;height:96px;flex-shrink:0;border-radius:50%;background:conic-gradient(#F54927 0%, #EBE7E6 0%);display:flex;align-items:center;justify-content:center">
+      <div style="width:74px;height:74px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:20px;font-weight:900;color:var(--text)" id="globalProjPct">0%</div>
     </div>
     <div>
       <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Cumplimiento global de Mercadeo</div>
@@ -1724,6 +1749,9 @@ main{margin-left:var(--sidebar);flex:1;padding:36px 40px;max-width:calc(100vw - 
   <div id="okr-app"></div>
   <div class="okr-no-results" id="okr-no-results">No hay KRs para este responsable en este objetivo.</div>
 </section>
+
+
+
 
 
 </main>
@@ -2626,6 +2654,15 @@ function renderProyectos(){
 
     // ── Render existing trackers ──
     renderTrackerItems(tItems, trackers, storageKey);
+
+    // ── "Ver detalle" link ──
+    const detailBtn = document.createElement('span');
+    detailBtn.textContent = 'Ver detalle →';
+    detailBtn.style.cssText = 'display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;transition:opacity 0.15s';
+    detailBtn.addEventListener('mouseenter', ()=>{ detailBtn.style.opacity='0.7'; });
+    detailBtn.addEventListener('mouseleave', ()=>{ detailBtn.style.opacity='1'; });
+    detailBtn.addEventListener('click', e => { e.stopPropagation(); openProjDetail(p, storageKey); });
+    footer.appendChild(detailBtn);
 
     // ── Card click = expand (not on interactive elements) ──
     card.addEventListener('click', e => {
@@ -3817,15 +3854,14 @@ function refreshProyectosKPIs() {
   const total = cards.length;
   const globalPct = count>0 ? Math.round(totalPct/count) : 0;
 
-  // Update global ring
-  const ring = document.getElementById('globalProjRing');
+  // Update global ring (conic-gradient — prints correctly)
+  const ringWrap = document.getElementById('globalProjRingWrap');
   const label = document.getElementById('globalProjPct');
-  if(ring) {
-    const circ = 251.3;
-    ring.style.strokeDashoffset = circ - (globalPct/100)*circ;
-    ring.style.stroke = globalPct===100?'var(--green)':globalPct>=50?'var(--accent)':'var(--amber)';
+  const ringColor = globalPct===100?'#16a34a':globalPct>=60?'#F54927':'#d97706';
+  if(ringWrap) {
+    ringWrap.style.background = `conic-gradient(${ringColor} ${globalPct}%, #EBE7E6 ${globalPct}%)`;
   }
-  if(label) label.textContent = globalPct+'%';
+  if(label) { label.textContent = globalPct+'%'; label.style.color = ringColor; }
 
   // Mini bars by status
   const barsEl = document.getElementById('globalProjBars');
@@ -4121,9 +4157,498 @@ function exportPDF() {
   }, 400);
 }
 
+
+// ── RESUMEN DE PROYECTOS ─────────────────────────────────────────
+function renderResumenProyectos() {
+  const qd = getMerged();
+  document.getElementById('resumenProjBadge').innerHTML = qBadgeHTML();
+
+  // Load projects same as backlog
+  let customProjs=[], deletedProjs=[], renames={};
+  try { customProjs=JSON.parse(localStorage.getItem('custom_projects'))||[]; } catch(e){}
+  try { deletedProjs=JSON.parse(localStorage.getItem('deleted_projects'))||[]; } catch(e){}
+  try { renames=JSON.parse(localStorage.getItem('proj_renames'))||{}; } catch(e){}
+
+  const originals = qd.proyectos
+    .filter(p=>!deletedProjs.includes(p.nombre))
+    .map(p=>renames[p.nombre]?{...p,nombre:renames[p.nombre]}:p);
+  let allProjs = [...originals, ...customProjs];
+
+  // Apply filters
+  const filtCat = document.getElementById('rp-filtCat')?.value||'';
+  const filtEst = document.getElementById('rp-filtEst')?.value||'';
+
+  // Get avance from trackers
+  function getAvance(p) {
+    const key = 'proj_tracker_' + p.nombre.replace(/\s+/g,'_');
+    let trackers=[];
+    try { trackers=JSON.parse(localStorage.getItem(key))||[]; } catch(e){}
+    return { pct: trackers.length?Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length):0, trackers };
+  }
+
+  // Add avance to each project
+  allProjs = allProjs.map(p=>{ const {pct,trackers}=getAvance(p); return {...p,avance:pct,trackers}; });
+
+  // Global stats
+  const total = allProjs.length;
+  const globalPct = total>0?Math.round(allProjs.reduce((a,p)=>a+p.avance,0)/total):0;
+  const completados = allProjs.filter(p=>p.avance===100).length;
+  const enCurso     = allProjs.filter(p=>p.avance>0&&p.avance<100).length;
+  const porIniciar  = allProjs.filter(p=>p.avance===0).length;
+
+  // Update ring
+  const ringColor = globalPct===100?'#16a34a':globalPct>=60?'#F54927':'#d97706';
+  const rw=document.getElementById('rp-ringWrap');
+  const rl=document.getElementById('rp-pct');
+  if(rw) rw.style.background=`conic-gradient(${ringColor} ${globalPct}%,#EBE7E6 ${globalPct}%)`;
+  if(rl) { rl.textContent=globalPct+'%'; rl.style.color=ringColor; }
+
+  // Mini bars
+  const barsEl=document.getElementById('rp-bars');
+  if(barsEl) barsEl.innerHTML=[
+    {label:'Completados',val:completados,color:'var(--green)'},
+    {label:'En curso',val:enCurso,color:'var(--accent)'},
+    {label:'Por iniciar',val:porIniciar,color:'var(--dim)'},
+  ].map(b=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px">
+    <span style="width:10px;height:10px;border-radius:50%;background:${b.color};flex-shrink:0"></span>
+    <span style="color:var(--muted)">${b.label}</span>
+    <span style="font-weight:800;color:var(--text)">${b.val}</span>
+  </div>`).join('');
+
+  // KPIs
+  document.getElementById('rp-kpis').innerHTML=`
+    <div class="metric-card"><div class="metric-label">Total</div><div class="metric-value">${total}</div><div class="metric-sub">Proyectos</div></div>
+    <div class="metric-card"><div class="metric-label">Completados</div><div class="metric-value" style="color:var(--green)">${completados}</div><div class="metric-sub">100%</div></div>
+    <div class="metric-card"><div class="metric-label">En curso</div><div class="metric-value" style="color:var(--accent)">${enCurso}</div><div class="metric-sub">Activos</div></div>`;
+
+  // Filter for cards
+  let filtered = allProjs;
+  if(filtCat) filtered=filtered.filter(p=>p.categoria===filtCat);
+  if(filtEst) {
+    filtered=filtered.filter(p=>{
+      if(filtEst==='completado') return p.avance===100;
+      if(filtEst==='en_curso')   return p.avance>0&&p.avance<100;
+      return p.avance===0;
+    });
+  }
+
+  document.getElementById('rp-count').textContent=filtered.length+' proyectos';
+
+  // Sort by avance desc
+  filtered.sort((a,b)=>b.avance-a.avance);
+
+  const pctColor = p=>p===100?'#16a34a':p>=60?'#F54927':p>=30?'#d97706':'#dc2626';
+  const statLabel = p=>p===100?'Completado':p>0?'En curso':'Por iniciar';
+  const statPill  = p=>p===100?'pill-green':p>0?'pill-amber':'pill-dim';
+
+  const grid=document.getElementById('rp-grid');
+  grid.innerHTML='';
+
+  filtered.forEach(p=>{
+    const col=pctColor(p.avance);
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--surface);border:1px solid var(--border);border-left:4px solid '+col+';border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.05)';
+
+    // Header
+    const hdr=document.createElement('div');
+    hdr.style.cssText='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px';
+    hdr.innerHTML=`<div>
+      <div style="font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">${p.categoria}</div>
+      <div style="font-size:15px;font-weight:800;color:var(--text)">${p.nombre}</div>
+    </div>
+    <div style="text-align:right;flex-shrink:0;margin-left:12px">
+      <div style="font-family:var(--font-head);font-size:28px;font-weight:900;color:${col};line-height:1">${p.avance}%</div>
+      <span class="pill ${statPill(p.avance)}" style="font-size:10px;margin-top:4px;display:inline-block">${statLabel(p.avance)}</span>
+    </div>`;
+
+    // Progress bar
+    const barWrap=document.createElement('div');
+    barWrap.style.cssText='height:6px;background:var(--surface2);border-radius:99px;margin:10px 0 14px;overflow:hidden';
+    barWrap.innerHTML=`<div style="height:100%;width:${p.avance}%;background:${col};border-radius:99px;transition:width 0.4s ease"></div>`;
+
+    // Indicators (read-only)
+    const tSection=document.createElement('div');
+    if(p.trackers.length) {
+      tSection.innerHTML=`<div style="font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Indicadores</div>`;
+      p.trackers.forEach(t=>{
+        const tc=pctColor(t.pct);
+        tSection.innerHTML+=`
+          <div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+              <span style="font-size:12px;color:var(--text);font-weight:500">${t.name}</span>
+              <span style="font-size:12px;font-weight:800;color:${tc}">${t.pct}%</span>
+            </div>
+            <div style="height:4px;background:var(--surface2);border-radius:99px;overflow:hidden">
+              <div style="height:100%;width:${t.pct}%;background:${tc};border-radius:99px"></div>
+            </div>
+          </div>`;
+      });
+    } else {
+      tSection.innerHTML=`<div style="font-size:11px;color:var(--dim);font-style:italic">Sin indicadores registrados</div>`;
+    }
+
+    // Hover effect
+    card.style.cursor = 'pointer';
+    card.style.transition = 'box-shadow 0.15s, transform 0.15s';
+    card.addEventListener('mouseenter', ()=>{ card.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'; card.style.transform='translateY(-2px)'; });
+    card.addEventListener('mouseleave', ()=>{ card.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'; card.style.transform=''; });
+
+    // Click → open detail
+    card.addEventListener('click', ()=> openRPDetail(p));
+
+    // "Ver detalle" hint
+    const hint = document.createElement('div');
+    hint.style.cssText = 'margin-top:12px;font-size:11px;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:4px';
+    hint.innerHTML = 'Ver detalle →';
+    card.appendChild(hdr);
+    card.appendChild(barWrap);
+    card.appendChild(tSection);
+    card.appendChild(hint);
+    grid.appendChild(card);
+  });
+
+  if(!filtered.length) {
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--dim);font-size:13px">No hay proyectos con estos filtros.</div>';
+  }
+}
+
+function openRPDetail(p) {
+  document.getElementById('rp-list').style.display = 'none';
+  document.getElementById('rp-detail').style.display = 'block';
+  document.getElementById('rp-detail').scrollIntoView({behavior:'smooth', block:'start'});
+
+  const col = p.avance===100?'#16a34a':p.avance>=60?'#F54927':p.avance>=30?'#d97706':'#dc2626';
+  const statLabel = p.avance===100?'Completado':p.avance>0?'En curso':'Por iniciar';
+  const statPill  = p.avance===100?'pill-green':p.avance>0?'pill-amber':'pill-dim';
+
+  const c = document.getElementById('rp-detail-content');
+  c.innerHTML = '';
+
+  // ── Header ──
+  const header = document.createElement('div');
+  header.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-left:5px solid '+col+';border-radius:var(--r);padding:24px 28px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.05)';
+  header.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">${p.categoria}</div>
+        <div style="font-family:var(--font-head);font-size:28px;font-weight:900;color:var(--text);margin-bottom:8px">${p.nombre}</div>
+        <span class="pill ${statPill}" style="font-size:12px">${statLabel}</span>
+      </div>
+      <div style="text-align:center">
+        <div id="rpd-ringWrap" style="width:100px;height:100px;border-radius:50%;background:conic-gradient(${col} ${p.avance}%,#EBE7E6 ${p.avance}%);display:flex;align-items:center;justify-content:center;margin:0 auto 6px">
+          <div style="width:78px;height:78px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:24px;font-weight:900;color:${col}">${p.avance}%</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted)">Cumplimiento</div>
+      </div>
+    </div>
+    <div style="height:8px;background:var(--surface2);border-radius:99px;margin-top:16px;overflow:hidden">
+      <div style="height:100%;width:${p.avance}%;background:${col};border-radius:99px;transition:width 0.5s ease"></div>
+    </div>`;
+  c.appendChild(header);
+
+  // ── Indicators ──
+  const tWrap = document.createElement('div');
+  tWrap.style.cssText = 'margin-bottom:20px';
+
+  const tTitle = document.createElement('div');
+  tTitle.className = 'section-title';
+  tTitle.textContent = 'Indicadores de seguimiento';
+  tWrap.appendChild(tTitle);
+
+  if(p.trackers.length) {
+    const tGrid = document.createElement('div');
+    tGrid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px';
+
+    p.trackers.forEach(t => {
+      const tc = t.pct===100?'#16a34a':t.pct>=60?'#F54927':t.pct>=30?'#d97706':'#dc2626';
+      const tCard = document.createElement('div');
+      tCard.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,0.04)';
+      tCard.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:13px;font-weight:600;color:var(--text)">${t.name}</span>
+          <span style="font-family:var(--font-head);font-size:22px;font-weight:900;color:${tc}">${t.pct}%</span>
+        </div>
+        <div style="height:6px;background:var(--surface2);border-radius:99px;overflow:hidden">
+          <div style="height:100%;width:${t.pct}%;background:${tc};border-radius:99px;transition:width 0.4s ease"></div>
+        </div>`;
+      tGrid.appendChild(tCard);
+    });
+    tWrap.appendChild(tGrid);
+  } else {
+    const empty = document.createElement('div');
+    empty.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:32px;text-align:center;color:var(--dim);font-size:13px;font-style:italic';
+    empty.textContent = 'Este proyecto aún no tiene indicadores registrados. Ve al Backlog para agregarlos.';
+    tWrap.appendChild(empty);
+  }
+  c.appendChild(tWrap);
+
+  // ── Placeholder for future info ──
+  const extra = document.createElement('div');
+  extra.id = 'rpd-extra';
+  extra.style.marginTop = '8px';
+  c.appendChild(extra);
+}
+
+function closeRPDetail() {
+  document.getElementById('rp-detail').style.display = 'none';
+  document.getElementById('rp-list').style.display = 'block';
+}
+
+
+// ── PROJECT DETAIL MODAL ────────────────────────────────────────
+let pdmCurrentKey = '';
+
+function openProjDetail(p, storageKey) {
+  pdmCurrentKey = storageKey;
+
+  // Load trackers
+  let trackers = [];
+  try { trackers = JSON.parse(localStorage.getItem(storageKey))||[]; } catch(e){}
+  const avance = trackers.length ? Math.round(trackers.reduce((a,t)=>a+t.pct,0)/trackers.length) : 0;
+  const col = avance===100?'#16a34a':avance>=60?'#F54927':avance>=30?'#d97706':'#dc2626';
+  const statLabel = avance===100?'Completado':avance>0?'En curso':'Por iniciar';
+  const statPill  = avance===100?'pill-green':avance>0?'pill-amber':'pill-dim';
+
+  // Load extra data
+  const extraKey = storageKey + '_detail';
+  let extra = {};
+  try { extra = JSON.parse(localStorage.getItem(extraKey))||{}; } catch(e){}
+
+  // Header
+  document.getElementById('pdm-cat').textContent    = p.categoria;
+  document.getElementById('pdm-nombre').textContent = p.nombre;
+
+  // Ring & bar
+  document.getElementById('pdm-pct').textContent    = avance+'%';
+  document.getElementById('pdm-pct').style.color    = col;
+  document.getElementById('pdm-bar').style.width    = avance+'%';
+  document.getElementById('pdm-bar').style.background = col;
+  document.getElementById('pdm-ring').style.background = `conic-gradient(${col} ${avance}%, var(--surface2) ${avance}%)`;
+  document.getElementById('pdm-status-pill').className   = 'pill '+statPill;
+  document.getElementById('pdm-status-pill').textContent = statLabel;
+
+  // Meta fields
+  document.getElementById('pdm-input-resp').value     = extra.resp||p.responsable||'';
+  document.getElementById('pdm-input-proximo').value  = extra.proximo||'';
+  document.getElementById('pdm-resp').textContent     = (extra.resp||p.responsable) ? '👤 '+(extra.resp||p.responsable) : '';
+  document.getElementById('pdm-proximo').textContent  = extra.proximo ? '⚡ '+extra.proximo : '';
+
+  // Comments
+  document.getElementById('pdm-comments').value = extra.comments||'';
+  document.getElementById('pdm-save-status').textContent = '';
+
+  // Indicators
+  const indEl = document.getElementById('pdm-indicators');
+  if(trackers.length) {
+    indEl.innerHTML = trackers.map(t => {
+      const tc = t.pct===100?'#16a34a':t.pct>=60?'#F54927':t.pct>=30?'#d97706':'#dc2626';
+      return `<div style="background:var(--bg);border-radius:var(--rs);padding:12px 14px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px;font-weight:600;color:var(--text)">${t.name}</span>
+          <span style="font-family:var(--font-head);font-size:20px;font-weight:900;color:${tc}">${t.pct}%</span>
+        </div>
+        <div style="height:5px;background:var(--surface2);border-radius:99px;overflow:hidden">
+          <div style="height:100%;width:${t.pct}%;background:${tc};border-radius:99px"></div>
+        </div>
+      </div>`;
+    }).join('');
+  } else {
+    indEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--dim);font-size:13px;font-style:italic;background:var(--bg);border-radius:var(--r)">Sin indicadores. Agrégalos desde el Backlog.</div>';
+  }
+
+  // Photos
+  const photos = extra.photos || Array(10).fill(null);
+  const photoGrid = document.getElementById('pdm-photos');
+  photoGrid.innerHTML = '';
+  photos.forEach((src, i) => {
+    const slot = document.createElement('div');
+    slot.className = 'pdm-photo-slot';
+    slot.title = 'Clic para subir foto';
+    if(src) {
+      slot.innerHTML = `<img src="${src}"><button class="pdm-photo-remove" onclick="pdmRemovePhoto(${i})">✕</button>`;
+    } else {
+      slot.innerHTML = `<div style="font-size:20px;color:var(--border2)">+</div><div style="font-size:9px;color:var(--dim);margin-top:4px">Foto ${i+1}</div>`;
+      slot.addEventListener('click', () => pdmPickPhoto(i));
+    }
+    photoGrid.appendChild(slot);
+  });
+
+  // Links
+  pdmRenderLinks(extra.links||[]);
+
+  document.getElementById('projDetailModal').style.display = 'block';
+}
+
+function pdmGetExtra() {
+  let e = {};
+  try { e = JSON.parse(localStorage.getItem(pdmCurrentKey+'_detail'))||{}; } catch(err){}
+  return e;
+}
+function pdmSaveExtra(e) {
+  localStorage.setItem(pdmCurrentKey+'_detail', JSON.stringify(e));
+}
+
+function pdmAutoSave() {
+  const e = pdmGetExtra();
+  e.resp     = document.getElementById('pdm-input-resp').value;
+  e.proximo  = document.getElementById('pdm-input-proximo').value;
+  e.comments = document.getElementById('pdm-comments').value;
+  pdmSaveExtra(e);
+  document.getElementById('pdm-resp').textContent    = e.resp    ?'👤 '+e.resp:'';
+  document.getElementById('pdm-proximo').textContent = e.proximo ?'⚡ '+e.proximo:'';
+  const st = document.getElementById('pdm-save-status');
+  st.textContent = '✓ Guardado';
+  clearTimeout(st._t);
+  st._t = setTimeout(()=>st.textContent='', 2000);
+}
+
+function pdmPickPhoto(i) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = () => {
+    const file = inp.files[0]; if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const e = pdmGetExtra();
+      if(!e.photos) e.photos = Array(10).fill(null);
+      e.photos[i] = ev.target.result;
+      pdmSaveExtra(e);
+      // Refresh slot
+      const slots = document.querySelectorAll('.pdm-photo-slot');
+      const slot = slots[i];
+      slot.innerHTML = `<img src="${ev.target.result}"><button class="pdm-photo-remove" onclick="pdmRemovePhoto(${i})">✕</button>`;
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function pdmRemovePhoto(i) {
+  const e = pdmGetExtra();
+  if(e.photos) e.photos[i] = null;
+  pdmSaveExtra(e);
+  const slot = document.querySelectorAll('.pdm-photo-slot')[i];
+  slot.innerHTML = `<div style="font-size:20px;color:var(--border2)">+</div><div style="font-size:9px;color:var(--dim);margin-top:4px">Foto ${i+1}</div>`;
+  slot.addEventListener('click', () => pdmPickPhoto(i));
+}
+
+function pdmRenderLinks(links) {
+  const el = document.getElementById('pdm-links');
+  el.innerHTML = links.length ? links.map((l,i)=>`
+    <div class="pdm-link-item">
+      <a href="${l.url}" target="_blank" rel="noopener">${l.label||l.url}</a>
+      <button class="pdm-link-remove" onclick="pdmRemoveLink(${i})">✕</button>
+    </div>`).join('') : '<div style="font-size:12px;color:var(--dim);margin-bottom:8px;font-style:italic">Sin links aún.</div>';
+}
+
+function pdmAddLink() {
+  const label = document.getElementById('pdm-link-label').value.trim();
+  const url   = document.getElementById('pdm-link-url').value.trim();
+  if(!url) { document.getElementById('pdm-link-url').focus(); return; }
+  const href  = url.startsWith('http') ? url : 'https://'+url;
+  const e = pdmGetExtra();
+  if(!e.links) e.links = [];
+  e.links.push({label: label||url, url: href});
+  pdmSaveExtra(e);
+  pdmRenderLinks(e.links);
+  document.getElementById('pdm-link-label').value = '';
+  document.getElementById('pdm-link-url').value = '';
+}
+
+function pdmRemoveLink(i) {
+  const e = pdmGetExtra();
+  e.links.splice(i,1);
+  pdmSaveExtra(e);
+  pdmRenderLinks(e.links);
+}
+
+function closeProjDetail(e) {
+  if(e && e.target !== document.getElementById('projDetailModal')) return;
+  document.getElementById('projDetailModal').style.display = 'none';
+}
+
 // ── INIT ──────────────────────────────────────────────
 updateFooterLabel();
 renderResumen();
 </script>
+
+<!-- ══ PROJECT DETAIL MODAL ══ -->
+<div id="projDetailModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(51,50,50,0.5);backdrop-filter:blur(3px)" onclick="closeProjDetail(event)">
+  <div style="position:absolute;top:0;right:0;bottom:0;width:min(680px,100%);background:var(--surface);box-shadow:-8px 0 32px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden">
+
+    <!-- Modal header -->
+    <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <div>
+        <div id="pdm-cat" style="font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px"></div>
+        <div id="pdm-nombre" style="font-family:var(--font-head);font-size:22px;font-weight:900;color:var(--text)"></div>
+      </div>
+      <button onclick="document.getElementById('projDetailModal').style.display='none'"
+        style="background:none;border:1px solid var(--border);border-radius:var(--rs);width:32px;height:32px;cursor:pointer;font-size:16px;color:var(--muted);display:flex;align-items:center;justify-content:center;font-family:var(--font)">✕</button>
+    </div>
+
+    <!-- Modal body -->
+    <div style="flex:1;overflow-y:auto;padding:24px">
+
+      <!-- Progress ring + meta info -->
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px;background:var(--bg);border-radius:var(--r);padding:16px 20px">
+        <div id="pdm-ring" style="width:72px;height:72px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+          <div id="pdm-ring-inner" style="width:56px;height:56px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center">
+            <span id="pdm-pct" style="font-family:var(--font-head);font-size:16px;font-weight:900"></span>
+          </div>
+        </div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span id="pdm-status-pill"></span>
+
+          </div>
+          <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-bottom:8px">
+            <div id="pdm-bar" style="height:100%;border-radius:99px;transition:width 0.5s ease"></div>
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <span id="pdm-resp" style="font-size:11px;color:var(--muted)"></span>
+            <span id="pdm-proximo" style="font-size:11px;color:var(--accent);font-weight:600"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meta fields row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+        <div style="background:var(--bg);border-radius:var(--rs);padding:12px 14px">
+          <div class="pdm-field-label">👤 Responsable</div>
+          <input id="pdm-input-resp" class="pdm-field-input" placeholder="Ej: Daniela · Mercadeo" oninput="pdmAutoSave()">
+        </div>
+        <div style="background:var(--bg);border-radius:var(--rs);padding:12px 14px">
+          <div class="pdm-field-label">⚡ Próximo paso</div>
+          <input id="pdm-input-proximo" class="pdm-field-input" placeholder="¿Qué sigue?" oninput="pdmAutoSave()">
+        </div>
+      </div>
+
+      <!-- 1. Indicators -->
+      <div class="pdm-section-title">📊 Indicadores de seguimiento</div>
+      <div id="pdm-indicators" style="margin-bottom:20px"></div>
+
+      <!-- 2. Evidencias clave -->
+      <div class="pdm-section-title">📸 Evidencias clave</div>
+      <div id="pdm-photos" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px"></div>
+
+      <!-- 3. Links de interés -->
+      <div class="pdm-section-title">🔗 Links de interés</div>
+      <div id="pdm-links" style="margin-bottom:12px"></div>
+      <div style="display:flex;gap:8px;margin-bottom:20px">
+        <input id="pdm-link-label" class="pdm-field-input" placeholder="Nombre del link" style="flex:1">
+        <input id="pdm-link-url" class="pdm-field-input" placeholder="https://..." style="flex:2">
+        <button onclick="pdmAddLink()" style="padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font);white-space:nowrap">+ Agregar</button>
+      </div>
+
+      <!-- 4. Comentarios generales -->
+      <div class="pdm-section-title">💬 Comentarios generales</div>
+      <textarea id="pdm-comments" placeholder="Contexto del proyecto, logros destacados, bloqueos, decisiones importantes..." oninput="pdmAutoSave()"
+        style="width:100%;min-height:100px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-family:var(--font);font-size:13px;color:var(--text);resize:vertical;outline:none;line-height:1.6;margin-bottom:4px"></textarea>
+      <div id="pdm-save-status" style="font-size:10px;color:var(--green);text-align:right;height:14px"></div>
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
