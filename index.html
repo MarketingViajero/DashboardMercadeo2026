@@ -4192,16 +4192,10 @@ async function notionSyncLoad() {
       }
     });
 
-    // Load apreciaciones from Sheet
-    try {
-      const sr = await fetch(BACKLOG_SHEET_URL + '?action=backlog_load&t=' + Date.now());
-      const sj = await sr.json();
-      if(sj.apreciaciones) {
-        localStorage.setItem('proyectos_insight_text', sj.apreciaciones);
-        const ta = document.getElementById('proyectosInsightTextarea');
-        if(ta) ta.value = sj.apreciaciones;
-      }
-    } catch(e) {}
+    // Restore saved apreciaciones from localStorage only
+    const savedInsight = localStorage.getItem('proyectos_insight_text') || '';
+    const ta = document.getElementById('proyectosInsightTextarea');
+    if(ta && savedInsight) ta.value = savedInsight;
 
     backlogToast('✓ Sincronizado con Notion (' + projects.length + ' proyectos)', 'ok');
     renderProyectos();
