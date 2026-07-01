@@ -3950,21 +3950,42 @@ function closeTrackerForm(btn) {
   form.querySelector('input').value = '';
 }
 
-function saveNewTracker(btn, key) {
+async function saveNewTracker(btn, key) {
   const form = btn.closest('.tracker-new-form');
   const name = form.querySelector('input').value.trim();
   if(!name) { form.querySelector('input').focus(); return; }
   let trackers = [];
   try { trackers = JSON.parse(localStorage.getItem(key)) || []; } catch(e) {}
-  trackers.push({ name, pct: 0 });
-  localStorage.setItem(key, JSON.stringify(trackers));
+
+  // Get Notion project ID for this tracker
   const projName = key.replace('proj_tracker_','').replace(/_/g,' ');
-  backlogSaveTrackers(projName, trackers);
+  const notionProjId = getNotionProjectId(projName);
+
+  // Create in Notion first to get the notion_id for the indicator
+  let notionIndicadorId = null;
+  if(notionProjId) {
+    try {
+      const url = BACKLOG_SHEET_URL
+        + '?action=notion_create_indicador'
+        + '&data=' + encodeURIComponent(JSON.stringify({ name, pct: 0, proyecto_notion_id: notionProjId }))
+        + '&t=' + Date.now();
+      const res = await fetch(url);
+      const json = await res.json();
+      if(json.ok) {
+        notionIndicadorId = json.notion_id;
+        backlogToast('✓ Indicador creado en Notion', 'ok');
+      }
+    } catch(e) {}
+  }
+
+  // Save to localStorage with notion_id
+  trackers.push({ name, pct: 0, notion_id: notionIndicadorId });
+  localStorage.setItem(key, JSON.stringify(trackers));
+
   const card = form.closest('.proj-card');
   renderTrackerItems(card.querySelector('.tracker-items'), trackers, key);
   form.classList.remove('open');
   form.querySelector('input').value = '';
-  // update big % if first tracker
   if(trackers.length===1) updateTracker(card.querySelector('.tracker-range'));
 }
 
