@@ -4161,6 +4161,7 @@ async function notionSyncLoad() {
     if(!json.ok) { backlogToast('⚠ Error al cargar desde Notion', 'err'); return; }
 
     const projects = json.proyectos || [];
+    // Clear everything and replace with Notion as source of truth
     localStorage.setItem('custom_projects', JSON.stringify(
       projects.map(p => ({
         nombre: p.nombre, categoria: p.categoria, estado: p.estado || 'por_iniciar',
@@ -4168,11 +4169,20 @@ async function notionSyncLoad() {
       }))
     ));
     localStorage.setItem('deleted_projects', JSON.stringify([]));
+    localStorage.setItem('proj_renames', JSON.stringify({}));
+    // Mark recovery as synced so recovery script doesn't re-add old projects
+    localStorage.setItem('backlog_recovery_v1_done', '1');
+    localStorage.setItem('backlog_recovery_synced_to_sheet', '1');
 
     const notionIds = {};
     projects.forEach(p => { notionIds[p.nombre] = p.notion_id; });
     localStorage.setItem('notion_project_ids', JSON.stringify(notionIds));
 
+    // Clear old tracker keys first to avoid stale data
+    Object.keys(localStorage).filter(k => k.startsWith('proj_tracker_')).forEach(k => {
+      // Only remove tracker data (not _detail keys)
+      if(!k.endsWith('_detail')) localStorage.removeItem(k);
+    });
     projects.forEach(p => {
       const key = 'proj_tracker_' + p.nombre.replace(/\s+/g, '_');
       if(p.trackers && p.trackers.length) {
