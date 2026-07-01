@@ -3862,7 +3862,12 @@ function updateTracker(input) {
   trackers[idx].pct = val;
   localStorage.setItem(key, JSON.stringify(trackers));
   const projName = key.replace('proj_tracker_','').replace(/_/g,' ');
-  backlogSaveTrackers(projName, trackers);
+  const thisTracker = trackers[idx];
+  if(thisTracker && thisTracker.notion_id) {
+    notionSaveIndicador(thisTracker.notion_id, val);
+  } else {
+    backlogSaveTrackers(projName, trackers);
+  }
   const tCol = trackerColor(val);
   document.getElementById('tfill-'+key+'-'+idx).style.width = val+'%';
   document.getElementById('tfill-'+key+'-'+idx).style.background = tCol;
@@ -4025,6 +4030,7 @@ function saveNewProject(){
   closeNewProjectForm();
   renderProyectos();
   backlogSaveProject({nombre, categoria:cat, qInicio:qi, qCierre:qc, responsable:resp});
+  notionCreateProject(nombre, cat);
 }
 
 function startEditName(el, oldName, isCustom){
@@ -4096,6 +4102,8 @@ function deleteProject(nombre, isCustom){
   }
   localStorage.removeItem('proj_tracker_'+nombre.replace(/\s+/g,'_'));
   backlogDeleteProject(nombre);
+  const _nid = getNotionProjectId(nombre);
+  if(_nid) notionDeleteProject(_nid);
   renderProyectos();
 }
 
@@ -4141,48 +4149,54 @@ async function backlogDeleteProject(projectName) {
 }
 
 async function backlogLoadFromSheet() {
-  backlogToast('⟳ Cargando backlog...', 'info');
+  return notionSyncLoad();
+}
+
+async function notionSyncLoad() {
+  backlogToast('⟳ Sincronizando con Notion...', 'info');
   try {
-    const url = BACKLOG_SHEET_URL + '?action=backlog_load&t=' + Date.now();
+    const url = BACKLOG_SHEET_URL + '?action=notion_load&t=' + Date.now();
     const res = await fetch(url);
     const json = await res.json();
-    if(!json.ok) { backlogToast('⚠ Error al cargar backlog', 'err'); return; }
+    if(!json.ok) { backlogToast('⚠ Error al cargar desde Notion', 'err'); return; }
 
-    // Restore custom projects
-    if(json.custom_projects) {
-      localStorage.setItem('custom_projects', JSON.stringify(json.custom_projects));
-    }
-    // Restore deleted list
-    if(json.deleted_projects) {
-      localStorage.setItem('deleted_projects', JSON.stringify(json.deleted_projects));
-    }
-    // Restore renames
-    if(json.renames) {
-      localStorage.setItem('proj_renames', JSON.stringify(json.renames));
-    }
-    // Restore trackers per project
-    if(json.trackers) {
-      console.log('📦 Trackers from Sheet:', Object.keys(json.trackers));
-      Object.entries(json.trackers).forEach(([key, val]) => {
-        const lsKey = 'proj_tracker_' + key;
-        console.log('💾 Saving:', lsKey, val.length, 'trackers');
-        localStorage.setItem(lsKey, JSON.stringify(val));
-      });
-    }
-    // Also log what projects expect
-    console.log('🔍 Projects looking for keys:', 
-      [...(json.custom_projects||[])].map(p=>'proj_tracker_'+p.nombre.replace(/\s+/g,'_'))
-    );
-    // Restore apreciaciones
-    if(json.apreciaciones !== undefined) {
-      localStorage.setItem('proyectos_insight_text', json.apreciaciones);
-      const ta = document.getElementById('proyectosInsightTextarea');
-      if(ta) ta.value = json.apreciaciones;
-    }
-    backlogToast('✓ Backlog cargado', 'ok');
+    const projects = json.proyectos || [];
+    localStorage.setItem('custom_projects', JSON.stringify(
+      projects.map(p => ({
+        nombre: p.nombre, categoria: p.categoria, estado: p.estado || 'por_iniciar',
+        notion_id: p.notion_id, _custom: true, avance: 0
+      }))
+    ));
+    localStorage.setItem('deleted_projects', JSON.stringify([]));
+
+    const notionIds = {};
+    projects.forEach(p => { notionIds[p.nombre] = p.notion_id; });
+    localStorage.setItem('notion_project_ids', JSON.stringify(notionIds));
+
+    projects.forEach(p => {
+      const key = 'proj_tracker_' + p.nombre.replace(/\s+/g, '_');
+      if(p.trackers && p.trackers.length) {
+        localStorage.setItem(key, JSON.stringify(
+          p.trackers.map(t => ({ name: t.name, pct: t.pct, notion_id: t.notion_id }))
+        ));
+      }
+    });
+
+    // Load apreciaciones from Sheet
+    try {
+      const sr = await fetch(BACKLOG_SHEET_URL + '?action=backlog_load&t=' + Date.now());
+      const sj = await sr.json();
+      if(sj.apreciaciones) {
+        localStorage.setItem('proyectos_insight_text', sj.apreciaciones);
+        const ta = document.getElementById('proyectosInsightTextarea');
+        if(ta) ta.value = sj.apreciaciones;
+      }
+    } catch(e) {}
+
+    backlogToast('✓ Sincronizado con Notion (' + projects.length + ' proyectos)', 'ok');
     renderProyectos();
   } catch(e) {
-    backlogToast('⚠ Sin conexión al Sheet', 'err');
+    backlogToast('⚠ Sin conexión a Notion', 'err');
   }
 }
 
@@ -4981,6 +4995,40 @@ function openColabDetail(idx){
 function closeColabDetail(e){
   if(e && e.target !== document.getElementById('colabDetailModal')) return;
   document.getElementById('colabDetailModal').style.display = 'none';
+}
+
+// ── NOTION WRITE HELPERS ────────────────────────────────────────
+function getNotionProjectId(nombre) {
+  try { return (JSON.parse(localStorage.getItem('notion_project_ids'))||{})[nombre] || null; } catch(e){ return null; }
+}
+
+async function notionSaveIndicador(notionId, pct) {
+  try {
+    const url = BACKLOG_SHEET_URL + '?action=notion_save_indicador&notion_id=' + encodeURIComponent(notionId) + '&pct=' + pct + '&t=' + Date.now();
+    const json = await (await fetch(url)).json();
+    if(json.ok) backlogToast('✓ Guardado en Notion', 'ok');
+    else backlogToast('⚠ Error Notion', 'err');
+  } catch(e) { backlogToast('⚠ Sin conexión', 'err'); }
+}
+
+async function notionCreateProject(nombre, categoria) {
+  try {
+    const url = BACKLOG_SHEET_URL + '?action=notion_create_project&data=' + encodeURIComponent(JSON.stringify({nombre, categoria})) + '&t=' + Date.now();
+    const json = await (await fetch(url)).json();
+    if(json.ok && json.notion_id) {
+      let ids = {}; try { ids = JSON.parse(localStorage.getItem('notion_project_ids'))||{}; } catch(e){}
+      ids[nombre] = json.notion_id;
+      localStorage.setItem('notion_project_ids', JSON.stringify(ids));
+      return json.notion_id;
+    }
+  } catch(e) {}
+  return null;
+}
+
+async function notionDeleteProject(notionId) {
+  try {
+    await fetch(BACKLOG_SHEET_URL + '?action=notion_delete_project&notion_id=' + encodeURIComponent(notionId) + '&t=' + Date.now());
+  } catch(e) {}
 }
 
 // ── INIT ──────────────────────────────────────────────
